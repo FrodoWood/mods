@@ -1,5 +1,6 @@
 package com.group5.mods.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,12 +12,14 @@ public class HomeController {
         return "Welcome to the homepage!";
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('USER')")
     public String user() {
         return "Hello user";
     }
 
-    @GetMapping("admin")
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public String admin() {
         return "Hello admin";
     }
