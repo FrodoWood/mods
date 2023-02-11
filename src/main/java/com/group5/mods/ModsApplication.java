@@ -27,4 +27,9 @@ public class ModsApplication {
 		};
 	}
 
+	@Bean
+	public nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect layoutDialect() {
+		return new nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect();
+	}
+
 }
