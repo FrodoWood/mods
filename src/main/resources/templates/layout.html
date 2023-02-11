@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+</head>
+
+<body>
+
+    <!-- This is the navbar that will be visible on all pages -->
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/store}">Store</a>
+        <a th:href="@{/login}">Login</a>
+    </nav>
+
+    <!-- Content received from other pages -->
+    <div layout:fragment="content">
+        <!-- This is where the content will be added from the other pages -->
+    </div>
+
+    <!-- This is the footer visible on all pages -->
+    <footer>
+        <!-- Add footer here -->
+
+    </footer>
+
+</body>
+
+</html>
