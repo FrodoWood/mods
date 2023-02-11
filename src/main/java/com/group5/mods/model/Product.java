@@ -22,13 +22,13 @@ public class Product {
     private String name;
 
     @Column(nullable = false, scale = 5)
-    private float Rating;
+    private float rating;
 
     @Column(nullable = false)
     private String description;
 
     public Product(float Rating, String name, String description) {
-        this.Rating = Rating;
+        this.rating = Rating;
         this.name = name;
         this.description = description;
     }
