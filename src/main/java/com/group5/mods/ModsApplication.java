@@ -31,10 +31,8 @@ public class ModsApplication {
 	// CommandLineRunner commandLineRunner(UserRepository userRepository,
 	// PasswordEncoder passwordEncoder) {
 	// return args -> {
-	// userRepository.save(new User("Luigi", "luigi", "luigi@gmail.com",
+	// userRepository.save(new User("alice", "alice", "alice@gmail.com",
 	// passwordEncoder.encode("pass"), "ROLE_USER"));
-	// userRepository.save(new User("Laura", "laura", "laura@gmail.com",
-	// passwordEncoder.encode("pass"), "ROLE_ADMIN"));
 	// };
 	// }
 

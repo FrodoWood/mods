@@ -17,50 +17,48 @@ import com.group5.mods.service.UserService;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // @Bean
-    // public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-    // UserDetails admin = User.withUsername("admin")
-    // .password(encoder.encode("pass"))
-    // .roles("ADMIN")
-    // .build();
-    // UserDetails user = User.withUsername("user")
-    // .password(encoder.encode("pass"))
-    // .roles("USER")
-    // .build();
-    // return new InMemoryUserDetailsManager(admin, user);
-    // }
+        // @Bean
+        // public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+        // UserDetails admin = User.withUsername("admin")
+        // .password(encoder.encode("pass"))
+        // .roles("ADMIN")
+        // .build();
+        // UserDetails user = User.withUsername("user")
+        // .password(encoder.encode("pass"))
+        // .roles("USER")
+        // .build();
+        // return new InMemoryUserDetailsManager(admin, user);
+        // }
 
-    @Autowired
-    private UserService userService;
+        @Autowired
+        private UserService userService;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/").permitAll()
-                        .requestMatchers("/register").permitAll()
-                        .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/user").hasAuthority("ROLE_USER")
-                        .anyRequest().authenticated())
-                .userDetailsService(userService)
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .invalidateHttpSession(true)
-                        .permitAll()
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests((requests) -> requests
+                                                .requestMatchers("/").permitAll()
+                                                .requestMatchers("/register", "/registerUser").permitAll()
+                                                .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                                                .requestMatchers("/user").hasAuthority("ROLE_USER")
+                                                .anyRequest().permitAll())
+                                .userDetailsService(userService)
+                                .formLogin(form -> form
+                                                .loginPage("/login")
+                                                .loginProcessingUrl("/login")
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                                .permitAll()
 
-                );
+                                );
 
-        return http.build();
-    }
+                return http.build();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        // @Bean
+        // public PasswordEncoder passwordEncoder() {
+        // return new BCryptPasswordEncoder();
+        // }
 
 }

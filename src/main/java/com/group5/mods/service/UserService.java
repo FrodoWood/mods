@@ -3,11 +3,15 @@ package com.group5.mods.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.group5.mods.DTO.UserDTO;
 import com.group5.mods.model.SecurityUser;
 import com.group5.mods.model.User;
 import com.group5.mods.repository.UserRepository;
@@ -16,6 +20,11 @@ import com.group5.mods.repository.UserRepository;
 public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -31,4 +40,21 @@ public class UserService implements UserDetailsService {
                 .map(SecurityUser::new)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
     }
+
+    // public void saveUser(UserDTO user) {
+    // // User newUser = new User();
+    // // newUser.setName(user.getName());
+    // // newUser.setUsername(user.getUsername());
+    // // newUser.setEmail(user.getEmail());
+    // // newUser.setPassword(passwordEncoder().encode(user.getPassword()));
+    // // newUser.setRoles("ROLE_USER");
+
+    // userRepository.save(new User(
+    // user.getName(),
+    // user.getUsername(),
+    // user.getEmail(),
+    // passwordEncoder().encode(user.getPassword()),
+    // "ROLE_USER"));
+
+    // }
 }
