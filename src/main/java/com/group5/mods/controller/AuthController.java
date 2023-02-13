@@ -71,9 +71,10 @@ public class AuthController {
         // return "register";
         // }
 
-        userRepository.save(new User(userDTO.getName(), userDTO.getUsername(), userDTO.getEmail(),
-                userDTO.getPassword(), "ROLE_USER"));
-
+        // userRepository.save(new User(userDTO.getName(), userDTO.getUsername(), userDTO.getEmail(),
+        //         userDTO.getPassword(), "ROLE_USER"));
+        
+        userService.saveUser(userDTO);
         return "redirect:/";
 
     }

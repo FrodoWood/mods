@@ -41,20 +41,8 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
-    // public void saveUser(UserDTO user) {
-    // // User newUser = new User();
-    // // newUser.setName(user.getName());
-    // // newUser.setUsername(user.getUsername());
-    // // newUser.setEmail(user.getEmail());
-    // // newUser.setPassword(passwordEncoder().encode(user.getPassword()));
-    // // newUser.setRoles("ROLE_USER");
-
-    // userRepository.save(new User(
-    // user.getName(),
-    // user.getUsername(),
-    // user.getEmail(),
-    // passwordEncoder().encode(user.getPassword()),
-    // "ROLE_USER"));
-
-    // }
+    public void saveUser(UserDTO userDTO){
+        userRepository.save(new User(userDTO.getName(), userDTO.getUsername(), userDTO.getEmail(),
+                passwordEncoder().encode(userDTO.getPassword()), "ROLE_USER"));
+    }
 }

@@ -41,7 +41,7 @@ public class SecurityConfig {
                                                 .requestMatchers("/register", "/registerUser").permitAll()
                                                 .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
                                                 .requestMatchers("/user").hasAuthority("ROLE_USER")
-                                                .anyRequest().permitAll())
+                                                .anyRequest().authenticated())
                                 .userDetailsService(userService)
                                 .formLogin(form -> form
                                                 .loginPage("/login")
