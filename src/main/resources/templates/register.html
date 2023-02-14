@@ -25,9 +25,14 @@
             <input type="password" id="password" name="password" placeholder="Enter a strong password"
                 th:field="*{password}">
 
-            <input type="hidden" id="roles" name="roles" value="ROLE_USER" th:field="*{roles}">
-
             <button type="submit">Register</button>
+            
+            <span th:utext="${successMessage}"></span>
+            <div th:if="${bindingResult!=null && bindingResult.getAllErrors()!=null}">
+                <ul th:each="data : ${bindingResult.getAllErrors()}">
+                  <li th:text="${data.getDefaultMessage()}"></li>
+                </ul>
+            </div>
         </form>
     </div>
 </body>
