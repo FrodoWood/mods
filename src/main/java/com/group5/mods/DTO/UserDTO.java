@@ -9,14 +9,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
-    @NotEmpty(message = "{registration.validation.name}")
+    @NotEmpty(message = "name cannot be empty")
     private String name;
-    @NotEmpty(message = "{registration.validation.username}")
+
+    @NotEmpty(message = "username cannot be empty")
     private String username;
-    @NotEmpty(message = "{registration.validation.email}")
+
+    @NotEmpty(message = "email cannot be empty")
     private String email;
-    @NotEmpty(message = "{registration.validation.password}")
+    
+    @NotEmpty(message = "password cannot be empty")
     private String password;
-    @NotEmpty(message = "{registration.validation.roles}")
+    
     private String roles;
 }
