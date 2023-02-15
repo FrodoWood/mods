@@ -13,7 +13,20 @@
         <h1>This is the store page using thymeleaf</h1>
         <a th:href="@{/product}">product</a>
         <p>This is a test</p>
+        <div id="productTable">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                </tr>
+                <tr th:each="product:${products}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.rating}"></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
-
 </html>
