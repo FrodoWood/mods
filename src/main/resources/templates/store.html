@@ -24,7 +24,7 @@
                         <td th:text="${product.name}"></td>
                         <td th:text="${product.description}"></td>
                         <td th:text="${product.rating}"></td>
-                        <td ><a th:href="@{/product/${product.id}}">BUY</a></td>
+                        <td ><a th:href="@{product/{id}(id=${product.id})}">BUY</a></td>
                 </table>
             </div>
         </form>

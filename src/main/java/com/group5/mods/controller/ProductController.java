@@ -1,6 +1,5 @@
 package com.group5.mods.controller;
 
-import org.hibernate.metamodel.mapping.internal.IdClassEmbeddable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +13,8 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
-    @GetMapping("/prduct/{id}")
-    public String product(@PathVariable("id") long id, Model model) {
+    @GetMapping("product/{id}")
+    public String product(@PathVariable(value = "id") long id, Model model) {
         model.addAttribute("product", productRepository.findById(id));
         return "product";
     }

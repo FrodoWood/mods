@@ -11,20 +11,30 @@
 <body>
     <div layout:fragment="content">
         <h1>Product Page</h1>
-        <div id="productTable">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Rating</th>
-                    <th>Buy</th>
-                </tr>
-                <tr th:each="product:${products}">
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.description}"></td>
-                    <td th:text="${product.rating}"></td>
-            </table>
-        </div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Rating</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td th:text="${{product.name}}"></td>
+                <td th:text="${{product.description}}"></td>
+                <td th:text="${{product.rating}}"></td>
+                <td th:text="${{product.make}}"></td>
+                <td th:text="${{product.model}}"></td>
+                <td th:text="${{product.category}}"></td>
+                <td th:text="'£' + ${{product.price}}"></td>
+            </tr>
+        </table>
+
+            
+
+            <button><a th:href="@{product/addToCart}">Add to Basket</a></button>
     </div>
 </body>
 
