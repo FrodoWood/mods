@@ -11,6 +11,20 @@
 <body>
     <div layout:fragment="content">
         <h1>Product Page</h1>
+        <div id="productTable">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                    <th>Buy</th>
+                </tr>
+                <tr th:each="product:${products}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.rating}"></td>
+            </table>
+        </div>
     </div>
 </body>
 
