@@ -27,9 +27,26 @@ public class Product {
     @Column(nullable = false)
     private String description;
 
-    public Product(float Rating, String name, String description) {
+    @Column(nullable = false)
+    private String model;
+
+    @Column(nullable = false)
+    private String make;
+
+    @Column(nullable = false)
+    private String category;
+
+    @Column(nullable = false)
+    private int price;
+
+    public Product(float Rating, String name, String description, String make, String model, String category,
+            int price) {
         this.rating = Rating;
         this.name = name;
         this.description = description;
+        this.make = make;
+        this.price = price;
+        this.model = model;
+        this.category = category;
     }
 }
