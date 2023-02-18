@@ -14,3 +14,23 @@
 .checked {
     color: orange;
 }
+.price{
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+input{
+    border: 1px solid #ccc;
+    font-weight: bold;
+    height: 33px;
+    text-align: center;
+    width: 30px;
+
+}
+.cart{
+    background:#a30000;
+    color: white;
+    font-size: 15px;
+    margin-left: 20px;
+
+}
