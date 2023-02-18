@@ -19,6 +19,7 @@
                 <th>Make</th>
                 <th>Model</th>
                 <th>Category</th>
+                <th>Stock amount</th>
                 <th>Price</th>
             </tr>
             <tr>
@@ -28,6 +29,7 @@
                 <td th:text="${{product.make}}"></td>
                 <td th:text="${{product.model}}"></td>
                 <td th:text="${{product.category}}"></td>
+                <td th:text="${{product.stock}}"></td>
                 <td th:text="${{product.price}}"></td>
             </tr>
         </table>
@@ -38,6 +40,8 @@
             <input type="number" name="quantity" th:value="1">
             <button type="submit">Add to Basket</button>
         </form>
+
+        <span th:utext="${error}"></span>
 
     </div>
 </body>

@@ -65,6 +65,13 @@ public String addToBasket(@RequestParam("productId") Long productId, @RequestPar
         basket = Optional.of(newBasket);
     }
     
+    //Check if the product is in stock
+    if(product.isPresent() && product.get().getStock() < quantity){
+        model.addAttribute("error", "Product is out of stock");
+        model.addAttribute("product", product.get());
+        return "product";
+    }
+
     //Add the product and quantity to the basket
     basket.get().addProduct(product.get(), quantity);
     basketService.save(basket.get());
