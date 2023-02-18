@@ -20,6 +20,7 @@
                 <th>make</th>
                 <th>category</th>
                 <th>price</th>
+                <th>Quantity</th>
             </tr>
             <tr th:each="basketProduct : ${products}">
                 <td th:text="${basketProduct.product.name}"></td>
@@ -28,6 +29,7 @@
                 <td th:text="${basketProduct.product.make}"></td>
                 <td th:text="${basketProduct.product.category}"></td>
                 <td th:text="'£' + ${basketProduct.product.price}"></td>
+                <td th:text="${basketProduct.quantity}"></td>
             </tr>
         </table>
     </div>
