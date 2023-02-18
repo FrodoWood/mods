@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <p>This is the basket page</p>
+        <!-- <p>Number of products: <span th:text="${#lists.size(products)}"></span></p> -->
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Rating</th>
+                <th>make</th>
+                <th>category</th>
+                <th>price</th>
+            </tr>
+            <tr th:each="basketProduct : ${products}">
+                <td th:text="${basketProduct.product.name}"></td>
+                <td th:text="${basketProduct.product.description}"></td>
+                <td th:text="${basketProduct.product.rating}"></td>
+                <td th:text="${basketProduct.product.make}"></td>
+                <td th:text="${basketProduct.product.category}"></td>
+                <td th:text="'£' + ${basketProduct.product.price}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -39,8 +39,11 @@ public class Product {
     @Column(nullable = false)
     private int price;
 
+    @Column(nullable = false)
+    private int stock;
+
     public Product(float Rating, String name, String description, String make, String model, String category,
-            int price) {
+            int price, int stock) {
         this.rating = Rating;
         this.name = name;
         this.description = description;
@@ -48,5 +51,6 @@ public class Product {
         this.price = price;
         this.model = model;
         this.category = category;
+        this.stock = stock;
     }
 }

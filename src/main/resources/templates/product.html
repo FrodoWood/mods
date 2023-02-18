@@ -28,13 +28,17 @@
                 <td th:text="${{product.make}}"></td>
                 <td th:text="${{product.model}}"></td>
                 <td th:text="${{product.category}}"></td>
-                <td th:text="'£' + ${{product.price}}"></td>
+                <td th:text="${{product.price}}"></td>
             </tr>
         </table>
 
-            
+        <form method="post" action="#" th:action="@{/basket/add}" th:object="${basketproduct}">
+            <input type="hidden" th:name="productId" th:value="${{product.id}}"/>
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" th:field="*{{quantity}}" value="1">
+            <button type="submit">Add to Basket</button>
+        </form>
 
-            <button><a th:href="@{product/addToCart}">Add to Basket</a></button>
     </div>
 </body>
 
