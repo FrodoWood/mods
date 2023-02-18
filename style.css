@@ -11,3 +11,6 @@
 .col-md-7 h2{
     color: #555;
 }
+.checked {
+    color: orange;
+}
