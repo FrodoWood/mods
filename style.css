@@ -74,19 +74,32 @@
     font-weight: bold;
     padding-top: 20px;
 }
-input{
+.quantity{
     border: 1px solid #ccc;
     font-weight: bold;
     height: 33px;
     text-align: center;
-    width: 30px;
-
+    width: 10px;
 }
 .cart{
     background:#a30000;
     color: white;
     font-size: 15px;
     margin-left: 20px;
-
+}
+img  {
+    border: 1px solid black;
+    flex-wrap: wrap;
+    box-shadow: 3px 3px 5px #999;
+    transition: transform 0.2s ease-in-out;
+}
+img:hover{
+    cursor: pointer;
+}
+.carousel{
+        border: 1px solid black;
+            flex-wrap: wrap;
+            box-shadow: 3px 3px 5px #999;
+            transition: transform 0.2s ease-in-out;
 }
 

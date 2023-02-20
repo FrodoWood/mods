@@ -57,30 +57,70 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+          <div class="row mt-5">
+            <div class="col-md-4">
+              <img src="images/img2.jpg" class="d-block w-100 thumbnail" alt="..." data-target="#carouselExample"
+                data-slide-to="0">
+            </div>
+            <div class="col-md-4">
+              <img src="images/img1.jpg" class="d-block w-100 thumbnail" alt="..." data-target="#carouselExample"
+                data-slide-to="1">
+            </div>
+            <div class="col-md-4">
+              <img src="images/img3.jpg" class="d-block w-100 thumbnail" alt="..." data-target="#carouselExample"
+                data-slide-to="2">
+            </div>
+          </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-5">
           <p class="newarrival text-center">NEW</p>
-          <h2>Title</h2>
-          <p>Product code</p>
           <!--star reviews-->
           <span class="fa fa-star checked"></span>
           <span class="fa fa-star checked"></span>
           <span class="fa fa-star checked"></span>
           <span class="fa fa-star checked"></span>
           <span class="fa fa-star checked"></span>
+          <h2>Title</h2>
+          <p>Product code</p>
           <p class="price">£79.99</p>
           <p><b>Abailability: </b> In stock</p>
           <p><b>Brand: </b> XYZ</p>
           <label for="qty">Quantity:</label>
           <input type="text" value="1">
           <button type="button" class="cart">Add to basket</button>
+          <div class="row2">
+            <h2>Description</h2>
+            <div class="description">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare libero eu iaculis condimentum.
+                Vestibulum
+                lacinia velit a dolor consequat tincidunt. Integer accumsan dictum purus eu venenatis. Vivamus mi massa,
+                eleifend eget
+                velit in, efficitur finibus ipsum. Praesent mi enim, semper quis vestibulum eget, tempus vitae orci.
+                Cras
+                interdum,
+                sapien quis gravida efficitur, dui ligula efficitur ex, sit amet volutpat dolor mi consectetur lorem.
+                Vestibulum porta
+
+                dolor eu ex viverra accumsan. Suspendisse ultricies sem cursus velit tincidunt, nec vestibulum tellus
+                ultrices. Sed
+                finibus mauris a porttitor egestas.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row2">
-        <h2>Description</h2>
-      </div>
-
     </div>
   </body>
+  <script>
+    const thumbnails = document.querySelectorAll('.thumbnail');
+
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener('click', () => {
+        const target = thumbnail.dataset.target;
+        const slideTo = thumbnail.dataset.slideTo;
+        const carousel = new bootstrap.Carousel(document.querySelector(target));
+        carousel.to(slideTo);
+      });
+    });
+  </script>
 
 </html>
