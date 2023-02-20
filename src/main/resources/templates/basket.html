@@ -21,6 +21,7 @@
                 <th>category</th>
                 <th>price</th>
                 <th>Quantity</th>
+                <th>Option</th>
             </tr>
             <tr th:each="basketProduct : ${products}">
                 <td th:text="${basketProduct.product.name}"></td>
@@ -30,8 +31,19 @@
                 <td th:text="${basketProduct.product.category}"></td>
                 <td th:text="'£' + ${basketProduct.product.price}"></td>
                 <td th:text="${basketProduct.quantity}"></td>
+                <td>
+                    <form>
+                        <button type="submit">Change</button>
+                    </form>
+                    <form  method="post" action="#" th:action="@{/basket/removeProduct}" th:object="${basketproduct}" >
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         </table>
+    <form method = "post" action ="#" th:action="@{/basket/clear}" th:object="${basketproduct}">
+        <button type="submit">Clear</button>
+    </form>
     </div>
 </body>
 </html>
