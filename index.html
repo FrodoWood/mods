@@ -26,10 +26,10 @@
         </form>
       </div>
       <ul class="navbar-links">
-        <li><a href="#">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="#">Shop</a></li>
         <li><a href="#">Account</a></li>
-        <li><a href="#">Basket</a></li>
+        <li><a href="basket.html">Basket</a></li>
       </ul>
     </nav>
 
@@ -88,27 +88,29 @@
           <label for="qty">Quantity:</label>
           <input type="text" value="1">
           <button type="button" class="cart">Add to basket</button>
-          <div class="row2">
-            <h2>Description</h2>
-            <div class="description">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare libero eu iaculis condimentum.
-                Vestibulum
-                lacinia velit a dolor consequat tincidunt. Integer accumsan dictum purus eu venenatis. Vivamus mi massa,
-                eleifend eget
-                velit in, efficitur finibus ipsum. Praesent mi enim, semper quis vestibulum eget, tempus vitae orci.
-                Cras
-                interdum,
-                sapien quis gravida efficitur, dui ligula efficitur ex, sit amet volutpat dolor mi consectetur lorem.
-                Vestibulum porta
-
-                dolor eu ex viverra accumsan. Suspendisse ultricies sem cursus velit tincidunt, nec vestibulum tellus
-                ultrices. Sed
-                finibus mauris a porttitor egestas.</p>
-            </div>
-          </div>
         </div>
       </div>
+      <div class="product-description">
+        <p class="description-header">Product Description</p>
+        <p class="description-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra
+          lobortis neque, eu iaculis quam semper in.
+          Mauris at enim lacus. Maecenas eget luctus purus, vitae faucibus purus. Etiam id ullamcorper nisl. Nullam
+          convallis
+          accumsan sapien ut ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+          curae;
+          Nam varius justo eget mauris iaculis, ac euismod dolor molestie. Quisque rhoncus purus dolor, nec convallis
+          eros
+          consequat vel. In ultrices fermentum commodo. Duis est leo, maximus a accumsan vel, ornare non augue. Maecenas
+          elementum
+          tincidunt turpis ut elementum. Vivamus tincidunt nisi vitae neque mollis, et facilisis neque accumsan. Donec
+          in massa
+          mi. In dapibus at velit nec fringilla. Donec tincidunt consectetur ipsum, condimentum pharetra dui lobortis
+          non. Vivamus
+          nec efficitur velit. </p>
+      </div>
     </div>
+    </div>
+
   </body>
   <script>
     const thumbnails = document.querySelectorAll('.thumbnail');
@@ -121,6 +123,12 @@
         carousel.to(slideTo);
       });
     });
+  </script>
+  <script>
+    document.querySelector('.product-description').addEventListener('click', function () {
+      this.classList.toggle('clicked');
+    });
+
   </script>
 
 </html>
