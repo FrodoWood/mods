@@ -10,14 +10,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.yaml.snakeyaml.events.Event.ID;
 
 import com.group5.mods.model.Basket;
 import com.group5.mods.model.BasketProduct;
 import com.group5.mods.model.Product;
 import com.group5.mods.model.SecurityUser;
 import com.group5.mods.model.User;
+import com.group5.mods.repository.BasketProductRepository;
 import com.group5.mods.repository.BasketRepository;
 import com.group5.mods.service.BasketService;
 import com.group5.mods.service.ProductService;
@@ -34,6 +37,9 @@ public class BasketController {
 
     @Autowired
     private BasketService basketService;
+
+    @Autowired
+    private BasketProductRepository basketProductRepository;
 
     @GetMapping("/basket")
     public String showBasket(Model model) {
@@ -91,12 +97,24 @@ public class BasketController {
 
     }
 
-    @PostMapping("basket/removeProduct")
-    public String removeItem(Model model) {
+    @GetMapping("basket/removeProduct/{id}")
+    public String removeItem(@PathVariable Long id, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
         Optional<Basket> basket = basketService.findByUser(user);
+        Optional<Product> product = productService.findById(id);
+        Optional<BasketProduct> basketproduct = basketProductRepository.findById(id);
+        if (basketproduct.isPresent()) {
+            basketProductRepository.delete(basketproduct.get());
+        }
+
+        // basketrepository.deleteById(id);
+        // basket.get().changeQuantity(product.get(), 1);
+        // basket.get().removeBasketProduct(product.get(),id);
+        basketService.save(basket.get());
+        model.addAttribute("basket", basket.get());
+        model.addAttribute("products", basket.get().getBasketProducts());
         return "redirect:/basket";
     }
 

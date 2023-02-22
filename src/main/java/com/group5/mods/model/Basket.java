@@ -36,7 +36,6 @@ public class Basket {
         this.user = user;
     }
 
-    
     public void addProduct(Product product, int quantity) {
         BasketProduct existingItem = findBasketProductByProduct(product);
         if (existingItem != null) {
@@ -47,11 +46,11 @@ public class Basket {
         }
     }
 
-    public void removeProduct(Product product, int quantity) {
+    public void changeQuantity(Product product, int quantity) {
         BasketProduct existingItem = findBasketProductByProduct(product);
         if (existingItem != null) {
             int newQuantity = existingItem.getQuantity() - quantity;
-            if (newQuantity > 0) {
+            if (newQuantity >= 0) {
                 existingItem.setQuantity(newQuantity);
             } else {
                 basketProducts.remove(existingItem);
@@ -59,6 +58,9 @@ public class Basket {
         }
     }
 
+    // public void removeBasketProduct(Product product,long id){
+
+    // }
     public void clear() {
         basketProducts.clear();
     }

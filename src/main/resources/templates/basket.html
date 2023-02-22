@@ -32,12 +32,8 @@
                 <td th:text="'£' + ${basketProduct.product.price}"></td>
                 <td th:text="${basketProduct.quantity}"></td>
                 <td>
-                    <form>
-                        <button type="submit">Change</button>
-                    </form>
-                    <form  method="post" action="#" th:action="@{/basket/removeProduct}" th:object="${basketproduct}" >
-                        <button type="submit">Delete</button>
-                    </form>
+                    
+                    <a th:href="@{basket/removeProduct/{id}(id=${basketProduct.id})}">Delete</a>
                 </td>
             </tr>
         </table>
