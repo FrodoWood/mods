@@ -2,8 +2,20 @@
 
 body {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
-  
+
+.carousel-banner-img {
+    height: 40vh;
+    object-fit: cover;
+    object-position: 0 50%;
+}
+
+.categories-img{
+    width: min-content;
+    height: 12rem;
+}
+
+.categories-card{
+    max-width: 12rem;
+    overflow: hidden;
+}

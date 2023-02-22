@@ -10,7 +10,63 @@
 
 <body>
     <div layout:fragment="content">
-        <h1>This is the homepage content using Thymeleaf</h1>
+        <!-- Banner -->
+        <div id="carousel-banner" class="carousel slide my-4" data-bs-ride="carousel">
+            <div class="carousel-inner rounded-3">
+              <div class="carousel-item active">
+                <img src="..." th:src="@{/images/img1.jpg}" class="d-block w-100 carousel-banner-img" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="..." th:src="@{/images/img2.jpg}" class="d-block w-100 carousel-banner-img" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="..." th:src="@{/images/img3.jpg}" class="d-block w-100 carousel-banner-img" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-banner" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-banner" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        <!-- Categories -->
+        <h2 class="text-center">Product Categories</h2>
+        <div class=" d-flex flex-wrap justify-content-center">
+            
+            <div class="card categories-card m-2">
+                <img src="..." th:src="@{/images/Tein Street Basis Z Coilovers.png}" class="card-img-top categories-img" alt="...">
+                <div class="card-body">
+                  <p class="card-text h5 text-center">Coilovers</p>
+                </div>
+            </div>
+            <div class="card categories-card m-2">
+                <img src="..." th:src="@{/images/turbo1.jpg}" class="card-img-top categories-img" alt="...">
+                <div class="card-body">
+                  <p class="card-text h5 text-center">Turbo kits</p>
+                </div>
+            </div>
+            <div class="card categories-card m-2">
+                <img src="..." th:src="@{/images/StopTech Trophy Sport Big Brake Kit.png}" class="card-img-top categories-img" alt="...">
+                <div class="card-body">
+                  <p class="card-text h5 text-center">Big Brake Kits</p>
+                </div>
+            </div>
+            <div class="card categories-card m-2">
+                <img src="..." th:src="@{/images/Castrol GTX Engine Oil.jpg}" class="card-img-top categories-img" alt="...">
+                <div class="card-body">
+                  <p class="card-text h5 text-center">Engine Oils</p>
+                </div>
+            </div>
+            <div class="card categories-card m-2">
+                <img src="..." th:src="@{/images/batt1.jpg}" class="card-img-top categories-img" alt="...">
+                <div class="card-body">
+                  <p class="card-text h5 text-center">Batteries</p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
