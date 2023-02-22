@@ -10,8 +10,8 @@
 
 <body>
     <div layout:fragment="content">
-        <h1>This is the store page using thymeleaf</h1>
-        <table>
+        <h1 class="text-center my-4">This is the store page using thymeleaf</h1>
+        <!-- <table>
             <tr>
                 <th>Name</th>
                 <th>Description</th>
@@ -23,7 +23,35 @@
                 <td th:text="${product.description}"></td>
                 <td th:text="${product.rating}"></td>
                 <td ><a th:href="@{product/{id}(id=${product.id})}">BUY</a></td>
-        </table>
+        </table> -->
+
+        <div class="container justify-content-center card-container card-deck" >
+            <div th:each="product:${products}">
+                <a href="#" th:href="@{product/{id}(id=${product.id})}" class="text-decoration-none text-dark">
+                    <!-- <div class="card product-card">
+                        <img src="..." th:src="@{/images/turbo1.jpg}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+                            <p class="card-text" th:text="${product.description}"></p>
+                        </div>
+                    </div> -->
+
+                    <div class="card mb-3 product-card">
+                        <div class="row g-0">
+                          <div class="col-md-4">
+                            <img src="..." th:src="@{/images/turbo1.jpg}" class="img-fluid rounded-start" alt="...">
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title" th:text="${product.name}"></h5>
+                              <p class="card-text" th:text="${product.description}"></p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
         <!-- <form action="#" th:action="@{/basket/add}" method="post">
             <label for="quantity">Quantity</label>
