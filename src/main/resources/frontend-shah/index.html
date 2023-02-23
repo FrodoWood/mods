@@ -7,22 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <!--star reviews-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
   </head>
 
   <body>
     <nav class="navbar">
       <div class="navbar-logo">
-        <img src="logo.png" alt="Logo">
+        <img src="images/logo.png" alt="Logo">
       </div>
       <div class="navbar-search">
         <form>
           <input type="text" placeholder="Search keyword, category, brand or part">
-          <button type="submit">Go</button>
+          <button type="button" class="btn btn-primary "><i class="bi bi-search"></i></button>
         </form>
       </div>
       <ul class="navbar-links">
@@ -90,59 +92,47 @@
           <button type="button" class="cart">Add to basket</button>
         </div>
       </div>
-      <!-- <div class="row2">
-        <div class="product-description">
-          <p class="description-header">Product Description</p>
-          <p class="description-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra
-            lobortis neque, eu iaculis quam semper in.
-            Mauris at enim lacus. Maecenas eget luctus purus, vitae faucibus purus. Etiam id ullamcorper nisl. Nullam
-            convallis
-            accumsan sapien ut ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-            cubilia
-            curae;
-            Nam varius justo eget mauris iaculis, ac euismod dolor molestie. Quisque rhoncus purus dolor, nec convallis
-            eros
-            consequat vel. In ultrices fermentum commodo. Duis est leo, maximus a accumsan vel, ornare non augue.
-            Maecenas
-            elementum
-            tincidunt turpis ut elementum. Vivamus tincidunt nisi vitae neque mollis, et facilisis neque accumsan. Donec
-            in massa
-            mi. In dapibus at velit nec fringilla. Donec tincidunt consectetur ipsum, condimentum pharetra dui lobortis
-            non. Vivamus
-            nec efficitur velit. </p>
-        </div>
-        <div class="delivery">
-          <p class="delivery-header">Delivery</p>
-          <p class="delivery-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra
-            lobortis neque, eu iaculis quam semper in.
-            Mauris at enim lacus. Maecenas eget luctus purus, vitae faucibus purus. Etiam id ullamcorper nisl. Nullam
-            convallis
-            accumsan sapien ut ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-            cubilia
-            curae;
-            Nam varius justo eget mauris iaculis, ac euismod dolor molestie. Quisque rhoncus purus dolor, nec convallis
-            eros
-            consequat vel. In ultrices fermentum commodo. Duis est leo, maximus a accumsan vel, ornare non augue.
-            Maecenas
-            elementum
-            tincidunt turpis ut elementum. Vivamus tincidunt nisi vitae neque mollis, et facilisis neque accumsan. Donec
-            in massa
-            mi. In dapibus at velit nec fringilla. Donec tincidunt consectetur ipsum, condimentum pharetra dui lobortis
-            non. Vivamus
-            nec efficitur velit. </p>
-        </div>
-      </div> -->
-      <div class="container my-5">
+      <div class="tab-container my-5">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-              type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
-            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-              type="button" role="tab" aria-controls="nav-home" aria-selected="true">Delivery</button>
-          </div>
-        </nav>
 
+            <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab"
+              data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description"
+              aria-selected="true">Description</button>
+
+            <button class="nav-link" id="nav-delivery-tab" data-bs-toggle="tab" data-bs-target="#nav-delivery"
+              type="button" role="tab" aria-controls="nav-delivery" aria-selected="false">Delivery</button>
+
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+
+          <div class="tab-pane fade show active p-3" id="nav-description" role="tabpanel"
+            aria-labelledby="nav-description-tab">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio provident corporis aut, ipsa tenetur
+              vel
+              illo excepturi voluptate molestiae magnam, totam est id alias dicta a assumenda corrupti et repellat.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio provident corporis aut, ipsa tenetur
+              vel
+              illo excepturi voluptate molestiae magnam, totam est id alias dicta a assumenda corrupti et repellat.</p>
+          </div>
+
+          <div class="tab-pane fade p-3" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi, cupiditate nam aperiam possimus, ratione
+              modi
+              enim inventore reiciendis ipsum mollitia, adipisci accusamus! Dolorem omnis illo incidunt ex, sit minus
+              numquam.
+            </p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi, cupiditate nam aperiam possimus, ratione
+              modi
+              enim inventore reiciendis ipsum mollitia, adipisci accusamus! Dolorem omnis illo incidunt ex, sit minus
+              numquam.
+            </p>
+          </div>
+
+
+        </div>
       </div>
+    </div>
     </div>
     </div>
     <footer class="footer">
@@ -196,25 +186,7 @@
       });
     });
   </script>
-  <script>
-    document.querySelector('.product-description',).addEventListener('click', function () {
-      this.classList.toggle('clicked');
-    });
 
-  </script>
-  <script>
-    // get a reference to the delivery header element
-    const deliveryHeader = document.querySelector('.delivery-header');
-
-    // add a click event listener to the delivery header element
-    deliveryHeader.addEventListener('click', function () {
-      // get a reference to the delivery text element
-      const deliveryText = document.querySelector('.delivery-content');
-
-      // toggle the display of the delivery text element
-      deliveryText.style.display = deliveryText.style.display === 'none' ? 'block' : 'none';
-    });
-  </script>
 
 
 </html>
