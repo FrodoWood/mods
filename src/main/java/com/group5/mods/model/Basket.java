@@ -46,10 +46,22 @@ public class Basket {
         }
     }
 
-    public void changeQuantity(Product product, int quantity) {
+    public void addQuantity(Product product) {
         BasketProduct existingItem = findBasketProductByProduct(product);
         if (existingItem != null) {
-            int newQuantity = existingItem.getQuantity() - quantity;
+            int newQuantity = existingItem.getQuantity() + 1;
+            if (newQuantity >= 0) {
+                existingItem.setQuantity(newQuantity);
+            } else {
+                basketProducts.remove(existingItem);
+            }
+        }
+    }
+
+    public void reduceQuantity(Product product) {
+        BasketProduct existingItem = findBasketProductByProduct(product);
+        if (existingItem != null) {
+            int newQuantity = existingItem.getQuantity() - 1;
             if (newQuantity >= 0) {
                 existingItem.setQuantity(newQuantity);
             } else {
@@ -72,5 +84,13 @@ public class Basket {
             }
         }
         return null;
+    }
+
+    public int totalCost() {
+        int total = 0;
+        for (BasketProduct basketProduct : basketProducts) {
+            total += (basketProduct.getProduct().getPrice() * basketProduct.getQuantity());
+        }
+        return total;
     }
 }

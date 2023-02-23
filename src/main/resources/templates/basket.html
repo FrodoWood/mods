@@ -20,7 +20,9 @@
                 <th>make</th>
                 <th>category</th>
                 <th>price</th>
+                <th>Add</th>
                 <th>Quantity</th>
+                <th>Reduce</th>
                 <th>Option</th>
             </tr>
             <tr th:each="basketProduct : ${products}">
@@ -30,16 +32,16 @@
                 <td th:text="${basketProduct.product.make}"></td>
                 <td th:text="${basketProduct.product.category}"></td>
                 <td th:text="'£' + ${basketProduct.product.price}"></td>
+                <td><a th:href = "@{basket/addQuantity/{id}(id=${basketProduct.product.id})}">+1</a></td>
                 <td th:text="${basketProduct.quantity}"></td>
-                <td>
-                    
-                    <a th:href="@{basket/removeProduct/{id}(id=${basketProduct.id})}">Delete</a>
-                </td>
+                <td><a th:href = "@{basket/reduce/{id}(id=${basketProduct.product.id})}">-1</a></td>
+                <td><a th:href="@{basket/removeProduct/{id}(id=${basketProduct.id})}">Delete</a></td>
             </tr>
         </table>
     <form method = "post" action ="#" th:action="@{/basket/clear}" th:object="${basketproduct}">
         <button type="submit">Clear</button>
     </form>
+    <p th:text="${total}"></p>
     </div>
 </body>
 </html>

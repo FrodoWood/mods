@@ -51,8 +51,10 @@ public class BasketController {
         // If the user already has a basket assigned, then retrieve basket from
         // database, or else create new empty basket;
         if (basket.isPresent()) {
+            int total = basket.get().totalCost();
             model.addAttribute("basket", basket.get());
             model.addAttribute("products", basket.get().getBasketProducts());
+            model.addAttribute("total", total);
         } else {
             model.addAttribute("basket", new Basket(user));
         }
@@ -139,5 +141,37 @@ public class BasketController {
 
         return "redirect:/basket";
 
+    }
+
+    @GetMapping("/basket/addQuantity/{id}")
+    public String addQuantity(@PathVariable long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        User user = securityUser.getUser();
+        Optional<Basket> basket = basketService.findByUser(user);
+        Optional<Product> product = productService.findById(id);
+
+        basket.get().addQuantity(product.get());
+        basketService.save(basket.get());
+
+        model.addAttribute("basket", basket.get());
+        model.addAttribute("products", basket.get().getBasketProducts());
+        return "redirect:/basket";
+    }
+
+    @GetMapping("/basket/reduce/{id}")
+    public String reduceQuantity(@PathVariable long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        User user = securityUser.getUser();
+        Optional<Basket> basket = basketService.findByUser(user);
+        Optional<Product> product = productService.findById(id);
+
+        basket.get().reduceQuantity(product.get());
+        basketService.save(basket.get());
+
+        model.addAttribute("basket", basket.get());
+        model.addAttribute("products", basket.get().getBasketProducts());
+        return "redirect:/basket";
     }
 }
