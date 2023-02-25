@@ -47,6 +47,10 @@ public class OrderController {
         // Getting basket, basket products, and creating a new order object with the user and basket products
         Optional<Basket> basket = basketService.findByUser(user);
         List<BasketProduct> basketProducts = basket.get().getBasketProducts();
+        // Check if basket is empty, don't allow to checkout with empty basket
+        if(basketProducts.isEmpty()){
+            return "redirect:/basket";
+        }
         Order order = orderService.createOrder(user, basketProducts);
         // Removing everything from basked since order was created, and saving new empty basket to the database
         basketRepository.deleteAll();
