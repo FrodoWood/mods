@@ -38,10 +38,16 @@
                 <td><a th:href="@{basket/removeProduct/{id}(id=${basketProduct.id})}">Delete</a></td>
             </tr>
         </table>
-    <form method = "post" action ="#" th:action="@{/basket/clear}" th:object="${basketproduct}">
-        <button type="submit">Clear</button>
-    </form>
-    <p th:text="${total}"></p>
+        <br>
+        <form method = "post" action ="#" th:action="@{/basket/clear}" th:object="${basketproduct}">
+            <button type="submit">Clear</button>
+        </form>
+        <br>
+        <form method = "post" action ="#" th:action="@{/checkout}">
+            <button type="submit">Checkout</button>
+        </form>
+        <br>
+        <p th:text="'Total = £' + ${total}"></p>
     </div>
 </body>
 </html>
