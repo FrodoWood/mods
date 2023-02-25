@@ -17,8 +17,12 @@ import com.group5.mods.model.BasketProduct;
 import com.group5.mods.model.Order;
 import com.group5.mods.model.SecurityUser;
 import com.group5.mods.model.User;
+import com.group5.mods.repository.BasketRepository;
 import com.group5.mods.service.BasketService;
+import com.group5.mods.service.OrderService;
 import com.group5.mods.service.UserService;
+
+import jakarta.persistence.EntityManager;
 
 @Controller
 public class OrderController {
@@ -31,6 +35,9 @@ public class OrderController {
     @Autowired
     private BasketService basketService;
 
+    @Autowired
+    private BasketRepository basketRepository;
+
     @PostMapping("/checkout")
     public String placeOrder(Model model){
         // Getting the authenticated user
@@ -42,6 +49,7 @@ public class OrderController {
         List<BasketProduct> basketProducts = basket.get().getBasketProducts();
         Order order = orderService.createOrder(user, basketProducts);
         // Removing everything from basked since order was created, and saving new empty basket to the database
+        basketRepository.deleteAll();
         basketProducts.clear();
         basketService.save(basket.get());
         return "redirect:/orders";

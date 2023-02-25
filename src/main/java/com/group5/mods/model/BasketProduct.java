@@ -24,6 +24,7 @@ public class BasketProduct {
     private Basket basket;
 
     @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
     private int quantity;

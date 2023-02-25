@@ -1,4 +1,4 @@
-package com.group5.mods.controller;
+package com.group5.mods.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.group5.mods.model.BasketProduct;
 import com.group5.mods.model.Order;
@@ -14,7 +15,7 @@ import com.group5.mods.model.OrderStatus;
 import com.group5.mods.model.User;
 import com.group5.mods.repository.OrderProductRepository;
 import com.group5.mods.repository.OrderRepository;
-
+@Service
 public class OrderService {
 
     @Autowired
