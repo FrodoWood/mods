@@ -1,5 +1,7 @@
 package com.group5.mods.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,11 +88,13 @@ public class Basket {
         return null;
     }
 
-    public int totalCost() {
-        int total = 0;
+    public BigDecimal totalCost() {
+        BigDecimal total = BigDecimal.ZERO;
         for (BasketProduct basketProduct : basketProducts) {
-            total += (basketProduct.getProduct().getPrice() * basketProduct.getQuantity());
+            BigDecimal price = basketProduct.getProduct().getPrice();
+            BigDecimal quantity = BigDecimal.valueOf(basketProduct.getQuantity());
+            total = total.add(price.multiply(quantity));
         }
-        return total;
+        return total.setScale(2, RoundingMode.HALF_UP);
     }
 }

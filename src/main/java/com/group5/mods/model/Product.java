@@ -1,11 +1,16 @@
 package com.group5.mods.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -37,13 +42,14 @@ public class Product {
     private String category;
 
     @Column(nullable = false)
-    private int price;
+    @Digits(integer = 10, fraction = 2)
+    private BigDecimal price;
 
     @Column(nullable = false)
     private int stock;
 
     public Product(float Rating, String name, String description, String make, String model, String category,
-            int price, int stock) {
+            BigDecimal price, int stock) {
         this.rating = Rating;
         this.name = name;
         this.description = description;

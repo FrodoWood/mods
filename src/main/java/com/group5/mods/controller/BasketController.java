@@ -1,5 +1,6 @@
 package com.group5.mods.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,7 +52,7 @@ public class BasketController {
         // If the user already has a basket assigned, then retrieve basket from
         // database, or else create new empty basket;
         if (basket.isPresent()) {
-            int total = basket.get().totalCost();
+            BigDecimal total = basket.get().totalCost();
             model.addAttribute("basket", basket.get());
             model.addAttribute("products", basket.get().getBasketProducts());
             model.addAttribute("total", total);

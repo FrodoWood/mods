@@ -1,5 +1,6 @@
 package com.group5.mods.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,12 +38,14 @@ public class Order {
 
     private LocalDateTime dateCreated;
     private LocalDateTime dateFulfiffed;
-    private Double totalPrice;
+
+    @Digits(integer = 10, fraction = 2)
+    private BigDecimal totalPrice;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    public Order(User user, LocalDateTime dateCreated, LocalDateTime dateFulfiffed, Double totalPrice,
+    public Order(User user, LocalDateTime dateCreated, LocalDateTime dateFulfiffed, BigDecimal totalPrice,
             OrderStatus status) {
         this.user = user;
         this.dateCreated = dateCreated;

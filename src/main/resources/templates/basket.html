@@ -118,7 +118,7 @@
                             <h2 class="card-title pt-2">Order Summary</h2>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Subtotal: $44.94</p>
+                            <p class="card-text" th:text="${total}">Subtotal: $44.94</p>
                             <p class="card-text">Shipping: $5.00</p>
                             <p class="card-text">Total: $49.94</p>
                             <form method = "post" action ="#" th:action="@{/checkout}">
