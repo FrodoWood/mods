@@ -80,7 +80,7 @@ public class BasketController {
 
         // Check if the product is in stock
         if (product.isPresent() && product.get().getStock() < quantity) {
-            model.addAttribute("error", "Product is out of stock");
+            model.addAttribute("error", "Not enough products in stock");
             model.addAttribute("product", product.get());
             return "product";
         }
