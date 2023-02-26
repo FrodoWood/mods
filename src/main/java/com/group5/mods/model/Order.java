@@ -37,7 +37,7 @@ public class Order {
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     private LocalDateTime dateCreated;
-    private LocalDateTime dateFulfiffed;
+    private LocalDateTime dateFulfilled;
 
     @Digits(integer = 10, fraction = 2)
     private BigDecimal totalPrice;
@@ -49,7 +49,7 @@ public class Order {
             OrderStatus status) {
         this.user = user;
         this.dateCreated = dateCreated;
-        this.dateFulfiffed = dateFulfiffed;
+        this.dateFulfilled = dateFulfiffed;
         this.totalPrice = totalPrice;
         this.status = status;
     }

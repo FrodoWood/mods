@@ -29,7 +29,10 @@ public class OrderService {
         order.setUser(user);
         order.setDateCreated(LocalDateTime.now());
         order.setStatus(OrderStatus.ORDERED);
-        order.setTotalPrice(BigDecimal.valueOf(100.00));
+
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        // order.setTotalPrice(BigDecimal.valueOf(100.00));
 
         List<OrderProduct> orderProducts = new ArrayList<>();
         for (BasketProduct basketProduct : basketProducts){
@@ -38,8 +41,10 @@ public class OrderService {
             orderProduct.setQuantity(basketProduct.getQuantity());
             orderProduct.setOrder(order);
             orderProducts.add(orderProduct);
+            totalPrice = totalPrice.add(basketProduct.getProduct().getPrice().multiply(BigDecimal.valueOf(basketProduct.getQuantity())));
         }
 
+        order.setTotalPrice(totalPrice);
         order.setOrderProducts(orderProducts);
 
         // Save the order in orders table
