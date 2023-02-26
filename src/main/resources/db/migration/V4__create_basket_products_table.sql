@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS basket_products (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  basket_id BIGINT UNSIGNED NOT NULL,
+  FOREIGN KEY (basket_id) REFERENCES basket(id),
+  product_id BIGINT UNSIGNED NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES products(id),
+  quantity INT NOT NULL
+);

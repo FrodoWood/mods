@@ -1,0 +1,6 @@
+INSERT INTO `products` (`id`, `category`, `description`, `make`, `model`, `name`, `price`, `rating`, `stock`) VALUES 
+(NULL, 'Coilovers', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Audi', 'A5', 'BC Racing V1-Series Racing Coilovers', '499.95', '4.5', '14'), 
+(NULL, 'Turbo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'BMW', 'Z4', 'Precision 6470 Next Gen R Billet Ball Bearing Turbo', '1459.95', '4.0', '4'), 
+(NULL, 'Brakes', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur numquam dolorem assumenda consectetur natus. Delectus.', 'Audi', 'A5', 'StopTech Sport Big Brake Kit - Front', '1595.95', '4.7', '2'), 
+(NULL, 'Oils', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 'BMW', 'Z4', 'Castrol Edge Supercar 10W-60', '69.95', '4.6', '14'), 
+(NULL, 'Batteries', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.', 'Audi', 'A5', 'SportTech Tropy Sport Big Brake Kit', '1599.95', '4.3', '3')

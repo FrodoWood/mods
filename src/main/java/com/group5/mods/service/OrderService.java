@@ -1,5 +1,6 @@
 package com.group5.mods.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,8 @@ public class OrderService {
         Order order = new Order();
         order.setUser(user);
         order.setDateCreated(LocalDateTime.now());
-        order.setStatus(OrderStatus.INPROGRESS);
-        order.setTotalPrice(100.00);
+        order.setStatus(OrderStatus.ORDERED);
+        order.setTotalPrice(BigDecimal.valueOf(100.00));
 
         List<OrderProduct> orderProducts = new ArrayList<>();
         for (BasketProduct basketProduct : basketProducts){
