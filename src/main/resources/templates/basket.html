@@ -135,6 +135,18 @@
                                 <form method = "post" action ="#" th:action="@{/checkout}">
                                     <button class="btn btn-success" type="submit">Checkout</button>
                                 </form>
+                                <!-- <span th:utext="${errorStock}"></span> -->
+                                <div th:if="${errorStock}">
+                                    <!-- Vertically centered modal -->
+                                    <div class="alert alert-danger mt-4" role="alert">
+                                        <div>Not enough items in stock, please change quantity for item: </div>
+                                        <ul>
+                                            <li>
+                                                <span th:utext="${errorStock} + ' (' + ${errorProduct.product.stock} + ' left)' "></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

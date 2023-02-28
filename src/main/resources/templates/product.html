@@ -113,7 +113,9 @@
                         </div>
                     </div>
                 </form>
-                <div class="text-danger h5 my-3 py-3" th:utext="${error}"></div>
+                <div th:if="${error}">
+                  <div class="alert alert-danger h5 my-3 py-3" th:utext="${error} +' (' + ${product.stock} + ' left)'"></div>
+                </div>
 
               </div>
             </div>
