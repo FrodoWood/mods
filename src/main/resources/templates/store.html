@@ -10,38 +10,62 @@
 
 <body>
     <div layout:fragment="content">
-        <h1 class="text-center my-4">This is the store page using thymeleaf</h1>
-        <!-- <table>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Rating</th>
-                <th>Buy</th>
-            </tr>
-            <tr th:each="product:${products}">
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.description}"></td>
-                <td th:text="${product.rating}"></td>
-                <td ><a th:href="@{product/{id}(id=${product.id})}">BUY</a></td>
-        </table> -->
 
-        <div class="container justify-content-center card-container card-deck" >
+        <!-- Categories -->
+        <h5 class="text-center mt-4">Product Categories</h5>
+        <div class=" d-flex flex-wrap justify-content-center">
+            
+            <div class="card categories-card m-2 text-center">
+                <a href="#" th:href="@{/store/Coilovers}" class="text-decoration-none link-dark">
+                  <img src="..." th:src="@{/images/Tein Street Basis Z Coilovers.png}" class="card-img-top categories-img" alt="...">
+                  <div class="card-body">
+                    <p class="card-text h5 text-center">Coilovers</p>
+                  </div>
+                </a>
+            </div>
+            <div class="card categories-card m-2 text-center">
+                <a href="#" th:href="@{/store/Turbo}" class="text-decoration-none link-dark">
+                  <img src="..." th:src="@{/images/turbo1.jpg}" class="card-img-top categories-img" alt="...">
+                  <div class="card-body">
+                    <p class="card-text h5 text-center">Turbo kits</p>
+                  </div>
+                </a>
+            </div>
+            <div class="card categories-card m-2 text-center">
+                <a href="#" th:href="@{/store/Brakes}" class="text-decoration-none link-dark">
+                  <img src="..." th:src="@{/images/StopTech Trophy Sport Big Brake Kit.png}" class="card-img-top categories-img" alt="...">
+                  <div class="card-body">
+                    <p class="card-text h5 text-center">Big Brake Kits</p>
+                  </div>
+                </a>
+            </div>
+            <div class="card categories-card m-2 text-center">
+                <a href="#" th:href="@{/store/Oils}" class="text-decoration-none link-dark">
+                  <img src="..." th:src="@{/images/Castrol GTX Engine Oil.jpg}" class="card-img-top categories-img" alt="...">
+                  <div class="card-body">
+                    <p class="card-text h5 text-center">Engine Oils</p>
+                  </div>
+                </a>
+            </div>
+            <div class="card categories-card m-2 text-center">
+                <a href="#" th:href="@{/store/Batteries}" class="text-decoration-none link-dark">
+                  <img src="..." th:src="@{/images/batt1.jpg}" class="card-img-top categories-img" alt="...">
+                  <div class="card-body">
+                    <p class="card-text h5 text-center">Batteries</p>
+                  </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="container justify-content-center card-container card-deck my-5" >
             <div th:each="product:${products}">
-                <a href="#" th:href="@{product/{id}(id=${product.id})}" class="text-decoration-none text-dark">
-                    <!-- <div class="card product-card">
-                        <img src="..." th:src="@{/images/turbo1.jpg}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${product.name}"></h5>
-                            <p class="card-text" th:text="${product.description}"></p>
-                        </div>
-                    </div> -->
-
+                <a href="#" th:href="@{/product/{id}(id=${product.id})}" class="text-decoration-none text-dark">
                     <div class="card mb-3 product-card">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="..." th:src="@{/images/turbo1.jpg}" class="img-fluid rounded-start" alt="...">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <img src="..." th:src="@{/images/turbo1.jpg}" class="img-thumbnail border-0" alt="...">
                           </div>
-                          <div class="col-md-8">
+                          <div class="col-sm-8">
                             <div class="card-body">
                               <h5 class="card-title" th:text="${product.name}"></h5>
                               <p class="card-text" th:text="${product.description}"></p>
@@ -53,13 +77,6 @@
             </div>
         </div>
 
-        <!-- <form action="#" th:action="@{/basket/add}" method="post">
-            <label for="quantity">Quantity</label>
-            <input type="number" name="quantity" id="quantity" value="1">
-            <input type="hidden" name="productId" th:value="${product.id}">
-            <button type="submit">Add to Basket</button>
-        </form> -->
-        
     </div>
 </body>
 </html>
