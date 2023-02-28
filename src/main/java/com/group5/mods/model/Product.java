@@ -59,4 +59,12 @@ public class Product {
         this.category = category;
         this.stock = stock;
     }
+
+    public int increaseStockBy(int amount){
+        return this.stock = stock + amount;
+    }
+
+    public int reduceStockBy(int amount){
+        return this.stock = stock - amount;
+    }
 }
