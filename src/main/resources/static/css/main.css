@@ -2,6 +2,9 @@
 
 body {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: rgb(245, 247, 252)
 }
 
@@ -54,3 +57,19 @@ body {
     box-shadow: 0px 4px 30px -20px #d7d7d7;
     transition-duration: 0.2s;
 }
+
+.login {
+    width: 360px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+  }
+  
+  .login form {
+    font-size: 20px;
+  }
+  
+  .login form .form-group {
+    margin-bottom: 12px;
+  }
