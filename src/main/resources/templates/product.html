@@ -75,19 +75,28 @@
                 
               </div>
               <div class="col-md-5 item-info">
-                <!--star reviews-->
-                <span><i class="bi bi-star-fill"></i></span>
-                <span><i class="bi bi-star-fill"></i></span>
-                <span><i class="bi bi-star-fill"></i></span>
-                <span><i class="bi bi-star-fill"></i></span>
-                <span><i class="bi bi-star-fill"></i></span>
+
+                <!-- Dynamic star rating -->
+                <span th:each="i : ${#numbers.sequence(1, 5)}">
+                  <i th:class="${{product.rating}} ge ${#numbers.formatDecimal(i,1,1)} - 0.5 ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+                </span>
+                <span class="text-secondary ps-2" th:text="${{product.rating}} + ' out of 5'"></span>
+                
+                
+
                 <h2 th:text="${{product.name}}">Title</h2>
                 <p th:text="${{product.category}}">Title</p>
                 <h4 th:text="'£' + ${{product.price}}">£79.99</h4>
-
-                <div th:if="${{product.stock}} lt 5">
+                
+                <!-- Check if stock is equal to 0 -->
+                <div th:if="${{product.stock}} eq 0">
+                    <p><b>Availability: </b> <span class="text-danger">Out of stock</span></p>
+                </div>
+                <!-- Check if stcok is less than 5 -->
+                <div th:if="${{product.stock}} gt 0 and ${{product.stock}} lt 5">
                     <p><b>Availability: </b> <span class="text-success">In stock, only <span th:text="${{product.stock}}"></span> left</span></p>
                 </div>
+                <!-- Check if stock is greater than 5 -->
                 <div th:if="${{product.stock}} ge 5">
                     <p><b>Availability: </b> <span class="text-success">In stock</span></p>
                 </div>
