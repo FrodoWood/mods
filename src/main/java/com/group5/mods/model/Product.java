@@ -48,8 +48,11 @@ public class Product {
     @Column(nullable = false)
     private int stock;
 
+    @Column(nullable = false)
+    private String image;
+
     public Product(float Rating, String name, String description, String make, String model, String category,
-            BigDecimal price, int stock) {
+            BigDecimal price, int stock, String image) {
         this.rating = Rating;
         this.name = name;
         this.description = description;
@@ -58,6 +61,7 @@ public class Product {
         this.model = model;
         this.category = category;
         this.stock = stock;
+        this.image = image;
     }
 
     public int increaseStockBy(int amount){

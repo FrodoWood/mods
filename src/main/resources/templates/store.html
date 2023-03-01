@@ -63,11 +63,16 @@
                     <div class="card mb-3 product-card">
                         <div class="row">
                           <div class="col-sm-4">
-                            <img src="..." th:src="@{/images/turbo1.jpg}" class="img-thumbnail border-0" alt="...">
+                            <img src="..." th:src="${product.image}" class="img-thumbnail border-0" alt="...">
                           </div>
                           <div class="col-sm-8">
                             <div class="card-body">
+                              <!-- Dynamic star rating -->
+                              <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                <i th:class="${{product.rating}} ge ${#numbers.formatDecimal(i,1,1)} - 0.5 ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+                              </span>
                               <h5 class="card-title" th:text="${product.name}"></h5>
+                              <h4 th:text="'£' + ${product.price}">£79.99</h4>
                               <p class="card-text" th:text="${product.description}"></p>
                             </div>
                           </div>
