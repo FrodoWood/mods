@@ -5,7 +5,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: rgb(245, 247, 252)
+    background-color: rgba(245, 247, 252, 0.682)
 }
 
 .carousel-banner-img {
@@ -30,9 +30,15 @@ body {
 }
 
 .categories-card:hover{
-    box-shadow: 0px 6px 20px -10px #888888;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-    transform: translate3d(0px, -4px, 33px);
+    box-shadow: 0 1.5rem 2.5rem rgba(22,28,45,.1),0 .3rem 0.5rem -.50rem rgba(25, 30, 43, 0.23);
+    transform: translate3d(0px, -6px, 100px);
+    /* transform: matrix3d(
+  1, 0, 0, 0,
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  0, -5, 0, 1
+); */
+    transition-timing-function: cubic-bezier(0.09, 0.56, 0.5, 0.96);
 }
 
 .card-container {
@@ -46,10 +52,10 @@ body {
     /* margin:auto; */
 }
 .product-card:hover {
-    box-shadow: 0px 6px 20px 0px rgb(96 96 96 / 30%);
+    box-shadow: 0 1.5rem 2.5rem rgba(22,28,45,.1),0 .3rem 0.5rem -.50rem rgba(22,28,45,.05);
     transition-duration: 0.2s;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-    transform: translate3d(0px, -4px, 33px);
+    transform: translate3d(0px, -4px, -100px);
+    transition-timing-function: cubic-bezier(0.09, 0.56, 0.5, 0.96);
 }
 
 .card{

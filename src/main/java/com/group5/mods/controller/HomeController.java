@@ -19,10 +19,4 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String admin() {
-        return "Hello admin";
-    }
-
 }
