@@ -2,14 +2,19 @@ package com.group5.mods.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.group5.mods.model.Order;
+import com.group5.mods.model.OrderStatus;
 import com.group5.mods.model.Product;
 import com.group5.mods.model.User;
 import com.group5.mods.repository.OrderRepository;
@@ -56,6 +61,20 @@ public class AdminController {
         List<Order> orderList = new ArrayList<>();
         orderList = orderRepository.findAll();
         model.addAttribute("orders", orderList);
+        model.addAttribute("orderStatusEnum", OrderStatus.values());
         return "admin/admin_orders";
+    }
+
+    @PostMapping("/admin/orders/updateStatus")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String updateOrderStatus(@RequestParam("orderId") Long orderId, @RequestParam("orderStatus") OrderStatus orderStatus) {
+        // Retrieve the order using the orderId
+        Optional<Order> order = orderRepository.findById(orderId);
+        // update the status in the updatedOrder
+        order.get().setStatus(orderStatus);
+        // Save updated order to database
+        orderRepository.save(order.get());
+
+        return "redirect:/admin/orders";
     }
 }
