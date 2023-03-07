@@ -79,3 +79,13 @@ body {
   .login form .form-group {
     margin-bottom: 12px;
   }
+
+  .adminNav {
+    min-height: 150px;
+  }
+
+  @media screen and (min-width:1200px) {
+    .adminNav {
+        min-height: 100vh;
+      }
+  }

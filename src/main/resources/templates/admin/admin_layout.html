@@ -13,104 +13,41 @@
 </head>
 
 <body>
-<!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg bg-dark sticky-top"data-bs-theme="dark">
-        <div class="container">
-          <a class="navbar-brand" href="#" th:href="@{/}">
-            <i class="bi bi-car-front-fill"></i>
-            <span class="me-5">MODS</span>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#" th:href="@{/store}">Store</a>
-              </li>
-              
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Car Parts
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" th:href="@{/store/Coilovers}">Coilovers</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Turbo}">Turbo Kits</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Brakes}">Big Brake Kits</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Oils}">Engine Oils</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Batteries}">Batteries</a></li>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-2 bg-dark adminNav">
+          <nav class="navbar bg-body-tertiary bg-dark p-0 h4 ms-2 sticky-top">
+            <div class="container-fluid bg-dark">
+                <ul class="navbar-nav mt-4">
+                  <li class="nav-item">
+                    <a class="nav-link text-white active" aria-current="page" href="#" th:href="@{/admin}"><i class="bi bi-grid-fill"></i> Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#" th:href="@{/admin/users}"><i class="bi bi-people-fill"></i> Users</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#" th:href="@{/admin/products}"><i class="bi bi-box-seam"></i> Products</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#" th:href="@{/admin/orders}"><i class="bi bi-credit-card"></i> Orders</a>
+                  </li>
+                  
                 </ul>
-              </li>
-
-              <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            </ul>
-
-
-            <!-- Search Bar -->
-            <form class="d-flex me-5" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
-            </form>
-
-            <!-- User Links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/orders}">Orders</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/login}"><i class="bi bi-person-fill"></i>Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/register}">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/logout}">Logout</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/basket}"><i class="bi bi-basket2 h4"></i></a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin}">Admin</a></li>
-            </ul>
-
-          </div>
+            </div>
+          </nav>
         </div>
-      </nav>
-
-    <!-- Content received from other pages -->
-    <div layout:fragment="admin_content" class="container">
-        <!-- This is where the content will be added from the other admin pages -->
-    </div>
-
-    <!-- This is the footer visible on all pages -->
-    <footer class="footer bg-dark text-light py-4 mt-4">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-md-4">
-            <h4>Shop</h4>
-            <ul class="list-unstyled">
-              <li><a class="link-light text-decoration-none" th:href="@{/store/Coilovers}">Coilovers</a></li>
-              <li><a class="link-light text-decoration-none" th:href="@{/store/Turbo}">Turbo Kits</a></li>
-              <li><a class="link-light text-decoration-none" th:href="@{/store/Brakes}">Big Brake Kits</a></li>
-              <li><a class="link-light text-decoration-none" th:href="@{/store/Oils}">Engine Oils</a></li>
-              <li><a class="link-light text-decoration-none" th:href="@{/store/Batteries}">Batteries</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h4>Information</h4>
-            <ul class="list-unstyled">
-              <li><a class="link-light text-decoration-none" href="#">About Us</a></li>
-              <li><a class="link-light text-decoration-none" href="#">Contact Us</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h4>Contact Us</h4>
-            <ul class="list-unstyled">
-              <li>123 Main St.</li>
-              <li>Birmingham, UK</li>
-              <li>info@example.com</li>
-              <li>+44 123 456 7890</li>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
-            <p class="text-center">&copy; 2023 Car Mods</p>
+        <div class="col-xl-10">
+          <!-- Content received from other pages -->
+          <div layout:fragment="admin_content" class="container">
+              <!-- This is where the content will be added from the other admin pages -->
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+
+
+    
 
     <!-- Global scripts here -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
