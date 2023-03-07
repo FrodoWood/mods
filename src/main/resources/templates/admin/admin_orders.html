@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/admin_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+</head>
+
+<body>
+    <div layout:fragment="admin_content">
+        <!-- List of all orders -->
+        <div class="d-flex flex-column container">
+            <h3 class="text-center my-5 py-4">Orders</h3>
+            <table class="table">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date created</th>
+                    <th>Total price</th>
+                    <th>Status</th>
+                </tr>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.dateCreated}"></td>
+                    <td th:text="${order.totalPrice}"></td>
+                    <td th:text="${order.status}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
