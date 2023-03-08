@@ -77,4 +77,17 @@ public class AdminController {
 
         return "redirect:/admin/orders";
     }
+
+    @PostMapping("/admin/users/updateRole")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String updateUserRole(@RequestParam("userId") Long userId, @RequestParam("userRole") String userRole) {
+        // Retrieve the user using the userId
+        Optional<User> user = userRepository.findById(userId);
+        // update the role in the updatedOrder
+        user.get().setRoles(userRole);
+        // Save updated order to database
+        userRepository.save(user.get());
+
+        return "redirect:/admin/users";
+    }
 }
