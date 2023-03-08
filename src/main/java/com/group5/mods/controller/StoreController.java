@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.MergedAnnotations.Search;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.group5.mods.model.Product;
 import com.group5.mods.repository.ProductRepository;
@@ -25,17 +28,17 @@ public class StoreController {
         return "store";
     }
 
-    @GetMapping("/store/search/{searchValue}")
-    public String storeSearch(@PathVariable String searchValue, Model model) {
+    @GetMapping("/store/search")
+    public String storeSearch(@RequestParam("searchValue") String search, Model model) {
         List<Product> test = productRepository.findAll();
         List<Product> result = new ArrayList<Product>();
         for (Product product : test) {
-            if (product.getName().toLowerCase().compareTo(searchValue.toLowerCase()) == 0) {
+            if (product.getName().toLowerCase().contains(search.toLowerCase())) {
                 result.add(product);
             }
         }
         if (result.isEmpty()) {
-            return "store";
+            return "redirect:/store";
         } else {
             model.addAttribute("products", result);
             return "store";
