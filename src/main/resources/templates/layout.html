@@ -48,8 +48,8 @@
 
 
             <!-- Search Bar -->
-            <form class="d-flex me-5" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex me-5" role="search" th:action="@{/store/search/{searchValue}(searchValue=productSearchValue)}">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:field="*{productSearchValue}">
               <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
             </form>
 
