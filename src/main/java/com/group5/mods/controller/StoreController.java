@@ -28,6 +28,31 @@ public class StoreController {
         return "store";
     }
 
+    @GetMapping("/store/{price}")
+    public String storePrice(@PathVariable String price, Model model) {
+        List<Product> rawData = productRepository.findAll();
+        ArrayList<Product> result = new ArrayList<>();
+        for (Product product : rawData) {
+            if (price.contentEquals("low")) {
+                if (product.getPrice().intValue() < 100) {
+                    result.add(product);
+                }
+            }
+            if (price.contentEquals("mid")) {
+                if (product.getPrice().intValue() < 1000) {
+                    result.add(product);
+                }
+            }
+            if (price.contentEquals("high")) {
+                if (product.getPrice().intValue() > 1000) {
+                    result.add(product);
+                }
+            }
+        }
+        model.addAttribute("products", result);
+        return "store";
+    }
+
     @GetMapping("/store/search")
     public String storeSearch(@RequestParam("searchValue") String search, Model model) {
         List<Product> test = productRepository.findAll();

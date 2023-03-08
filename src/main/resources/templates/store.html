@@ -56,9 +56,20 @@
             </div>
         </div>
         
-        <ul class="dropdown-menu">
-          <li></li>
-        </ul>
+          <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Prices
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" th:href="@{/store/{price}(price=low)}">&lt; 100</a></li>
+                  <li><a class="dropdown-item" th:href="@{/store/{price}(price=mid)}">&lt; 1000</a></li>
+                  <li><a class="dropdown-item" th:href="@{/store/{price}(price=high)}">&gt; 1000</a></li>
+                </ul>
+              </li>
+            </ul>
+          <!-- </div> -->
         <div th:if="${size}">
           <p th:text="${'Total Results ' + size}"></p>
         </div>
