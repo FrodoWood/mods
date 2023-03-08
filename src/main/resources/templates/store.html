@@ -14,7 +14,6 @@
         <!-- Categories -->
         <h5 class="text-center mt-4">Product Categories</h5>
         <div class=" d-flex flex-wrap justify-content-center">
-            
             <div class="card categories-card m-2 text-center">
                 <a href="#" th:href="@{/store/Coilovers}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/Tein Street Basis Z Coilovers.png}" class="card-img-top categories-img" alt="...">
@@ -56,8 +55,17 @@
                 </a>
             </div>
         </div>
-
-        <div class="container justify-content-center card-container card-deck my-5" >
+        
+        <ul class="dropdown-menu">
+          <li></li>
+        </ul>
+        <div th:if="${size}">
+          <p th:text="${'Total Results ' + size}"></p>
+        </div>
+        <div class="container justify-content-center card-container card-deck my-5">
+          <div th:if="${error}">
+            <span th:text="${error}"></span>
+          </div>
             <div th:each="product:${products}">
                 <a href="#" th:href="@{/product/{id}(id=${product.id})}" class="text-decoration-none text-dark">
                     <div class="card mb-3 product-card">

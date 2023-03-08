@@ -38,9 +38,13 @@ public class StoreController {
             }
         }
         if (result.isEmpty()) {
-            return "redirect:/store";
+            String error = "No items for that search";
+            model.addAttribute("error", error);
+            return "store";
         } else {
+            String size = Integer.toString(result.size());
             model.addAttribute("products", result);
+            model.addAttribute("size", size);
             return "store";
         }
     }
