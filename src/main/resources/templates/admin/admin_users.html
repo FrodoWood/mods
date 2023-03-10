@@ -32,12 +32,14 @@
                     <!-- <td th:text="${user.roles}"></td> -->
                     <td>
                         <select th:name="userRole" class="form-select">
-                            <option th:selected="${user.roles}" th:value="${ROLE_USER}" th:text="${}">ROLE_USER</option>
-                            <option th:selected="${user.roles}" th:value="${ROLE_ADMIN}" th:text="${}">ROLE_ADMIN</option>
+                            <option th:selected="${user.roles} == 'ROLE_USER'">ROLE_USER</option>
+                            <option th:selected="${user.roles} == 'ROLE_ADMIN'">ROLE_ADMIN</option>
                         </select>
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-outline-dark">Update</button>
+                        <div th:if="${user.username} ne 'admin'">
+                            <button type="submit" class="btn btn-outline-dark">Update</button>
+                        </div>
                     </td>
                     </form>
                 </tr>
