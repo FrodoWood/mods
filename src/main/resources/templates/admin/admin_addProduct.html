@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/admin_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+</head>
+
+<body>
+    <div layout:fragment="admin_content">
+        <p>This is the admin Add Product page</p>
+
+        <!-- Add product form -->
+        <div class="container w-75">
+            <form th:action="@{/admin/products/addProduct}" method="post" th:object="${product}">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Product name" th:field="*{name}">
+                </div>
+
+                <div class="form-group">
+                  <label for="make">Make</label>
+                  <select class="form-select" id="make" th:field="*{make}" onchange="this.form.action='/admin/products/updateAddProductForm'; this.form.submit();">
+                    <option value=""></option>
+                    <option th:each="make : ${makeSet}" th:value="${make}" th:text="${make}"></option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="model">Model</label>
+                  <select class="form-select" id="model" th:field="*{model}">
+                    <option th:each="model : ${models}" th:value="${model}" th:text="${model}"></option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-select" id="category" th:field="*{category}" >
+                        <option value="">Coilovers</option>
+                        <option value="">Turbo</option>
+                        <option value="">Brakes</option>
+                        <option value="">Oils</option>
+                        <option value="">Batteries</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input class="form-control" type="number" name="stock" th:value="1" min="1" max="100" th:field="*{stock}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" id="price" placeholder="£ Product price" th:field="*{price}">
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image URL</label>
+                    <input type="text" class="form-control" id="image" th:value="${'/images/Bosch S4 Car Batt.jpg'}" th:field="*{image}">
+                </div>
+
+                <input type="hidden" th:field="*{rating}" th:value="0.00">
+
+
+
+                <button type="submit" class="btn btn-primary my-3">Add product</button>
+
+              </form>
+        </div>
+    </div>
+</body>
+</html>
