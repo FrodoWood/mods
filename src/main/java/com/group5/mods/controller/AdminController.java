@@ -119,17 +119,10 @@ public class AdminController {
         makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
         Set<String> makeSet = makeModelMap.keySet();
 
-        if(product.getModel() == null || product.getModel().isEmpty()){
-            List<String> models = makeModelMap.get(product.getMake());
-            model.addAttribute("models", models);
-        }else{
-            // User has correctly selected the make and model, now save the product to the database
-            return "redirect:/admin/products";
-        }
+        // Add product to repository
+        productRepository.save(product);
 
-        model.addAttribute("makeSet", makeSet);
-        model.addAttribute("makeModelMap", makeModelMap);
-        return "/admin/admin_addProduct";
+        return "redirect:/admin/products";
     }
 
     @PostMapping("/admin/products/updateAddProductForm")
@@ -139,7 +132,7 @@ public class AdminController {
         makeModelMap.put("Audi", Arrays.asList("A5", "Q5", "S5"));
         makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
         Set<String> makeSet = makeModelMap.keySet();
-        
+
         List<String> models = makeModelMap.get(product.getMake());
         model.addAttribute("models", models);
         
