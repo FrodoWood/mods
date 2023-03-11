@@ -118,7 +118,15 @@ public class AdminController {
         makeModelMap.put("Audi", Arrays.asList("A5", "Q5", "S5"));
         makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
         Set<String> makeSet = makeModelMap.keySet();
+        model.addAttribute("makeModelMap", makeModelMap);
+        model.addAttribute("makeSet", makeSet);
 
+        // Check if product name already exists, if it doesn then send error to thymeleaf page
+        Optional<Product> existingProduct = productRepository.findByName(product.getName());
+        if(existingProduct.isPresent()){
+            model.addAttribute("ProductNameExists", "There already exists a product with the same name, please change the name!");
+            return "admin/admin_addProduct";
+        }
         // Add product to repository
         productRepository.save(product);
 
@@ -139,6 +147,12 @@ public class AdminController {
 
         model.addAttribute("makeSet", makeSet);
         model.addAttribute("makeModelMap", makeModelMap);
+
+        // Check if product name already exists, if it doesn then send error to thymeleaf page
+        Optional<Product> existingProduct = productRepository.findByName(product.getName());
+        if(existingProduct.isPresent()){
+            model.addAttribute("ProductNameExists", "There already exists a product with the same name, please change the name!");
+        }
         return "/admin/admin_addProduct";
     }
 }
