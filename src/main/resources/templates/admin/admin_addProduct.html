@@ -14,7 +14,10 @@
         <!-- Add product form -->
         <div class="container w-75 mt-5">
             <h3 class="mb-4"><b>ADD PRODUCT</b></h3>
-            <form th:action="@{/admin/products/addProduct}" method="post" th:object="${product}">
+            <div class="alert alert-success" th:if="${addProductSuccess}" th:text="${addProductSuccess}">
+
+            </div>
+            <form th:action="@{/admin/products/addProduct}" method="post" th:object="${product}" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" th:class="${ProductNameExists}? 'form-control is-invalid' : 'form-control' " class="form-control" id="name" value="" placeholder="Product name" th:field="*{name}" onchange="this.form.action='/admin/products/updateAddProductForm'; this.form.submit();" required>
@@ -69,7 +72,7 @@
 
                 <div class="form-group">
                     <label for="image">Image URL</label>
-                    <input type="text" class="form-control" id="image" th:value="${'/images/Bosch S4 Car Batt.jpg'}" th:field="*{image}">
+                    <input type="file" name="file" id="file" accept="image/*">
                 </div>
 
                 <input type="hidden" th:field="*{rating}" th:value="0.00">

@@ -1,5 +1,11 @@
 package com.group5.mods.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,11 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.group5.mods.model.Order;
 import com.group5.mods.model.OrderStatus;
@@ -113,7 +122,7 @@ public class AdminController {
 
     @PostMapping("/admin/products/addProduct")
     @PreAuthorize("hasRole('ADMIN')")
-    public String addProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) {
+    public String addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws IOException {
         Map<String, List<String>> makeModelMap = new HashMap<>();
         makeModelMap.put("Audi", Arrays.asList("A5", "Q5", "S5"));
         makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
@@ -127,10 +136,24 @@ public class AdminController {
             model.addAttribute("ProductNameExists", "There already exists a product with the same name, please change the name!");
             return "admin/admin_addProduct";
         }
+
+        //Save the image file
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Path filePath = Paths.get("src/main/resources/static/images/" + fileName);
+        try (InputStream inputStream = file.getInputStream()){
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        }
+
+        // Set the image value in the product
+        String imageURL = "/images/" + fileName;
+        product.setImage(imageURL);
+
         // Add product to repository
         productRepository.save(product);
 
-        return "redirect:/admin/products";
+
+        redirectAttributes.addFlashAttribute("addProductSuccess", "Product successfully added!");
+        return "redirect:/admin/products/add";
     }
 
     @PostMapping("/admin/products/updateAddProductForm")
