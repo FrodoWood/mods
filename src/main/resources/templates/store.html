@@ -15,7 +15,7 @@
         <h5 class="text-center mt-4">Product Categories</h5>
         <div class=" d-flex flex-wrap justify-content-center">
             <div class="card categories-card m-2 text-center">
-                <a href="#" th:href="@{/store/Coilovers}" class="text-decoration-none link-dark">
+                <a href="#" th:href="@{/store/category/{category}(category= 'Coilovers')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/Tein Street Basis Z Coilovers.png}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
                     <p class="card-text h5 text-center">Coilovers</p>
@@ -23,7 +23,7 @@
                 </a>
             </div>
             <div class="card categories-card m-2 text-center">
-                <a href="#" th:href="@{/store/Turbo}" class="text-decoration-none link-dark">
+                <a href="#" th:href="@{/store/category/{category}(category = 'Turbo')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/turbo1.jpg}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
                     <p class="card-text h5 text-center">Turbo kits</p>
@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div class="card categories-card m-2 text-center">
-                <a href="#" th:href="@{/store/Brakes}" class="text-decoration-none link-dark">
+                <a href="#" th:href="@{/store/category/{category}(category = 'Brakes')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/StopTech Trophy Sport Big Brake Kit.png}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
                     <p class="card-text h5 text-center">Big Brake Kits</p>
@@ -39,7 +39,7 @@
                 </a>
             </div>
             <div class="card categories-card m-2 text-center">
-                <a href="#" th:href="@{/store/Oils}" class="text-decoration-none link-dark">
+                <a href="#" th:href="@{/store/category/{category}(category = 'Oils')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/Castrol GTX Engine Oil.jpg}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
                     <p class="card-text h5 text-center">Engine Oils</p>
@@ -47,7 +47,7 @@
                 </a>
             </div>
             <div class="card categories-card m-2 text-center">
-                <a href="#" th:href="@{/store/Batteries}" class="text-decoration-none link-dark">
+                <a href="#" th:href="@{/store/category/{category}(category = 'Batteries')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/batt1.jpg}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
                     <p class="card-text h5 text-center">Batteries</p>
@@ -70,9 +70,9 @@
               </li>
             </ul>
           <!-- </div> -->
-        <div th:if="${size}">
+        <!-- <div th:if="${size}">
           <p th:text="${'Total Results ' + size}"></p>
-        </div>
+        </div> -->
         <div class="container justify-content-center card-container card-deck my-5">
           <div th:if="${error}">
             <span th:text="${error}"></span>

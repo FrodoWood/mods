@@ -55,9 +55,9 @@ public class StoreController {
 
     @GetMapping("/store/search")
     public String storeSearch(@RequestParam("searchValue") String search, Model model) {
-        List<Product> test = productRepository.findAll();
+        List<Product> allProducts = productRepository.findAll();
         List<Product> result = new ArrayList<Product>();
-        for (Product product : test) {
+        for (Product product : allProducts) {
             if (product.getName().toLowerCase().contains(search.toLowerCase())) {
                 result.add(product);
             }
@@ -74,33 +74,11 @@ public class StoreController {
         }
     }
 
-    @GetMapping("/store/Coilovers")
-    public String storeCoilovers(Model model) {
-        model.addAttribute("products", productRepository.findByCategory("Coilovers").get());
-        return "store";
-    }
-
-    @GetMapping("/store/Turbo")
-    public String storeTurbo(Model model) {
-        model.addAttribute("products", productRepository.findByCategory("Turbo").get());
-        return "store";
-    }
-
-    @GetMapping("/store/Brakes")
-    public String storeBrakes(Model model) {
-        model.addAttribute("products", productRepository.findByCategory("Brakes").get());
-        return "store";
-    }
-
-    @GetMapping("/store/Oils")
-    public String storeOils(Model model) {
-        model.addAttribute("products", productRepository.findByCategory("Oils").get());
-        return "store";
-    }
-
-    @GetMapping("/store/Batteries")
-    public String storeBatteries(Model model) {
-        model.addAttribute("products", productRepository.findByCategory("Batteries").get());
+    @GetMapping("/store/category/{category}")
+    public String storeCategoryFilter(@PathVariable String category,Model model){
+        Optional<List<Product>> categoryProducts = productRepository.findAllByCategory(category);
+        // List<Product> allProducts = productRepository.findAll();
+        model.addAttribute("products", categoryProducts.get());
         return "store";
     }
 }
