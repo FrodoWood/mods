@@ -31,7 +31,8 @@
                     <td th:text="${user.email}"></td>
                     <!-- <td th:text="${user.roles}"></td> -->
                     <td>
-                        <select th:name="userRole" class="form-select">
+                        <select th:name="userRole" class="form-select" th:classappend="
+                                ${#strings.equals(user.roles, 'ROLE_ADMIN')} ? 'border-info' : '' ">
                             <option th:selected="${user.roles} == 'ROLE_USER'">ROLE_USER</option>
                             <option th:selected="${user.roles} == 'ROLE_ADMIN'">ROLE_ADMIN</option>
                         </select>

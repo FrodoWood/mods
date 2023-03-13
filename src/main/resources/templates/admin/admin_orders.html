@@ -28,7 +28,11 @@
                         <td th:text="${order.dateCreated}"></td>
                         <td th:text="'£' + ${order.totalPrice}"></td>
                         <td>
-                            <select th:name="orderStatus" class="form-select">
+                            <select th:name="orderStatus" class="form-select" 
+                                    th:classappend="
+                                       ${#strings.equals(order.status, 'DELIVERED')}    ? 'border-success text-success' 
+                                    : (${#strings.equals(order.status, 'CANCELLED')}    ? 'border-danger text-danger' 
+                                    : (${#strings.equals(order.status, 'ORDERED')}      ? 'border-warning text-warning'))">
                                 <option th:each="status : ${orderStatusEnum}" 
                                         th:value="${status}" 
                                         th:text="${status}"
