@@ -32,10 +32,11 @@
                     <th>Category</th>
                     <th>Price</th>
                     <th>Stock</th>
+                    <th>Actions</th>
                 </tr>
                 <tr th:each="product : ${products}">
                     <td>
-                        <img src="..." th:src="${product.image}" class="img-thumbnail w-50 border-0" alt="...">
+                        <img src="..." th:src="${product.image}" class="img-thumbnail w-50 border-0" alt="Product image">
                     </td>
                     <td th:text="${product.id}"></td>
                     <td th:text="${product.name}"></td>
@@ -46,6 +47,9 @@
                     <td th:text="${product.category}"></td>
                     <td th:text="'£' + ${product.price}"></td>
                     <td th:text="${product.stock}"></td>
+                    <td>
+                        <a th:href="@{/admin/products/edit/{id}(id=${product.id})}"><button class="btn btn-primary">Edit</button></a>
+                    </td>
                 </tr>
             </table>
         </div>

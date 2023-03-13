@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -120,6 +121,24 @@ public class AdminController {
         return "admin/admin_addProduct";
     }
 
+    @GetMapping("/admin/products/edit/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String editProduct(@PathVariable Long id, Model model) {
+        // Retrieve product from database with id
+        Optional<Product> product = productRepository.findById(id);
+        model.addAttribute("product", product.get());
+        // Pass the list of makes and models for the dropdowns
+        Map<String, List<String>> makeModelMap = new HashMap<>();
+        makeModelMap.put("Audi", Arrays.asList("A5", "Q5", "S5"));
+        makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
+
+        Set<String> makeSet = makeModelMap.keySet();
+        model.addAttribute("makeModelMap", makeModelMap);
+        model.addAttribute("makeSet", makeSet);
+        
+        return "admin/admin_editProduct";
+    }
+
     @PostMapping("/admin/products/addProduct")
     @PreAuthorize("hasRole('ADMIN')")
     public String addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws IOException {
@@ -138,15 +157,19 @@ public class AdminController {
         }
 
         //Save the image file
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Path filePath = Paths.get("src/main/resources/static/images/" + fileName);
-        try (InputStream inputStream = file.getInputStream()){
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        if(file!=null && !file.isEmpty()){
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            Path filePath = Paths.get("src/main/resources/static/images/" + fileName);
+            try (InputStream inputStream = file.getInputStream()){
+                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            }
+    
+            // Set the image value in the product
+            String imageURL = "/images/" + fileName;
+            product.setImage(imageURL);
+        }else{
+            product.setImage("/images/image-missing-stars-mods.jpg");
         }
-
-        // Set the image value in the product
-        String imageURL = "/images/" + fileName;
-        product.setImage(imageURL);
 
         // Add product to repository
         productRepository.save(product);
@@ -163,13 +186,12 @@ public class AdminController {
         makeModelMap.put("Audi", Arrays.asList("A5", "Q5", "S5"));
         makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
         Set<String> makeSet = makeModelMap.keySet();
-
         List<String> models = makeModelMap.get(product.getMake());
-        model.addAttribute("models", models);
-        
 
+        model.addAttribute("models", models);
         model.addAttribute("makeSet", makeSet);
         model.addAttribute("makeModelMap", makeModelMap);
+        model.addAttribute("product", product);
 
         // Check if product name already exists, if it doesn then send error to thymeleaf page
         Optional<Product> existingProduct = productRepository.findByName(product.getName());
@@ -177,5 +199,64 @@ public class AdminController {
             model.addAttribute("ProductNameExists", "There already exists a product with the same name, please change the name!");
         }
         return "/admin/admin_addProduct";
+    }
+
+    @PostMapping("/admin/products/editProduct")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String editProduct(@ModelAttribute("product") Product product, 
+                                @RequestParam(value = "file", required = false) MultipartFile file, 
+                                BindingResult result, Model model, 
+                                RedirectAttributes redirectAttributes) throws IOException {
+        Map<String, List<String>> makeModelMap = new HashMap<>();
+        makeModelMap.put("Audi", Arrays.asList("A5", "Q5", "S5"));
+        makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
+        Set<String> makeSet = makeModelMap.keySet();
+        model.addAttribute("makeModelMap", makeModelMap);
+        model.addAttribute("makeSet", makeSet);
+        // Check if product name already exists, if it doesn then send error to thymeleaf page
+        Optional<Product> existingProduct = productRepository.findByNameAndIdNot(product.getName(), product.getId());
+        if(existingProduct.isPresent()){
+            model.addAttribute("ProductNameExists", "There already exists a product with the same name, please change the name!");
+            return "admin/admin_editProduct";
+        }
+        //Save the image file if a new image was uploaded
+        if(file != null && !file.isEmpty()){
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            Path filePath = Paths.get("src/main/resources/static/images/" + fileName);
+            try (InputStream inputStream = file.getInputStream()){
+                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            }
+            // Set the image value in the product
+            String imageURL = "/images/" + fileName;
+            product.setImage(imageURL);
+        }
+        // Add product to repository
+        productRepository.save(product);
+
+        redirectAttributes.addFlashAttribute("editProductSuccess", "Product successfully updated!");
+        return "redirect:/admin/products/edit/" + product.getId();
+    }
+
+    @PostMapping("/admin/products/updateEditProductForm")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String updateEditProductForm(@ModelAttribute("product") Product product, BindingResult result, Model model) {
+        Map<String, List<String>> makeModelMap = new HashMap<>();
+        makeModelMap.put("Audi", Arrays.asList("A5", "Q5", "S5"));
+        makeModelMap.put("BMW", Arrays.asList("Z4", "X5", "M4"));
+        Set<String> makeSet = makeModelMap.keySet();
+        List<String> models = makeModelMap.get(product.getMake());
+
+        model.addAttribute("models", models);
+        model.addAttribute("makeSet", makeSet);
+        model.addAttribute("makeModelMap", makeModelMap);
+        model.addAttribute("product", product);
+
+        // Check if product name already exists, if it doesn then send error to thymeleaf page
+        Optional<Product> existingProduct = productRepository.findByNameAndIdNot(product.getName(), product.getId());
+        if(existingProduct.isPresent()){
+            model.addAttribute("ProductNameExists", "There already exists a product with the same name, please change the name!");
+            return "admin/admin_editProduct";
+        }
+        return "/admin/admin_editProduct";
     }
 }
