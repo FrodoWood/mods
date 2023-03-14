@@ -2,12 +2,15 @@ package com.group5.mods.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +51,28 @@ public class AdminController {
     
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
-    public String admin() {
+    public String adminDashboard(Model model) {
+        List<Order> allOrders = orderRepository.findAll();
+        List<Order> monthlyOrders = new ArrayList<>();
+        List<Order> cancelledOrders = new ArrayList<>();
+        BigDecimal monthlyRevenue = BigDecimal.ZERO;
+
+        for(Order order : allOrders){
+            if(order.getDateCreated().isAfter(LocalDateTime.now().minusMonths(1))){
+                monthlyOrders.add(order);
+            }
+        }
+        for(Order order : monthlyOrders){
+            if(order.getStatus().equals(OrderStatus.CANCELLED)){
+                cancelledOrders.add(order);
+            }
+            if(order.getStatus().equals(OrderStatus.DELIVERED)){
+                monthlyRevenue = monthlyRevenue.add(order.getTotalPrice());
+            }
+        }
+        model.addAttribute("monthlyOrders", monthlyOrders);
+        model.addAttribute("cancelledOrders", cancelledOrders);
+        model.addAttribute("monthlyRevenue", monthlyRevenue);
         return "admin/admin_dashboard";
     }
 
