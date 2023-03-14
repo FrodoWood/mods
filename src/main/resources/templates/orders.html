@@ -10,21 +10,67 @@
 
 <body>
 <div layout:fragment="content">
-    <div class="d-flex flex-column container">
-        <div class="card bg-light m-3 shadow">
-            <h3 class="card-header mb-3">Your Orders</h3>
-            <table class="">
+    <div class="d-flex flex-column container mb-0">
+        <div class="card bg-light m-3 shadow table-responsive">
+            <h3 class="card-header mb-3 text-center">Your Orders</h3>
+            <table class="m-3">
                 <tr>
+                    <th>Image</th>
                     <th>Order ID</th>
                     <th>Date created</th>
+                    <th>Qty</th>
                     <th>Total price</th>
                     <th>Status</th>
                 </tr>
-                <tr th:each="order : ${orders}">
+                <tr class="border-top" th:each="order : ${orders}">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
+                                    alt=""
+                                    style="width: 120px; height: 100px"
+                                    class="img-fluid rounded m-3"
+                            />
+                            <div class="ms-3">
+                                <p class="text-muted mb-0">Item Title</p>
+                            </div>
+                        </div>
+                    </td>
                     <td th:text="${order.id}"></td>
                     <td th:text="${order.dateCreated}"></td>
+                    <td th:text="${order.id}"></td> <!--change this to qty-->
                     <td th:text="${order.totalPrice}"></td>
                     <td th:text="${order.status}"></td>
+                    <td>
+                        <button type="button" class="btn btn-dark btn-sm mt-3 mb-1">Write review</button>
+                        <br>
+                        <button type="button" class="btn  btn-sm btn-dark mb-3">Buy it again</button>
+                    </td>
+                </tr>
+                <tr class="border-top" th:each="order : ${orders}">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
+                                    alt=""
+                                    style="width: 120px; height: 100px"
+                                    class="img-fluid rounded m-3"
+                            />
+                            <div class="ms-3">
+                                <p class="text-muted mb-0">Item Title</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.dateCreated}"></td>
+                    <td th:text="${order.id}"></td> <!--change this to qty-->
+                    <td th:text="${order.totalPrice}"></td>
+                    <td th:text="${order.status}"></td>
+                    <td>
+                        <button type="button" class="btn btn-dark btn-sm mt-3 mb-1">Write review</button>
+                        <br>
+                        <button type="button" class="btn  btn-sm btn-dark mb-3">Buy it again</button>
+                    </td>
                 </tr>
             </table>
         </div>
