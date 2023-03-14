@@ -52,6 +52,9 @@
                             <div class="card-header h4"><i class="bi bi-credit-card"></i> Sales Analytics</div>
                             <div class="card-body">
                               <p class="card-text">Example graph</p>
+                              <div>
+                                <canvas id="myChart"></canvas>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -69,6 +72,31 @@
             
             
         </div>
+    </div>
+
+    <div layout:fragment="admin_scripts">
+        <script>
+            const ctx = document.getElementById('myChart');
+          
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                  label: '# of Votes',
+                  data: [12, 19, 3, 5, 2, 3],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          </script>
     </div>
 </body>
 </html>
