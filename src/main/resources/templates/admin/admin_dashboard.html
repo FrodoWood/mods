@@ -5,12 +5,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basket</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
     <div layout:fragment="admin_content">
-        <p>This is the admin content</p>
+        <div class="container w-100 mt-5 d-flex flex-column justify-content-between">
+            <h3 class="mb-4"><b>Dashboard</b></h3>
+
+            <div class="d-flex flex-column flex-lg-row  justify-content-lg-between align-items-center">
+                <div class="row w-100">
+                    <div class="col-lg-4 p-2">
+                        <div class="card dashboard-card-sm text-bg-primary mb-3">
+                            <div class="card-header h4"><i class="bi bi-credit-card"></i> Orders</div>
+                            <div class="card-body">
+                              <h2 class="card-title" th:text="${#lists.size(monthlyOrders)}"></h2>
+                              <p class="card-text">Total for this months</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-2">
+                        <div class="card dashboard-card-sm text-bg-danger mb-3">
+                            <div class="card-header h4"><i class="bi bi-credit-card"></i> Cancellations</div>
+                            <div class="card-body">
+                              <h2 class="card-title" th:text="${#lists.size(cancelledOrders)}"></h2>
+                              <p class="card-text">Total for this months</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-2">
+                        <div class="card dashboard-card-sm text-bg-success mb-3">
+                            <div class="card-header h4"><i class="bi bi-credit-card"></i> Revenue</div>
+                            <div class="card-body">
+                              <h2 class="card-title" th:text="${#numbers.formatCurrency(monthlyRevenue)}"></h2>
+                              <p class="card-text">Total for this months</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-lg-row  justify-content-lg-between align-items-center">
+                <div class="row w-100">
+                    <div class="col-lg-8 p-2">
+                        <div class="card dashboard-card-lg w-100 text-bg-primary mb-3">
+                            <div class="card-header h4"><i class="bi bi-credit-card"></i> Sales Analytics</div>
+                            <div class="card-body">
+                              <p class="card-text">Example graph</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-2">
+                        <div class="card dashboard-card-sm text-bg-secondary mb-3">
+                            <div class="card-header h4"><i class="bi bi-credit-card"></i> Recent Reviews</div>
+                            <div class="card-body">
+                              <p class="card-text">Example review</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+        </div>
     </div>
 </body>
 </html>

@@ -64,6 +64,18 @@ body {
     transition-duration: 0.2s;
 }
 
+.dashboard-card-sm{
+  /* width: 18rem; */
+  /* min-width: 14rem; */
+  min-height: 10rem;
+}
+.dashboard-card-lg{
+  /* width: 38rem; */
+  /* min-width: 10rem; */
+  min-height: 10rem;
+
+}
+
 .login {
     width: 360px;
     height: min-content;
