@@ -76,6 +76,19 @@
               </a>
           </div>
       </div>
+      <div>
+        <form th:action="@{/store/makeModel}" th:object="${Product}">
+          <select id="model" name="model">
+            <option value="A5">A5</option>
+            <option value="Z4">Z4</option>
+          </select>
+          <select id="make" name="make">
+            <option value="BMW">BMW</option>
+            <option value="Audi">Audi</option>
+          </select>
+          <button type="submit">Search</button>
+        </form>
+      </div>
         
     </div>
 </body>

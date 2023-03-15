@@ -28,6 +28,15 @@ public class StoreController {
         return "store";
     }
 
+    @GetMapping("/store/makeModel")
+    public String storeMakeModel(@RequestParam("make") String make, @RequestParam("model") String carmodel,
+            Model model) {
+        List<Product> temp = productRepository.findByMakeAndModel(make, carmodel);
+        // List<Product> temp = productRepository.findAll();
+        model.addAttribute("products", temp);
+        return "store";
+    }
+
     @GetMapping("/store/{price}")
     public String storePrice(@PathVariable String price, Model model) {
         List<Product> rawData = productRepository.findAll();
@@ -75,7 +84,7 @@ public class StoreController {
     }
 
     @GetMapping("/store/category/{category}")
-    public String storeCategoryFilter(@PathVariable String category,Model model){
+    public String storeCategoryFilter(@PathVariable String category, Model model) {
         Optional<List<Product>> categoryProducts = productRepository.findAllByCategory(category);
         // List<Product> allProducts = productRepository.findAll();
         model.addAttribute("products", categoryProducts.get());
