@@ -7,9 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.group5.mods.model.Order;
+import com.group5.mods.model.OrderProduct;
 import com.group5.mods.model.OrderStatus;
 import com.group5.mods.model.Product;
 import com.group5.mods.model.User;
@@ -56,12 +59,14 @@ public class AdminController {
         List<Order> monthlyOrders = new ArrayList<>();
         List<Order> cancelledOrders = new ArrayList<>();
         BigDecimal monthlyRevenue = BigDecimal.ZERO;
-
+        Map<LocalDate, Integer> ordersByDate = new HashMap<>();
+        // All monthly orders
         for(Order order : allOrders){
             if(order.getDateCreated().isAfter(LocalDateTime.now().minusMonths(1))){
                 monthlyOrders.add(order);
             }
         }
+        // All monthyl Cancelled and Delivered orders (revenue)
         for(Order order : monthlyOrders){
             if(order.getStatus().equals(OrderStatus.CANCELLED)){
                 cancelledOrders.add(order);
@@ -70,9 +75,34 @@ public class AdminController {
                 monthlyRevenue = monthlyRevenue.add(order.getTotalPrice());
             }
         }
+        // Loop over all the orders and add the quantity of each order product to the date
+        for(Order order : allOrders){
+            int orderProductsQuantity = 0;
+            for(OrderProduct orderProduct : order.getOrderProducts()){
+                orderProductsQuantity += orderProduct.getQuantity();
+            }
+
+            LocalDate orderDate = order.getDateCreated().toLocalDate();
+            ordersByDate.put(orderDate,ordersByDate.getOrDefault(orderDate, 0) + orderProductsQuantity);
+            System.out.println(orderProductsQuantity);
+        }
+
+        // Split ordersByDate map into separate arrays for chart.js
+        List<String> dates = new ArrayList<>();
+        List<Integer> quantities = new ArrayList<>();
+        List<LocalDate> sortedDates = new ArrayList<>(ordersByDate.keySet());
+        Collections.sort(sortedDates);
+        for(LocalDate date : sortedDates){
+            int quantity = ordersByDate.get(date);
+            dates.add(date.toString());
+            quantities.add(quantity);
+    }
+
         model.addAttribute("monthlyOrders", monthlyOrders);
         model.addAttribute("cancelledOrders", cancelledOrders);
         model.addAttribute("monthlyRevenue", monthlyRevenue);
+        model.addAttribute("dates", dates);
+        model.addAttribute("quantities", quantities);
         return "admin/admin_dashboard";
     }
 

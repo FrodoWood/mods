@@ -19,16 +19,16 @@
                         <div class="card dashboard-card-sm text-bg-primary mb-3">
                             <div class="card-header h4"><i class="bi bi-credit-card"></i> Orders</div>
                             <div class="card-body">
-                              <h2 class="card-title" th:text="${#lists.size(monthlyOrders)}"></h2>
+                              <h1 class="card-title" th:text="${#lists.size(monthlyOrders)}"></h1>
                               <p class="card-text">Total for this months</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 p-2">
                         <div class="card dashboard-card-sm text-bg-danger mb-3">
-                            <div class="card-header h4"><i class="bi bi-credit-card"></i> Cancellations</div>
+                            <div class="card-header h4"><i class="bi bi-x-circle"></i> Cancellations</div>
                             <div class="card-body">
-                              <h2 class="card-title" th:text="${#lists.size(cancelledOrders)}"></h2>
+                              <h1 class="card-title" th:text="${#lists.size(cancelledOrders)}"></h1>
                               <p class="card-text">Total for this months</p>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                         <div class="card dashboard-card-sm text-bg-success mb-3">
                             <div class="card-header h4"><i class="bi bi-credit-card"></i> Revenue</div>
                             <div class="card-body">
-                              <h2 class="card-title" th:text="${#numbers.formatCurrency(monthlyRevenue)}"></h2>
+                              <h1 class="card-title" th:text="${#numbers.formatCurrency(monthlyRevenue)}"></h1>
                               <p class="card-text">Total for this months</p>
                             </div>
                         </div>
@@ -48,12 +48,11 @@
             <div class="d-flex flex-column flex-lg-row  justify-content-lg-between align-items-center">
                 <div class="row w-100">
                     <div class="col-lg-8 p-2">
-                        <div class="card dashboard-card-lg w-100 text-bg-primary mb-3">
-                            <div class="card-header h4"><i class="bi bi-credit-card"></i> Sales Analytics</div>
+                        <div class="card dashboard-card-lg w-100 mb-3">
+                            <div class="card-header h4 bg-white"><i class="bi bi-credit-card"></i> Sales Analytics</div>
                             <div class="card-body">
-                              <p class="card-text">Example graph</p>
                               <div>
-                                <canvas id="myChart"></canvas>
+                                <canvas id="myChart" class="w-100 h-100"></canvas>
                               </div>
                             </div>
                         </div>
@@ -75,28 +74,65 @@
     </div>
 
     <div layout:fragment="admin_scripts">
-        <script>
-            const ctx = document.getElementById('myChart');
-          
-            new Chart(ctx, {
-              type: 'bar',
-              data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      <!-- Create the key and value arrays for the x and y axis in the chart from the ordersByDate map -->
+      
+      <script th:inline="javascript">
+        let dates = /*[[${dates}]]*/ [];
+        let quantities = /*[[${quantities}]]*/ [];
+        console.log(dates)
+        console.log(quantities)
+
+        let ctx = document.getElementById('myChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
                 datasets: [{
-                  label: '# of Votes',
-                  data: [12, 19, 3, 5, 2, 3],
-                  borderWidth: 1
+                    label: 'Orders by date',
+                    data: quantities,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 3,
+                    fill: false
                 }]
-              },
-              options: {
+            },
+            options: {
                 scales: {
-                  y: {
-                    beginAtZero: true
-                  }
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'day',
+                            displayFormats: {
+                                day: 'MMM D'
+                            }
+                        },
+                        distribution: 'linear'
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        fontColor: '#333',
+                        fontSize: 14
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Orders by date',
+                    fontSize: 18
                 }
-              }
-            });
-          </script>
+            }
+        });
+
+    </script>
+    
+
     </div>
+
 </body>
 </html>
