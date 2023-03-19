@@ -149,3 +149,12 @@ body {
       transform: scale(1);
     }
   }
+
+  .btn:hover{
+    transition-duration: 0.1s !important;
+    transition-timing-function: cubic-bezier(0, 0.83, 0.6, 0.99) !important;
+  }
+
+  .btn{
+    transition-duration: 0.1s !important;
+  }
