@@ -11,15 +11,10 @@
 <body>
     <div layout:fragment="admin_content">
 
-        <div class="container">
-            <div class="card my-4 w-50">
-                <div class="card-body">
-                    <a href="#" th:href="@{/admin/products/add}">
-                        <div class="btn btn-dark">ADD PRODUCT</div>
-                    </a>
-                </div>
-            </div>
-            <h3 class="text-center my-5 py-4">Products</h3>
+        <div class="container mt-5">
+            
+            <h3 class="mb-4"><b>Products</b></h3>
+            <a class="btn btn-success my-2" href="#" th:href="@{/admin/products/add}"><b class="h4"> <i class="bi bi-plus-lg"></i> ADD PRODUCT</b></a>
             <table class="table">
                 <tr>
                     <th>Image</th>
