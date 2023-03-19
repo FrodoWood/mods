@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,9 +38,11 @@ import com.group5.mods.model.Order;
 import com.group5.mods.model.OrderProduct;
 import com.group5.mods.model.OrderStatus;
 import com.group5.mods.model.Product;
+import com.group5.mods.model.Review;
 import com.group5.mods.model.User;
 import com.group5.mods.repository.OrderRepository;
 import com.group5.mods.repository.ProductRepository;
+import com.group5.mods.repository.ReviewRepository;
 import com.group5.mods.repository.UserRepository;
 
 @Controller
@@ -51,11 +54,14 @@ public class AdminController {
     private ProductRepository productRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
     
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminDashboard(Model model) {
         List<Order> allOrders = orderRepository.findAll();
+        List<Review> latestReviews = reviewRepository.findAllByOrderByDateCreatedDesc(PageRequest.of(0, 5));
         List<Order> monthlyOrders = new ArrayList<>();
         List<Order> cancelledOrders = new ArrayList<>();
         BigDecimal monthlyRevenue = BigDecimal.ZERO;
@@ -103,6 +109,7 @@ public class AdminController {
         model.addAttribute("monthlyRevenue", monthlyRevenue);
         model.addAttribute("dates", dates);
         model.addAttribute("quantities", quantities);
+        model.addAttribute("recentReviews", latestReviews);
         return "admin/admin_dashboard";
     }
 

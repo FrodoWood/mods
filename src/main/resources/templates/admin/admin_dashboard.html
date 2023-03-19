@@ -58,10 +58,22 @@
                         </div>
                     </div>
                     <div class="col-lg-4 p-2">
-                        <div class="card dashboard-card-sm text-bg-secondary mb-3">
+                        <div class="card dashboard-card-sm mb-3">
                             <div class="card-header h4"><i class="bi bi-star-half"></i> Recent Reviews</div>
                             <div class="card-body">
-                              <p class="card-text">Example review</p>
+                                <div th:each="review : ${recentReviews}" class="row">
+                                    <span class="text-secondary" th:text="${#strings.capitalize(review.user.name)} ">User's name</span>
+                                    <div>
+                                        <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                            <i th:class="${{review.rating}} ge ${#numbers.formatDecimal(i,1,1)} - 0.5 ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span th:text="'Reviewed on ' + ${#temporals.format(review.dateCreated, 'dd MMMM yyyy')}" class="text-secondary"></span>
+                                        <span class="text-success ms-lg-3">Verified purchase <i class="bi bi-check-circle"></i></span>
+                                    </div>
+                                    <p class="text-black" th:text="${review.comment}"></p>
+                                </div> 
                             </div>
                         </div>
                     </div>

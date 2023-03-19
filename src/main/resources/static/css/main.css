@@ -108,6 +108,9 @@ body {
   span i.bi-star{
     color: orange;
   }
+  i.bi-star-half{
+    color: orange;
+  }
 
   .rating-stars {
     display: flex;
