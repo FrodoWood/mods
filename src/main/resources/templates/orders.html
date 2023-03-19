@@ -10,7 +10,7 @@
 
 <body>
 <div layout:fragment="content">
-    <div class="d-flex flex-column container mb-0">
+    <div class="d-flex flex-column container align-items-center mb-0">
         <h2 class="text-center mb-3">Your Orders</h2>
       <!--  <div class="card bg-light m-3 shadow table-responsive">
             <h3 class="card-header mb-3 text-center">Your Orders</h3>
@@ -79,11 +79,13 @@
         <div class="card mb-3 product-card">
             <div class="row">
                 <div class="col-sm-4">
+                    <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark"> <!--when user clicks the image it should redirect them to the product-->
                     <img
                             src="https://www.turbokits.com/media/catalog/product/cache/3b2aefc2b48a174ba8be0a677a9948b5/h/p/hpt-f3-6870-ball-bearing-turbo.jpg"
                             alt=""
                             class="img-fluid rounded m-3"
                     />
+                    </a>
                 </div>
                 <div class="col-sm-8">
                     <div class="card-body">
@@ -99,11 +101,13 @@
         <div class="card mb-3 product-card">
             <div class="row">
                 <div class="col-sm-4">
-                    <img
-                            src="https://www.turbokits.com/media/catalog/product/cache/3b2aefc2b48a174ba8be0a677a9948b5/h/p/hpt-f3-6870-ball-bearing-turbo.jpg"
-                            alt=""
-                            class="img-fluid rounded m-3"
-                    />
+                    <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark"> <!--when user clicks the image it should redirect them to the product-->
+                        <img
+                                src="https://www.turbokits.com/media/catalog/product/cache/3b2aefc2b48a174ba8be0a677a9948b5/h/p/hpt-f3-6870-ball-bearing-turbo.jpg"
+                                alt=""
+                                class="img-fluid rounded m-3"
+                        />
+                    </a>
                 </div>
                 <div class="col-sm-8">
                     <div class="card-body">
@@ -111,7 +115,7 @@
                         <p class="card-text">Order ID: 1</p>
                         <p class="card-text">Date created: 14/03/2023</p>
                         <p class="card-text">Total Price: £999</p>
-                        <p class="card-text">Status: Delivered</p>
+                        <p class="card-text">Status: Ordered</p>
                     </div>
                 </div>
             </div>
