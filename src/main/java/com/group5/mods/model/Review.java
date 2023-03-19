@@ -53,4 +53,7 @@ public class Review {
         this.dateCreated = dateCreated;
         this.rating = rating;
     }
+    public boolean getHidden(){
+        return this.hidden;
+    }
 }

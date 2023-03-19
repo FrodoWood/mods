@@ -1,5 +1,6 @@
 package com.group5.mods.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +30,14 @@ public class ProductController {
 public String getProduct(@PathVariable Long id, Model model) {
     Optional<Product> product = productService.findById(id);
     List<Review> reviews = reviewRepository.findByProduct(product.get());
+    List<Review> displayedReviews = new ArrayList<>();
+    for(Review review : reviews){
+        if(!review.getHidden()){
+            displayedReviews.add(review);
+        }
+    }
     model.addAttribute("product", product.get());
-    model.addAttribute("reviews", reviews);
+    model.addAttribute("reviews", displayedReviews);
     model.addAttribute("basketproduct", new BasketProduct()); // add new empty object
     return "product";
 }

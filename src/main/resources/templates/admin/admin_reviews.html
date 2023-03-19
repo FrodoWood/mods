@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/admin_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+</head>
+
+<body>
+    <div layout:fragment="admin_content">
+        <!-- List of all orders -->
+        <div class="d-flex flex-column container mt-5">
+            <h3 class="mb-4"><b>Reviews</b></h3>
+
+            <div class="card dashboard-card-sm mb-3">
+                <div class="card-body">
+                    <div th:each="review : ${reviews}" class="row">
+                        <div class="col-10">
+                            <span class="text-secondary" th:text="${#strings.capitalize(review.user.name)} ">User's name</span>
+                            <div>
+                                <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                    <i th:class="${{review.rating}} ge ${#numbers.formatDecimal(i,1,1)} - 0.5 ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+                                </span>
+                            </div>
+                            <span th:text="${review.product.name}"></span>
+                            <div>
+                                <span th:text="'Reviewed on ' + ${#temporals.format(review.dateCreated, 'dd MMMM yyyy')}" class="text-secondary"></span>
+                                <span class="text-success ms-lg-3">Verified purchase <i class="bi bi-check-circle"></i></span>
+                            </div>
+                            <p class="text-black" th:text="${review.comment}"></p>
+                        </div>
+                        <div class="col-2 align-self-center">
+                            <form th:action="@{/admin/reviews/{reviewId}/hide (reviewId=${review.id})}" method="post">
+                                <button th:class="${review.hidden}? 'btn btn-secondary' : 'btn btn-primary'" type="submit">
+                                    <i th:class="${review.hidden}? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'"></i>
+                                    <span th:text="${review.hidden} ? ' Show' : ' Hide' "> Show or Hide </span>
+                                </button>
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

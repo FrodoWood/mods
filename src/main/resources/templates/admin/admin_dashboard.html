@@ -68,6 +68,7 @@
                                             <i th:class="${{review.rating}} ge ${#numbers.formatDecimal(i,1,1)} - 0.5 ? 'bi bi-star-fill' : 'bi bi-star'"></i>
                                         </span>
                                     </div>
+                                    <span th:text="${review.product.name}"></span>
                                     <div>
                                         <span th:text="'Reviewed on ' + ${#temporals.format(review.dateCreated, 'dd MMMM yyyy')}" class="text-secondary"></span>
                                         <span class="text-success ms-lg-3">Verified purchase <i class="bi bi-check-circle"></i></span>

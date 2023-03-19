@@ -185,7 +185,7 @@
                         
                         <b><h4 class="mb-4">Top Reviews</h4></b>
                         <!-- Loop for reviews -->
-                        <div th:each="review : ${reviews}" class="row">
+                        <div th:each="review : ${reviews}" th:if="${review.hidden} ne true" class="row">
                                 <span class="text-secondary" th:text="${#strings.capitalize(review.user.name)} ">User's name</span>
                                 <div>
                                     <span th:each="i : ${#numbers.sequence(1, 5)}">

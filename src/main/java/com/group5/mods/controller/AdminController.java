@@ -131,6 +131,15 @@ public class AdminController {
         return "admin/admin_products";
     }
 
+    @GetMapping("/admin/reviews")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String adminreviews(Model model) {
+        List<Review> reviews = new ArrayList<>();
+        reviews = reviewRepository.findAllByOrderByDateCreatedDesc();
+        model.addAttribute("reviews", reviews);
+        return "admin/admin_reviews";
+    }
+
     @GetMapping("/admin/orders")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminOrders(Model model) {
@@ -139,6 +148,15 @@ public class AdminController {
         model.addAttribute("orders", orderList);
         model.addAttribute("orderStatusEnum", OrderStatus.values());
         return "admin/admin_orders";
+    }
+
+    @PostMapping("/admin/reviews/{reviewId}/hide")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String hideReview(@PathVariable("reviewId") Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).get();
+        review.setHidden(!review.getHidden());
+        reviewRepository.save(review);
+        return "redirect:/admin/reviews";
     }
 
     @PostMapping("/admin/orders/updateStatus")
