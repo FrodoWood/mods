@@ -13,12 +13,12 @@
         
         <!-- Add product form -->
         <div class="container w-75 mt-5">
-            <h3 class="mb-4"><b>ADD PRODUCT</b></h3>
+            <h3 class="mb-3"><b>ADD PRODUCT</b></h3>
             <div class="alert alert-success" th:if="${addProductSuccess}" th:text="${addProductSuccess}">
 
             </div>
             <form th:action="@{/admin/products/addProduct}" method="post" th:object="${product}" enctype="multipart/form-data">
-                <div class="form-group">
+                <div class="form-group mb-3">
                   <label for="name">Name</label>
                   <input type="text" th:class="${ProductNameExists}? 'form-control is-invalid' : 'form-control' " class="form-control" id="name" value="" placeholder="Product name" th:field="*{name}" onchange="this.form.action='/admin/products/updateAddProductForm'; this.form.submit();" required>
                   <!-- <span th:text="${ProductNameExists}"></span> -->
@@ -27,57 +27,58 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="make">Make</label>
-                  <select class="form-select" id="make" th:field="*{make}" onchange="this.form.action='/admin/products/updateAddProductForm'; this.form.submit();" required>
-                    <option value="" hidden selected></option>
-                    <option th:each="make : ${makeSet}" th:value="${make}" th:text="${make}"></option>
-                  </select>
-                </div>
-                
-                <div class="form-group">
-                  <label for="model">Model</label>
-                  <select class="form-select" id="model" th:field="*{model}" required>
-                    <option value="" hidden></option>
-                    <option th:each="model : ${models}" th:value="${model}" th:text="${model}"></option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <select class="form-select" id="category" th:field="*{category}" required>
-                        <option value="" hidden></option>
-                        <option value="Coilovers">Coilovers</option>
-                        <option value="Turbo">Turbo</option>
-                        <option value="Brakes">Brakes</option>
-                        <option value="Oils">Oils</option>
-                        <option value="Batteries">Batteries</option>
+                <div class="row">
+                  <div class="form-group mb-3 col-md-4">
+                    <label for="make">Make</label>
+                    <select class="form-select" id="make" th:field="*{make}" onchange="this.form.action='/admin/products/updateAddProductForm'; this.form.submit();" required>
+                      <option value="" hidden selected></option>
+                      <option th:each="make : ${makeSet}" th:value="${make}" th:text="${make}"></option>
                     </select>
+                  </div>
+                  
+                  <div class="form-group mb-3 col-md-4">
+                    <label for="model">Model</label>
+                    <select class="form-select" id="model" th:field="*{model}" required>
+                      <option value="" hidden></option>
+                      <option th:each="model : ${models}" th:value="${model}" th:text="${model}"></option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3 col-md-4">
+                      <label for="category">Category</label>
+                      <select class="form-select" id="category" th:field="*{category}" required>
+                          <option value="" hidden></option>
+                          <option value="Coilovers">Coilovers</option>
+                          <option value="Turbo">Turbo</option>
+                          <option value="Brakes">Brakes</option>
+                          <option value="Oils">Oils</option>
+                          <option value="Batteries">Batteries</option>
+                      </select>
+                  </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                   <label for="description">Description</label>
                   <textarea class="form-control" id="description" rows="3" th:field="*{description}" required></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="stock">Stock</label>
-                    <input class="form-control" type="number" name="stock" th:value="1" min="1" max="100" th:field="*{stock}">
-                </div>
-                
-                <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" placeholder="Price" th:field="*{price}" required>
+                <div class="row">
+                  <div class="form-group mb-3 col-md-6">
+                      <label for="stock">Stock</label>
+                      <input class="form-control" type="number" name="stock" th:value="1" min="1" max="100" th:field="*{stock}">
+                  </div>
+                  
+                  <div class="form-group mb-3 col-md-6">
+                      <label for="price">Price</label>
+                      <input type="text" class="form-control" id="price" placeholder="Price" th:field="*{price}" required>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="image">Image URL</label>
-                    <input type="file" name="file" id="file" accept="image/*">
+                <div class="input-group mb-3">
+                  <input class="form-control" type="file" name="file" id="file" accept="image/*">
+                  <label class="input-group-text" for="file">Upload Image</label>
                 </div>
 
                 <input type="hidden" th:field="*{rating}" th:value="0.00">
-
-
 
                 <button type="submit" th:class="${ProductNameExists}? 'btn btn-primary my-3 btn-dark' : 'btn btn-primary my-3' " th:disabled="${ProductNameExists}">Add product</button>
 

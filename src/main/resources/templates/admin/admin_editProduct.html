@@ -17,7 +17,7 @@
             <div class="alert alert-success" th:if="${editProductSuccess}" th:text="${editProductSuccess}"></div>
             
             <form th:action="@{/admin/products/editProduct}" method="post" th:object="${product}" enctype="multipart/form-data">
-                <div class="form-group">
+                <div class="form-group mb-3">
 
                   <label for="name">Name</label>
                   <input type="text" th:class="${ProductNameExists}? 'form-control is-invalid' : 'form-control' " 
@@ -26,58 +26,61 @@
                   <div th:if="${ProductNameExists}" id="name" class="invalid-feedback">Product name already exists.</div>
                 </div>
 
-                <div class="form-group">
-                  <label for="make">Make</label>
-                  <select class="form-select" id="make" th:field="*{make}" required
-                            onchange="this.form.action='/admin/products/updateEditProductForm'; this.form.submit();">
-                    <option value="" hidden></option>
-                    <option th:each="make : ${makeSet}" th:value="${make}" th:text="${make}" th:selected="${make == product.make}"></option>
-                  </select>
-                </div>
-                
-                <div class="form-group">
-                  <label for="model">Model</label>
-                  <select class="form-select" id="model" th:field="*{model}" required>
-                    <option value="" hidden></option>
-                    <option th:each="model : ${makeModelMap.get(product.make)}" th:value="${model}" th:text="${model}" th:selected="${model == product.model}"></option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <select class="form-select" id="category" th:field="*{category}" required>
-                        <option value="" hidden></option>
-                        <option value="Coilovers">Coilovers</option>
-                        <option value="Turbo">Turbo</option>
-                        <option value="Brakes">Brakes</option>
-                        <option value="Oils">Oils</option>
-                        <option value="Batteries">Batteries</option>
+                <div class="row">
+                  <div class="form-group mb-3 col-md-4">
+                    <label for="make">Make</label>
+                    <select class="form-select" id="make" th:field="*{make}" required
+                              onchange="this.form.action='/admin/products/updateEditProductForm'; this.form.submit();">
+                      <option value="" hidden></option>
+                      <option th:each="make : ${makeSet}" th:value="${make}" th:text="${make}" th:selected="${make == product.make}"></option>
                     </select>
+                  </div>
+                  
+                  <div class="form-group mb-3 col-md-4">
+                    <label for="model">Model</label>
+                    <select class="form-select" id="model" th:field="*{model}" required>
+                      <option value="" hidden></option>
+                      <option th:each="model : ${makeModelMap.get(product.make)}" th:value="${model}" th:text="${model}" th:selected="${model == product.model}"></option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3 col-md-4">
+                      <label for="category">Category</label>
+                      <select class="form-select" id="category" th:field="*{category}" required>
+                          <option value="" hidden></option>
+                          <option value="Coilovers">Coilovers</option>
+                          <option value="Turbo">Turbo</option>
+                          <option value="Brakes">Brakes</option>
+                          <option value="Oils">Oils</option>
+                          <option value="Batteries">Batteries</option>
+                      </select>
+                  </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                   <label for="description">Description</label>
                   <textarea class="form-control" id="description" rows="3" th:field="*{description}" th:value="${product.description}" required></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="stock">Stock</label>
-                    <input class="form-control" type="number" name="stock" th:value="${product.stock}" min="1" max="100" th:field="*{stock}">
-                </div>
-                
-                <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" placeholder="Price" th:value="${product.price}" th:field="*{price}" required>
+                <div class="row">
+                  <div class="form-group mb-3 col-md-6">
+                      <label for="stock">Stock</label>
+                      <input class="form-control" type="number" name="stock" th:value="${product.stock}" min="0" max="100" th:field="*{stock}">
+                  </div>
+                  
+                  <div class="form-group mb-3 col-md-6">
+                      <label for="price">Price</label>
+                      <input type="text" class="form-control" id="price" placeholder="Price" th:value="${product.price}" th:field="*{price}" required>
+                  </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="image" class="input-group">Image</label>
                     <img src="#" name="image" th:src="${product.image}" class="img-thumbnail w-25" alt="">
                 </div>
 
                 <div class="input-group my-3">
                     <input class="form-control" type="file" name="file" id="file" accept="image/*">
-                    <label class="input-group-text" for="file">Upload</label>
+                    <label class="input-group-text" for="file">Upload Image</label>
                 </div>
 
                 <input type="hidden" th:field="*{rating}" th:value="${product.rating}">
