@@ -11,35 +11,78 @@
 <body>
     <div layout:fragment="admin_content">
         <div class="container w-100 mt-5 d-flex flex-column justify-content-between">
-            <h3 class="mb-4"><b>Dashboard</b></h3>
+            <h3 class="mb-2"><b>Dashboard</b></h3>
 
             <div class="d-flex flex-column flex-lg-row  justify-content-lg-between align-items-center">
                 <div class="row w-100">
                     <div class="col-lg-4 p-2">
-                        <div class="card dashboard-card-sm text-bg-primary mb-3">
+                        <div class="card dashboard-card-sm h-100 text-bg-primary">
                             <div class="card-header h4"><i class="bi bi-credit-card"></i> Orders</div>
-                            <div class="card-body">
+                            <div class="card-body pt-2 pb-0">
                               <h1 class="card-title" th:text="${#lists.size(monthlyOrders)}"></h1>
-                              <p class="card-text">Total for this months</p>
+                            </div>
+                            <div class="card-footer bg-primary border-0 mb-1">Total for this month</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-2">
+                        <div class="card dashboard-card-sm h-100 text-white bg-info">
+                            <div class="card-header h4"><i class="bi bi-gear"></i> Processing</div>
+                            <div class="card-body pt-2 pb-0">
+                                <h1 class="card-title" th:text="${#lists.size(processingOrders)}"></h1>
+                            </div>
+                            <div class="card-footer bg-info border-0 mb-1">Total for this month</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-2">
+                        <div class="card dashboard-card-sm h-100 text-dark bg-secondary-subtle shadow-lg">
+                            <div class="card-header h4 border-0 bg-secondary-subtle"><i class="bi bi-stack"></i> Stock</div>
+                            <div class="card-body pt-2 pb-0">
+                              <div th:if="${outOfStock}" class="alert alert-danger py-1">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                                  <span class="card-text" th:if="${outOfStock}" th:text="${outOfStock}"></span>
+                                  <span th:text="${outOfStock} eq 1 ? ' product' : ' products' "></span>
+                                  <span> out of stock</span>
+                              </div>
+
+                              <div th:if="${lowStock}" class="alert alert-info py-1">
+                                <i class="bi bi-exclamation-diamond-fill"></i>
+                                  <span class="card-text" th:if="${lowStock}" th:text="${lowStock}"></span>
+                                  <span th:text="${lowStock} eq 1 ? ' product' : ' products' "></span>
+                                  <span> low in stock</span>
+                              </div>
+
+                              <div th:if="${outOfStock eq 0}" class="alert alert-success py-1">
+                                <i class="bi bi-check2-square"></i>
+                                  <span>All products are in stock!</span>
+                              </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 p-2">
-                        <div class="card dashboard-card-sm text-bg-danger mb-3">
+                        <div class="card dashboard-card-sm h-100 text-bg-success">
+                            <div class="card-header h4"><i class="bi bi-check-circle"></i> Delivered</div>
+                            <div class="card-body pt-2 pb-0">
+                                <h1 class="card-title" th:text="${#lists.size(deliveredOrders)}"></h1>
+                            </div>
+                            <div class="card-footer bg-success border-0 mb-1">Total for this month</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-2">
+                        <div class="card dashboard-card-sm h-100 text-bg-danger">
                             <div class="card-header h4"><i class="bi bi-x-circle"></i> Cancellations</div>
-                            <div class="card-body">
-                              <h1 class="card-title" th:text="${#lists.size(cancelledOrders)}"></h1>
-                              <p class="card-text">Total for this months</p>
+                            <div class="card-body pt-2 pb-0">
+                                <h1 class="card-title" th:text="${#lists.size(cancelledOrders)}"></h1>
                             </div>
+                            <div class="card-footer bg-danger border-0 mb-1">Total for this month</div>
                         </div>
                     </div>
                     <div class="col-lg-4 p-2">
-                        <div class="card dashboard-card-sm text-bg-success mb-3">
+                        <div class="card dashboard-card-sm h-100 text-white bg-light-green">
                             <div class="card-header h4"><i class="bi bi-bank2"></i> Revenue</div>
-                            <div class="card-body">
+                            <div class="card-body pt-2 pb-0">
                               <h1 class="card-title" th:text="${#numbers.formatCurrency(monthlyRevenue)}"></h1>
-                              <p class="card-text">Total for this months</p>
                             </div>
+                            <div class="card-footer bg-light-green border-0 mb-1">Total for this month</div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +102,7 @@
                     </div>
                     <div class="col-lg-4 p-2">
                         <div class="card dashboard-card-sm mb-3">
-                            <div class="card-header h4"><i class="bi bi-star-half"></i> Recent Reviews</div>
+                            <div class="card-header h4"><i class="bi bi-star"></i> Recent Reviews</div>
                             <div class="card-body">
                                 <div th:each="review : ${recentReviews}" class="row">
                                     <span class="text-secondary" th:text="${#strings.capitalize(review.user.name)} ">User's name</span>

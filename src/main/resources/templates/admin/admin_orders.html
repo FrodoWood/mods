@@ -31,9 +31,9 @@
                         <td>
                             <select th:name="orderStatus" class="form-select" 
                                     th:classappend="
-                                       ${#strings.equals(order.status, 'DELIVERED')}    ? 'border-success text-success' 
-                                    : (${#strings.equals(order.status, 'CANCELLED')}    ? 'border-danger text-danger' 
-                                    : (${#strings.equals(order.status, 'ORDERED')}      ? 'border-warning text-warning'))">
+                                       ${#strings.equals(order.status, 'DELIVERED')}    ? 'border-success bg-success-subtle text-success' 
+                                    : (${#strings.equals(order.status, 'CANCELLED')}    ? 'border-danger bg-danger-subtle text-danger' 
+                                    : (${#strings.equals(order.status, 'ORDERED')}      ? 'border-info bg-info-subtle text-info'))">
                                 <option th:each="status : ${orderStatusEnum}" 
                                         th:value="${status}" 
                                         th:text="${status}"

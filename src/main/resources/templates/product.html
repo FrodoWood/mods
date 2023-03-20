@@ -10,42 +10,6 @@
 
 <body>
 
-<!-- <div layout:fragment="content">
-<h1>Product Page</h1>
-<table>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Rating</th>
-<th>Make</th>
-<th>Model</th>
-<th>Category</th>
-<th>Stock amount</th>
-<th>Price</th>
-</tr>
-<tr>
-<td th:text="${{product.name}}"></td>
-<td th:text="${{product.description}}"></td>
-<td th:text="${{product.rating}}"></td>
-<td th:text="${{product.make}}"></td>
-<td th:text="${{product.model}}"></td>
-<td th:text="${{product.category}}"></td>
-<td th:text="${{product.stock}}"></td>
-<td th:text="${{product.price}}"></td>
-</tr>
-</table>
-
-<form method="post" action="#" th:action="@{/basket/add}" th:object="${basketproduct}">
-<input type="hidden" th:name="productId" th:value="${{product.id}}"/>
-<label for="quantity">Quantity:</label>
-<input type="number" name="quantity" th:value="1">
-<button type="submit">Add to Basket</button>
-</form>
-
-<span th:utext="${error}"></span>
-
-</div> -->
-
 <div layout:fragment="content">
 
     <div class="container">
@@ -144,11 +108,11 @@
                 <div class="tab-container">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab"
+                            <button class="nav-link link-dark active" id="nav-description-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-description" type="button" role="tab"
                                     aria-controls="nav-description" aria-selected="true">Description
                             </button>
-                            <button class="nav-link" id="nav-delivery-tab" data-bs-toggle="tab"
+                            <button class="nav-link link-dark" id="nav-delivery-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-delivery" type="button" role="tab" aria-controls="nav-delivery"
                                     aria-selected="false">Delivery
                             </button>

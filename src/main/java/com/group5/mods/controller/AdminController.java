@@ -61,11 +61,17 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     public String adminDashboard(Model model) {
         List<Order> allOrders = orderRepository.findAll();
+        List<Product> allProducts = productRepository.findAll();
         List<Review> latestReviews = reviewRepository.findAllByOrderByDateCreatedDesc(PageRequest.of(0, 5));
         List<Order> monthlyOrders = new ArrayList<>();
         List<Order> cancelledOrders = new ArrayList<>();
+        List<Order> processingOrders = new ArrayList<>();
+        List<Order> deliveredOrders = new ArrayList<>();
         BigDecimal monthlyRevenue = BigDecimal.ZERO;
         Map<LocalDate, Integer> ordersByDate = new HashMap<>();
+        int lowStock = 0;
+        int outOfStock = 0;
+
         // All monthly orders
         for(Order order : allOrders){
             if(order.getDateCreated().isAfter(LocalDateTime.now().minusMonths(1))){
@@ -74,11 +80,15 @@ public class AdminController {
         }
         // All monthyl Cancelled and Delivered orders (revenue)
         for(Order order : monthlyOrders){
-            if(order.getStatus().equals(OrderStatus.CANCELLED)){
-                cancelledOrders.add(order);
-            }
             if(order.getStatus().equals(OrderStatus.DELIVERED)){
                 monthlyRevenue = monthlyRevenue.add(order.getTotalPrice());
+                deliveredOrders.add(order);
+            }
+            else if(order.getStatus().equals(OrderStatus.CANCELLED)){
+                cancelledOrders.add(order);
+            }
+            else if(order.getStatus().equals(OrderStatus.ORDERED)){
+                processingOrders.add(order);
             }
         }
         // Loop over all the orders and add the quantity of each order product to the date
@@ -102,14 +112,27 @@ public class AdminController {
             int quantity = ordersByDate.get(date);
             dates.add(date.toString());
             quantities.add(quantity);
-    }
+        }
+
+        // Calculate amount of low stock and out of stock products
+        for(Product product: allProducts){
+            if(product.getStock() == 0){
+                outOfStock += 1;
+            }else if(product.getStock() <= 4){
+                lowStock += 1;
+            }
+        }
 
         model.addAttribute("monthlyOrders", monthlyOrders);
         model.addAttribute("cancelledOrders", cancelledOrders);
+        model.addAttribute("deliveredOrders", deliveredOrders);
+        model.addAttribute("processingOrders", processingOrders);
         model.addAttribute("monthlyRevenue", monthlyRevenue);
         model.addAttribute("dates", dates);
         model.addAttribute("quantities", quantities);
         model.addAttribute("recentReviews", latestReviews);
+        model.addAttribute("outOfStock",outOfStock); 
+        model.addAttribute("lowStock",lowStock); 
         return "admin/admin_dashboard";
     }
 

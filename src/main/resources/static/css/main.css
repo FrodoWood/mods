@@ -158,3 +158,11 @@ body {
   .btn{
     transition-duration: 0.1s !important;
   }
+
+  .bg-purple{
+    background-color: rgb(134, 80, 233);
+  }
+
+  .bg-light-green{
+    background-color: #62b83e;
+  }
