@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -62,7 +63,7 @@ public class AdminController {
     public String adminDashboard(Model model) {
         List<Order> allOrders = orderRepository.findAll();
         List<Product> allProducts = productRepository.findAll();
-        List<Review> latestReviews = reviewRepository.findAllByOrderByDateCreatedDesc(PageRequest.of(0, 5));
+        List<Review> latestReviews = reviewRepository.findAllByOrderByDateCreatedDesc(PageRequest.of(0, 3));
         List<Order> monthlyOrders = new ArrayList<>();
         List<Order> cancelledOrders = new ArrayList<>();
         List<Order> processingOrders = new ArrayList<>();
@@ -165,13 +166,33 @@ public class AdminController {
 
     @GetMapping("/admin/orders")
     @PreAuthorize("hasRole('ADMIN')")
-    public String adminOrders(Model model) {
-        List<Order> orderList = new ArrayList<>();
-        orderList = orderRepository.findAll();
-        model.addAttribute("orders", orderList);
-        model.addAttribute("orderStatusEnum", OrderStatus.values());
-        return "admin/admin_orders";
+    public String adminOrders(Model model,  @RequestParam(required = false) OrderStatus status,
+                                            @RequestParam (required = false) String search) {
+    List<Order> orderList = new ArrayList<>();
+    if (status == null) {
+        orderList = orderRepository.findAllByOrderByDateCreatedDesc();
+    } else {
+        orderList = orderRepository.findAllByOrderByDateCreatedDesc().stream()
+                            .filter(o -> o.getStatus().equals(status))
+                            .collect(Collectors.toList());
     }
+    if(search != null && !search.isBlank()){
+        orderList = orderList.stream()
+                        .filter( o ->   o.getDateCreated().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                        String.valueOf(o.getId()).contains(search.toLowerCase()) ||
+                                        o.getTotalPrice().toString().contains(search.toLowerCase()) ||
+                                        o.getUser().getName().toLowerCase().contains(search.toLowerCase()) ||
+                                        o.getOrderProducts().stream()
+                                            .anyMatch(op -> op.getProduct().getName().toLowerCase().contains(search.toLowerCase())))
+                        .collect(Collectors.toList());
+    }
+
+
+    model.addAttribute("orders", orderList);
+    model.addAttribute("orderStatusEnum", OrderStatus.values());
+    return "admin/admin_orders";
+    }   
+
 
     @PostMapping("/admin/reviews/{reviewId}/hide")
     @PreAuthorize("hasRole('ADMIN')")

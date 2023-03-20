@@ -14,6 +14,48 @@
         <div class="d-flex flex-column container mt-5">
             <h3 class="mb-4"><b>Orders</b></h3>
 
+            <!-- Filters -->
+            <div class="row">
+                <div class="col-auto">
+                    <form th:action="@{/admin/orders}" method="get">
+                        <div class="row g-3 mb-3">
+                            <div class="col-auto">
+                                <div>
+                                    <label for="status" class="form-label">Filter by status:</label>
+                                    <select class="form-select" id="status" name="status">
+                                        <option value="">All</option>
+                                        <option th:each="status : ${orderStatusEnum}"
+                                                th:value="${status}"
+                                                th:text="${status}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-auto align-self-end">
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-auto">
+                    <form action="#" th:action="@{/admin/orders}" th:method="get">
+                        <div class="row g-3 mb-3">
+                            <div class="col-auto">
+                                <div>
+                                    <label for="search" class="form-label">Search order</label>
+                                    <input class="form-control" type="text" name="search" placeholder="Search by keyword">
+                                </div>
+                            </div>
+                            <div class="col-auto align-self-end">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+              
+            
+            <!-- Orders -->
             <table class="table">
                 <tr>
                     <th>Order ID</th>
