@@ -97,7 +97,16 @@
                                                 </div>
                                             </td>
                                             <td class="h4">
-                                                <span class="flex-row"><a class="link-dark" th:href = "@{basket/reduce/{id}(id=${basketProduct.product.id})}"><i class="bi bi-dash"></i></a></span>
+                                                <span class="flex-row">
+                                                    <a class="link-dark text-decoration-none" th:if="${basketProduct.quantity > 1}"
+                                                        th:href="@{basket/reduce/{id}(id=${basketProduct.product.id})}">
+                                                        <i class="bi bi-dash"></i>
+                                                     </a>
+                                                     <a class="link-dark text-decoration-none" th:if="${basketProduct.quantity <= 1}"
+                                                        th:href="@{basket/removeProduct/{id}(id=${basketProduct.id})}">
+                                                        <i class="bi bi-dash"></i>
+                                                     </a>
+                                                </span>
                                                 <span class="flex-row mx-2" th:text="${basketProduct.quantity}"></span>
                                                 <span class="flex-row"><a class="link-dark" th:href = "@{basket/addQuantity/{id}(id=${basketProduct.product.id})}"><i class="bi bi-plus-lg"></i></i></a></span>
                                             </td>
