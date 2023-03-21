@@ -13,59 +13,10 @@
 </head>
 
 <body>
-<!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg bg-dark sticky-top"data-bs-theme="dark">
-        <div class="container">
-          <a class="navbar-brand" href="#" th:href="@{/}">
-            <i class="bi bi-car-front-fill"></i>
-            <span class="me-5">MODS</span>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#" th:href="@{/store}">Store</a>
-              </li>
-              
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Car Parts
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" th:href="@{/store/Coilovers}">Coilovers</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Turbo}">Turbo Kits</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Brakes}">Big Brake Kits</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Oils}">Engine Oils</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/Batteries}">Batteries</a></li>
-                </ul>
-              </li>
+    <!-- Navigation bar -->
+    <div  th:insert="~{navbar :: navbar(basketCount=${basketCount})}">
 
-              <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            </ul>
-
-
-            <!-- Search Bar -->
-            <form class="d-flex me-5" role="search" action="#" th:action="@{/store/search}">
-              <input class="form-control me-2" type="search" placeholder="Search" th:name = "searchValue"aria-label="Search">
-              <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
-            </form>
-
-            <!-- User Links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/orders}">Orders</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/login}"><i class="bi bi-person-fill"></i>Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/register}">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/logout}">Logout</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/basket}"><i class="bi bi-basket2 h4"></i></a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin}">Admin</a></li>
-            </ul>
-
-          </div>
-        </div>
-      </nav>
+    </div>
 
     <!-- Content received from other pages -->
     <div layout:fragment="content" class="container">

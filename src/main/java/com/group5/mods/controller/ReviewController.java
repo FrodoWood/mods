@@ -29,7 +29,7 @@ import com.group5.mods.repository.ReviewRepository;
 import com.group5.mods.service.ProductService;
 
 @Controller
-public class ReviewController {
+public class ReviewController extends BaseController {
     @Autowired
     private ReviewRepository reviewRepository;
     @Autowired

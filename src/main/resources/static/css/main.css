@@ -166,3 +166,9 @@ body {
   .bg-light-green{
     background-color: #62b83e;
   }
+
+  .basketAmount{
+    position: relative;
+    top: -7px;
+    left: -24px;
+  }

@@ -27,7 +27,7 @@ import com.group5.mods.service.UserService;
 import jakarta.persistence.EntityManager;
 
 @Controller
-public class OrderController {
+public class OrderController extends BaseController {
     @Autowired
     private OrderService orderService;
 
