@@ -110,12 +110,9 @@ public class BasketController extends BaseController {
         Optional<Product> product = productService.findById(id);
         Optional<BasketProduct> basketproduct = basketProductRepository.findById(id);
         if (basketproduct.isPresent()) {
+            basket.get().getBasketProducts().remove(basketproduct.get());
             basketProductRepository.delete(basketproduct.get());
         }
-
-        // basketrepository.deleteById(id);
-        // basket.get().changeQuantity(product.get(), 1);
-        // basket.get().removeBasketProduct(product.get(),id);
         basketService.save(basket.get());
         model.addAttribute("basket", basket.get());
         model.addAttribute("products", basket.get().getBasketProducts());
