@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.yaml.snakeyaml.events.Event.ID;
 
 import com.group5.mods.model.Basket;
@@ -65,7 +66,7 @@ public class BasketController extends BaseController {
 
     @PostMapping("/basket/add")
     public String addToBasket(@RequestParam("productId") Long productId, @RequestParam("quantity") int quantity,
-            Model model) {
+            Model model, RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
@@ -81,9 +82,9 @@ public class BasketController extends BaseController {
 
         // Check if the product is in stock
         if (product.isPresent() && product.get().getStock() < quantity) {
-            model.addAttribute("error", "Not enough products in stock");
-            model.addAttribute("product", product.get());
-            return "product";
+            redirectAttributes.addFlashAttribute("error", "Not enough products in stock");
+
+            return "redirect:/product/" + productId;
         }
 
         // Add the product and quantity to the basket
