@@ -32,9 +32,40 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+
+        <!-- Select make and model -->
+        <p class="h3 text-uppercase text-center">Select your Vehicle</p>
+        <div class="card mb-4">
+          <div class="card-body">
+            <form th:action="@{/store/makeModel}" th:object="${Product}">
+  
+              <div class="row">
+                <div class="col-md-5">
+                  <label class="form-label" for="make">Make</label>
+                  <select class="form-select mb-3" id="make" name="make" required>
+                    <option value="">Select Make</option>
+                    <option value="Audi">Audi</option>
+                    <option value="BMW">BMW</option>
+                  </select>
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label" for="model">Model</label>
+                  <select class="form-select mb-3" id="model" name="model" required>
+                    <option value="">Select Model</option>
+                  </select>
+                </div>
+                <div class="col-md-2 align-self-end">
+                  <button class="btn btn-primary w-100 my-3" type="submit">Search</button>
+                </div>
+              </div>
+  
+            </form>
+          </div>
+        </div>
         <!-- Categories -->
-        <h2 class="text-center">Product Categories</h2>
-        <div class=" d-flex flex-wrap justify-content-center">
+        <p class="h3 text-uppercase text-center">Product Categories</p>
+
+        <div class=" d-flex flex-wrap justify-content-center mb-4">
           <div class="card categories-card m-2 text-center">
               <a href="#" th:href="@{/store/category/{category}(category= 'Coilovers')}" class="text-decoration-none link-dark">
                 <img src="..." th:src="@{/images/Tein Street Basis Z Coilovers.png}" class="card-img-top categories-img" alt="...">
@@ -76,20 +107,50 @@
               </a>
           </div>
       </div>
-      <div>
-        <form th:action="@{/store/makeModel}" th:object="${Product}">
-          <select id="model" name="model">
-            <option value="A5">A5</option>
-            <option value="Z4">Z4</option>
-          </select>
-          <select id="make" name="make">
-            <option value="BMW">BMW</option>
-            <option value="Audi">Audi</option>
-          </select>
-          <button type="submit">Search</button>
-        </form>
-      </div>
         
+    </div>
+
+    <div layout:fragment="scripts">
+      <script th:inline="javascript">
+        // Map of make and model
+        const makeModelsMap = {
+            'Audi': ['A5', 'Q5', 'S5'],
+            'BMW': ['Z4', 'X5', 'M5']
+        };
+        
+        // Get the make and model select elements
+        const makeSelect = document.getElementById('make');
+        const modelSelect = document.getElementById('model');
+
+        // Disable the model select and set make select to first option ('Select Make')
+        modelSelect.disabled = true;
+        makeSelect.selectedIndex = 0;
+
+        // Add an event listener to the make select element
+        makeSelect.addEventListener('change', function() {
+            // Clear the model selection
+            modelSelect.innerHTML = '<option value="">Select Model</option>';
+
+            // Get the selected make
+            const selectedMake = this.value;
+
+            // If a make is selected then generate the mapped models
+            if (selectedMake !== '') {
+                modelSelect.disabled = false;
+                const models = makeModelsMap[selectedMake];
+                models.forEach(function(model) {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.innerHTML = model;
+                    modelSelect.appendChild(option);
+                });
+            }
+            else {
+                modelSelect.disabled = true;
+                modelSelect.selectedIndex = -1;
+            }
+        });
+      </script>
     </div>
 </body>
 
