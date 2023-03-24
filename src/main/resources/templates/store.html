@@ -56,14 +56,45 @@
             </div>
         </div>
         <!-- Price filter and sorting -->
-        <div class="card">
-          <div class="card-body">
-            <a href="/store/price?maxPrice=100">Less than 100</a>
-            <a href="/store/price?maxPrice=500">Less than 500</a>
-            <a href="/store/price?maxPrice=1000">Less than 1000</a>
-            <a th:href="@{/store/price(maxPrice=${maxPrice},sort='low')}">Low to High Price</a>
-            <a th:href="@{/store/price(maxPrice=${maxPrice},sort='high')}">High to Low Price</a>
+        <div class="container d-flex justify-content-center my-5">
+          <div class="card product-card w-100 py-3">
+            <div class="card-body d-flex justify-content-between">
+          
+              <div class="row w-100 align-items-center">
 
+                <div class="col-lg-6">
+                  <form method="GET" action="/store/price">
+                      <div class="row align-items-center">
+                        <div class="col-3"><label class="form-label" for="maxPrice">Max Price</label></div>
+                        <div class="col-4"><input class="w-100" type="range" id="maxPrice" name="maxPrice" min="0" max="2000" th:value="${maxPrice}" step="100" oninput="priceRange.value = this.value"></div>
+                        <div class="col-2">
+                          <output id="priceRange"></output>
+                        </div>
+                        <div class="col-3"><button type="submit" class="btn btn-primary">Filter</button></div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group row align-items-center">
+                    <div class="col-4 text-lg-end"><label class="col-form-label" for="sort">Sort by</label></div>
+                    <div class="col-8">
+                      <form method="GET" action="/store/price">
+                        <select class="form-select" id="sort" name="sort" onchange="this.form.submit();" required>
+                            <option th:selected="${sort == 'low'}" value="low">Low to High</option>
+                            <option th:selected="${sort == 'high'}" value="high">High to Low</option>
+                        </select>
+                        <input type="hidden" name="maxPrice" th:value="${maxPrice}">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+          
+              <!-- <a th:href="@{/store/price(maxPrice=${maxPrice},sort='low')}">Low to High Price</a>
+              <a th:href="@{/store/price(maxPrice=${maxPrice},sort='high')}">High to Low Price</a> -->
+            </div>
           </div>
         </div>
         <!-- Search result   -->
@@ -98,6 +129,16 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <div layout:fragment="scripts">
+      <script>
+        window.onload = function(){
+          let maxPriceInput = document.getElementById('maxPrice');
+          let priceRangeOutput = document.getElementById('priceRange');
+          priceRangeOutput.value = maxPriceInput.value;
+        };
+      </script>
     </div>
 </body>
 </html>

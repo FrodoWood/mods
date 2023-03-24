@@ -48,7 +48,7 @@
                         <input class="btn btn-success w-100" type="submit" value="SIGN IN">
                     </form>
                     <div class="alert alert-danger text-center mt-3 mb-0" th:if="${param.error}">*Invalid username and password.</div>
-                    <div class="alert alert-warning text-center mt-3 mb-0" th:if="${param.logout}">*You have been logged out.</div>
+                    <div class="alert alert-info text-center mt-3 mb-0" th:if="${param.logout}">*You have been logged out.</div>
                     <div th:if="${successMessage}">
                         <div class="alert alert-success text-center mt-3 mb-0" th:utext="${successMessage}"></div>
                     </div>

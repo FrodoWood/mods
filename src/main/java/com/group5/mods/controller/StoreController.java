@@ -41,7 +41,7 @@ public class StoreController extends BaseController {
     }
 
     @GetMapping("/store/price")
-    public String storePrice(Model model, @RequestParam(required = false, defaultValue = "1000") BigDecimal maxPrice,
+    public String storePrice(Model model, @RequestParam(required = false, defaultValue = "99999") BigDecimal maxPrice,
                                             @RequestParam(required = false, defaultValue = "low") String sort) {
         List<Product> allProducts = productRepository.findAll();
         
@@ -56,6 +56,7 @@ public class StoreController extends BaseController {
         }
         model.addAttribute("products", allProducts);
         model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("sort", sort);
         return "store";
     }
 
