@@ -13,8 +13,8 @@
 
         <!-- Categories -->
         <h5 class="text-center mt-4">Product Categories</h5>
-        <div class=" d-flex flex-wrap justify-content-center">
-            <div class="card categories-card m-2 text-center">
+        <div class=" d-flex flex-wrap justify-content-sm-center">
+            <div class="card categories-card m-md-2 text-center">
                 <a href="#" th:href="@{/store/category/{category}(category= 'Coilovers')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/Tein Street Basis Z Coilovers.png}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
@@ -22,7 +22,7 @@
                   </div>
                 </a>
             </div>
-            <div class="card categories-card m-2 text-center">
+            <div class="card categories-card m-md-2 text-center">
                 <a href="#" th:href="@{/store/category/{category}(category = 'Turbo')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/turbo1.jpg}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
@@ -30,7 +30,7 @@
                   </div>
                 </a>
             </div>
-            <div class="card categories-card m-2 text-center">
+            <div class="card categories-card m-md-2 text-center">
                 <a href="#" th:href="@{/store/category/{category}(category = 'Brakes')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/StopTech Trophy Sport Big Brake Kit.png}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
@@ -38,7 +38,7 @@
                   </div>
                 </a>
             </div>
-            <div class="card categories-card m-2 text-center">
+            <div class="card categories-card m-md-2 text-center">
                 <a href="#" th:href="@{/store/category/{category}(category = 'Oils')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/Castrol GTX Engine Oil.jpg}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
@@ -46,7 +46,7 @@
                   </div>
                 </a>
             </div>
-            <div class="card categories-card m-2 text-center">
+            <div class="card categories-card m-md-2 text-center">
                 <a href="#" th:href="@{/store/category/{category}(category = 'Batteries')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/batt1.jpg}" class="card-img-top categories-img" alt="...">
                   <div class="card-body">
@@ -55,24 +55,22 @@
                 </a>
             </div>
         </div>
-        
-          <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Prices
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" th:href="@{/store/{price}(price=low)}">&lt; 100</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/{price}(price=mid)}">&lt; 1000</a></li>
-                  <li><a class="dropdown-item" th:href="@{/store/{price}(price=high)}">&gt; 1000</a></li>
-                </ul>
-              </li>
-            </ul>
-          <!-- </div> -->
-        <!-- <div th:if="${size}">
+        <!-- Price filter and sorting -->
+        <div class="card">
+          <div class="card-body">
+            <a href="/store/price?maxPrice=100">Less than 100</a>
+            <a href="/store/price?maxPrice=500">Less than 500</a>
+            <a href="/store/price?maxPrice=1000">Less than 1000</a>
+            <a th:href="@{/store/price(maxPrice=${maxPrice},sort='low')}">Low to High Price</a>
+            <a th:href="@{/store/price(maxPrice=${maxPrice},sort='high')}">High to Low Price</a>
+
+          </div>
+        </div>
+        <!-- Search result   -->
+        <div th:if="${size}">
           <p th:text="${'Total Results ' + size}"></p>
-        </div> -->
+        </div>
+
         <div class="container justify-content-center card-container card-deck my-5">
           <div th:if="${error}">
             <span th:text="${error}"></span>

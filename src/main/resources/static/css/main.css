@@ -172,3 +172,7 @@ body {
     top: -7px;
     left: -24px;
   }
+
+  .layout-container{
+    min-height: 60vh;
+  }

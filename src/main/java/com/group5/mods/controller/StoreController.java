@@ -1,8 +1,11 @@
 package com.group5.mods.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.MergedAnnotations.Search;
@@ -37,28 +40,22 @@ public class StoreController extends BaseController {
         return "store";
     }
 
-    @GetMapping("/store/{price}")
-    public String storePrice(@PathVariable String price, Model model) {
-        List<Product> rawData = productRepository.findAll();
-        ArrayList<Product> result = new ArrayList<>();
-        for (Product product : rawData) {
-            if (price.contentEquals("low")) {
-                if (product.getPrice().intValue() < 100) {
-                    result.add(product);
-                }
-            }
-            if (price.contentEquals("mid")) {
-                if (product.getPrice().intValue() < 1000) {
-                    result.add(product);
-                }
-            }
-            if (price.contentEquals("high")) {
-                if (product.getPrice().intValue() > 1000) {
-                    result.add(product);
-                }
-            }
+    @GetMapping("/store/price")
+    public String storePrice(Model model, @RequestParam(required = false, defaultValue = "1000") BigDecimal maxPrice,
+                                            @RequestParam(required = false, defaultValue = "low") String sort) {
+        List<Product> allProducts = productRepository.findAll();
+        
+        // Filter products list by max price
+        allProducts = allProducts.stream().filter(product -> product.getPrice().compareTo(maxPrice) <= 0)
+                                            .collect(Collectors.toList());
+        // Sort products
+        if(sort.equals("low")){
+            allProducts.sort(Comparator.comparing(Product::getPrice));
+        }else if(sort.equals("high")){
+            allProducts.sort(Comparator.comparing(Product::getPrice).reversed());
         }
-        model.addAttribute("products", result);
+        model.addAttribute("products", allProducts);
+        model.addAttribute("maxPrice", maxPrice);
         return "store";
     }
 
