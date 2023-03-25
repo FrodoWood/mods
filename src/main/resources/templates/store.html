@@ -108,7 +108,7 @@
           </div>
             <div th:each="product:${products}">
                 <a href="#" th:href="@{/product/{id}(id=${product.id})}" class="text-decoration-none text-dark">
-                    <div class="card mb-3 product-card">
+                    <div class="card mb-3 product-card w-100">
                         <div class="row">
                           <div class="col-sm-4">
                             <img src="..." th:src="${product.image}" class="img-thumbnail border-0" alt="...">
