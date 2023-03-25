@@ -14,42 +14,26 @@
         <div class="container mt-5">
             
             <h3 class="mb-4"><b>Products</b></h3>
-            <a class="btn btn-success my-2" href="#" th:href="@{/admin/products/add}"><b class="h4"> <i class="bi bi-plus-lg"></i> ADD PRODUCT</b></a>
-            <!-- <div class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>Image</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Description</th>
-                        <th>Rating</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Actions</th>
-                    </tr>
-                    <tr th:each="product : ${products}">
-                        <td>
-                            <img src="..." th:src="${product.image}" class="img-thumbnail w-50 border-0" alt="Product image">
-                        </td>
-                        <td th:text="${product.id}"></td>
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.make}"></td>
-                        <td th:text="${product.model}"></td>
-                        <td th:text="${product.description}"></td>
-                        <td th:text="${product.rating}"></td>
-                        <td th:text="${product.category}"></td>
-                        <td th:text="'£' + ${product.price}"></td>
-                        <td th:text="${product.stock}"></td>
-                        <td>
-                            <a th:href="@{/admin/products/edit/{id}(id=${product.id})}"><button class="btn btn-primary">Edit</button></a>
-                        </td>
-                    </tr>
-                </table>
-            </div> -->
+            <a class="btn btn-success my-2 mb-4" href="#" th:href="@{/admin/products/add}"><b class="h4"> <i class="bi bi-plus-lg"></i> ADD PRODUCT</b></a>
+            
+            <!-- Filters -->
+            <div class="row">
+                <form action="#" th:action="@{/admin/products}" th:method="get">
+                    <div class="row g-3 mb-3">
+                        <div class="col-auto">
+                            <div>
+                                <label for="search" class="form-label">Search product</label>
+                                <input class="form-control" th:value="${search}" type="text" name="search" placeholder="Search by keyword">
+                            </div>
+                        </div>
+                        <div class="col-auto align-self-end">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
+            <!-- Product card -->
             <div class="container card-container-admin px-0 my-5">
                   <div class="w-100" th:each="product:${products}">
                       <div class="card mb-3 product-card-admin overflow-hidden">

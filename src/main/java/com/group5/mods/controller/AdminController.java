@@ -139,28 +139,70 @@ public class AdminController {
 
     @GetMapping("/admin/users")
     @PreAuthorize("hasRole('ADMIN')")
-    public String adminUsers(Model model) {
+    public String adminUsers(Model model, @RequestParam (required = false) String search) {
         List<User> userList = new ArrayList<>();
         userList = userRepository.findAll();
+        if(search != null && !search.isBlank()){
+            userList = userList.stream()
+                            .filter( u ->   u.getName().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            u.getUsername().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            u.getEmail().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            u.getRoles().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            String.valueOf(u.getId()).toLowerCase().contains(search.toLowerCase())
+                                            )
+                            .collect(Collectors.toList());
+        }
         model.addAttribute("users", userList);
+        model.addAttribute("search", search);
         return "admin/admin_users";
     }
 
     @GetMapping("/admin/products")
     @PreAuthorize("hasRole('ADMIN')")
-    public String adminProducts(Model model) {
+    public String adminProducts(Model model, @RequestParam (required = false) String search) {
         List<Product> productList = new ArrayList<>();
         productList = productRepository.findAll();
+        if(search != null && !search.isBlank()){
+            productList = productList.stream()
+                            .filter( p ->   p.getName().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            String.valueOf(p.getId()).contains(search.toLowerCase()) ||
+                                            p.getDescription().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            p.getMake().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            p.getModel().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            p.getCategory().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            String.valueOf(p.getPrice()).contains(search.toLowerCase()) ||
+                                            String.valueOf(p.getRating()).contains(search.toLowerCase()) ||
+                                            String.valueOf(p.getStock()).contains(search.toLowerCase())
+                                            )
+                            .collect(Collectors.toList());
+        }
         model.addAttribute("products", productList);
+        model.addAttribute("search", search);
         return "admin/admin_products";
     }
 
     @GetMapping("/admin/reviews")
     @PreAuthorize("hasRole('ADMIN')")
-    public String adminreviews(Model model) {
+    public String adminreviews(Model model, @RequestParam (required = false) String search) {
         List<Review> reviews = new ArrayList<>();
         reviews = reviewRepository.findAllByOrderByDateCreatedDesc();
+        if(search != null && !search.isBlank()){
+            reviews = reviews.stream()
+                            .filter( r ->   r.getUser().getName().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            r.getUser().getUsername().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            r.getProduct().getName().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            r.getProduct().getMake().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            r.getProduct().getModel().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            r.getProduct().getCategory().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            r.getDateCreated().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            r.getComment().toString().toLowerCase().contains(search.toLowerCase()) ||
+                                            String.valueOf(r.getRating()).toLowerCase().contains(search.toLowerCase()) ||
+                                            String.valueOf(r.getId()).toLowerCase().contains(search.toLowerCase())
+                                            )
+                            .collect(Collectors.toList());
+        }
         model.addAttribute("reviews", reviews);
+        model.addAttribute("search", search);
         return "admin/admin_reviews";
     }
 
@@ -190,6 +232,7 @@ public class AdminController {
 
     model.addAttribute("orders", orderList);
     model.addAttribute("orderStatusEnum", OrderStatus.values());
+    model.addAttribute("search", search);
     return "admin/admin_orders";
     }   
 
