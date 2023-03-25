@@ -11,19 +11,45 @@
 <body>
 <div layout:fragment="content">
     <div class="d-flex flex-column container align-items-center mb-0">
-        <h2 class="text-center my-5">Your Orders</h2>
+        <!-- Error and Success alerts -->
+        <div th:if="${orderCancelSuccess}" class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            <span class="h5" th:text="${orderCancelSuccess}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${orderSuccess}" class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            <span class="h5" th:text="${orderSuccess}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${orderNotFound}" class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            <span class="h5" th:text="${orderNotFound}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+
+        <h2 class="text-center my-5">My Orders</h2>
 
         <div th:each="order : ${orders}">
             <div class="card product-card mb-5 mt-2">
-                <div class="card-header">
+                <div class="card-header border-0 bg-white mt-2">
                     <div class="row">
-                        <div class="col-lg-2" th:text="${order.id}"></div>
-                        <div class="col-lg-4" th:text="${order.dateCreated}"></div>
-                        <div class="col-lg-2" th:text="${order.user.name}"></div>
-                        <div class="col-lg-2" th:text="${order.totalPrice}"></div>
-                        <div class="col-lg-2" th:text="${order.status}"></div>
+                        <div class="col-lg-2 col-6 order-0 order-lg-0 h5">
+                            <span class="badge rounded-pill bg-secondary-subtle text-secondary">Order <span class="text-dark" th:text="'#'+${order.id}"></span></span>
+                        </div>
+                        <div class="col-lg-4 order-2 order-lg-2" th:text="'Order placed: ' + ${#temporals.format(order.dateCreated, 'dd MMM yyyy')}"></div>
+                        <div class="col-lg-2 order-3 order-lg-3">
+                            <span>Deliver to </span><span class="text-capitalize" th:text="${order.user.name}"></span>
+                        </div>
+                        <div class="col-lg-4 col-6 order-1 order-lg-3 text-end h5">
+                            <span th:text="${order.status}" th:classappend="
+                                                            ${#strings.equals(order.status, 'DELIVERED')}    ? 'badge rounded-pill bg-success-subtle text-success' 
+                                                            : (${#strings.equals(order.status, 'CANCELLED')}    ? 'badge rounded-pill bg-danger-subtle text-danger' 
+                                                            : (${#strings.equals(order.status, 'ORDERED')}      ? 'badge rounded-pill bg-info-subtle text-info'))">
+                            </span>
+                        </div>
                     </div>
+                    <hr class="mb-0 text-secondary">
                 </div>
+
                 <div class="row" th:each="orderProduct : ${order.orderProducts}">
                     
                     <div class="col-4 col-lg-4 mt-lg-1 mt-4">
@@ -56,48 +82,31 @@
                             
                         </div>
 
-                        <div class="row card-body mb-3">
+                        <div class="row card-body">
                             <div class="col-md-4"><span><a th:href="@{/product/{id}(id=${orderProduct.product.id})}" class="btn btn-primary w-100 my-1 my-md-0">Buy it again</a></span></div>
                             <div class="col-md-4"><span><a th:href="@{/product/{id}/review (id=${{orderProduct.product.id}})}" class="btn btn-outline-primary me-2 w-100 my-1 my-md-0">Write review</a></span></div>
                         </div>
                     </div>
 
                 </div>
+                <!-- End order product loop -->
 
-                <div class="card-footer">
-                    <div class="col-md-4"><span><a class="btn btn-outline-danger w-100 my-1 my-md-0"><i class="bi bi-x-lg"></i> Cancel order</a></span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div class="card mb-3 product-card">
-            <div class="row">
-                <div class="col-sm-4">
-                    
-                    <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark">
-                        <img
-                                src="https://www.turbokits.com/media/catalog/product/cache/3b2aefc2b48a174ba8be0a677a9948b5/h/p/hpt-f3-6870-ball-bearing-turbo.jpg"
-                                alt=""
-                                class="img-fluid rounded m-3"
-                        />
-                    </a>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card-body mt-4">
-                        <h5 class="card-title">Name: Turbo</h5>
-                        <p class="card-text">Order ID: 1</p>
-                        <p class="card-text">Date created: 14/03/2023</p>
-                        <p class="card-text">Total Price: £999</p>
-                        <p class="card-text">Status: Ordered</p>
+                <div class="card-footer bg-white border-0 mb-2">
+                    <div class="row align-items-center">
+                        <div class="col-7">
+                            <div th:if="${#strings.equals(order.status, 'ORDERED')}">
+                                <a class="btn btn-outline-danger border-0 my-1 my-md-0 text-uppercase" th:href="@{/orders/{id}/cancel (id=${order.id})}"><i class="bi bi-x-lg"></i> Cancel order</a>
+                            </div>
+                        </div>
+                        <div class="col-5 text-end h5">
+                            <span>Subtotal</span> <span th:text="'£' +${order.totalPrice}"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4 row p-5 g-2">
-                    <button type="button" class="btn btn-dark btn-sm rounded-pill mt-3 mb-1">Write review</button>
-                    <br>
-                    <button type="button" class="btn  btn-sm btn-dark rounded-pill mb-3">Buy it again</button>
-                </div>
+
             </div>
-        </div> -->
+        </div>
+        <!-- End order loop -->
     </div>
 </div>
 </body>

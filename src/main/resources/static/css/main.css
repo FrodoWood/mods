@@ -58,13 +58,13 @@ body {
     /* margin:auto; */
 }
 .product-card:hover {
-    box-shadow: 0 1.5rem 2.5rem rgba(22,28,45,.1),0 .3rem 0.5rem -.50rem rgba(22,28,45,.05);
+    box-shadow: 0 1rem 2.5rem rgba(22,28,45,.1),0 .3rem 0.5rem -.50rem rgba(22,28,45,.05);
     transition-duration: 0.2s;
     transform: translate3d(0px, -4px, -100px);
     transition-timing-function: cubic-bezier(0.09, 0.56, 0.5, 0.96);
 }
 .product-card-admin:hover {
-    box-shadow: 0 1.5rem 2.5rem rgba(22,28,45,.1),0 .3rem 0.5rem -.50rem rgba(22,28,45,.05);
+    box-shadow: 0 1rem 2.5rem rgba(22,28,45,.1),0 .3rem 0.5rem -.50rem rgba(22,28,45,.05);
     transition-duration: 0.2s;
     transform: translate3d(0px, -4px, -100px);
     transition-timing-function: cubic-bezier(0.09, 0.56, 0.5, 0.96);
@@ -78,7 +78,7 @@ body {
 
 .card{
     border: 0px;
-    box-shadow: 0px 4px 30px -20px #d7d7d7;
+    box-shadow: 0px 0px 30px -15px #d7d7d7;
     transition-duration: 0.2s;
 }
 
