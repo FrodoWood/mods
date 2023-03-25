@@ -12,101 +12,69 @@
 <div layout:fragment="content">
     <div class="d-flex flex-column container align-items-center mb-0">
         <h2 class="text-center my-5">Your Orders</h2>
-      <!--  <div class="card bg-light m-3 shadow table-responsive">
-            <h3 class="card-header mb-3 text-center">Your Orders</h3>
-            <table class="m-3 table-responsive-sm">
-                <tr>
-                    <th>Image</th>
-                    <th>Order ID</th>
-                    <th>Date created</th>
-                    <th>Qty</th>
-                    <th>Total price</th>
-                    <th>Status</th>
-                </tr>
-                <tr class="border-top" th:each="order : ${orders}">
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
-                                    alt=""
-                                    style="width: 120px; height: 100px"
-                                    class="img-fluid rounded m-3"
-                            />
-                            <div class="ms-3">
-                                <p class="text-muted mb-0">Item Title</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td th:text="${order.id}"></td>
-                    <td th:text="${order.dateCreated}"></td>
-                    <td th:text="${order.id}"></td> &lt;!&ndash;change this to qty&ndash;&gt;
-                    <td th:text="${order.totalPrice}"></td>
-                    <td th:text="${order.status}"></td>
-                    <td>
-                        <button type="button" class="btn btn-dark btn-sm mt-3 mb-1">Write review</button>
-                        <br>
-                        <button type="button" class="btn  btn-sm btn-dark mb-3">Buy it again</button>
-                    </td>
-                </tr>
-                <tr class="border-top" th:each="order : ${orders}">
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
-                                    alt=""
-                                    style="width: 120px; height: 100px"
-                                    class="img-fluid rounded m-3"
-                            />
-                            <div class="ms-3">
-                                <p class="text-muted mb-0">Item Title</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td th:text="${order.id}"></td>
-                    <td th:text="${order.dateCreated}"></td>
-                    <td th:text="${order.id}"></td> &lt;!&ndash;change this to qty&ndash;&gt;
-                    <td th:text="${order.totalPrice}"></td>
-                    <td th:text="${order.status}"></td>
-                    <td>
-                        <button type="button" class="btn btn-dark btn-sm mt-3 mb-1">Write review</button>
-                        <br>
-                        <button type="button" class="btn  btn-sm btn-dark mb-3">Buy it again</button>
-                    </td>
-                </tr>
-            </table>
-        </div>-->
 
-        <div class="card mb-3 product-card">
-            <div class="row">
-                <div class="col-sm-4">
-                    <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark"> <!--when user clicks the image it should redirect them to the product-->
-                    <img
-                            src="https://www.turbokits.com/media/catalog/product/cache/3b2aefc2b48a174ba8be0a677a9948b5/h/p/hpt-f3-6870-ball-bearing-turbo.jpg"
-                            alt=""
-                            class="img-fluid rounded m-3"
-                    />
-                    </a>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card-body mt-4">
-                        <h5 class="card-title">Name: Turbo</h5>
-                        <p class="card-text">Order ID: 1</p>
-                        <p class="card-text">Date created: 14/03/2023</p>
-                        <p class="card-text">Total Price: £999</p>
-                        <p class="card-text">Status: Ordered</p>
+        <div th:each="order : ${orders}">
+            <div class="card product-card mb-5 mt-2">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg-2" th:text="${order.id}"></div>
+                        <div class="col-lg-4" th:text="${order.dateCreated}"></div>
+                        <div class="col-lg-2" th:text="${order.user.name}"></div>
+                        <div class="col-lg-2" th:text="${order.totalPrice}"></div>
+                        <div class="col-lg-2" th:text="${order.status}"></div>
                     </div>
                 </div>
-                <div class="col-sm-4 row p-5 g-2">
-                    <button type="button" class="btn btn-dark btn-sm rounded-pill mt-3 mb-1">Write review</button>
-                    <br>
-                    <button type="button" class="btn  btn-sm btn-dark rounded-pill mb-3">Buy it again</button>
+                <div class="row" th:each="orderProduct : ${order.orderProducts}">
+                    
+                    <div class="col-4 col-lg-4 mt-lg-1 mt-4">
+                        <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark"> <!--when user clicks the image it should redirect them to the product-->
+                            <img th:src="${orderProduct.product.image}" alt="" class="img-thumbnail border-0 w-auto"/>
+                        </a>
+                    </div>
+
+                    <div class="col-8 col-lg-8">
+                        <div class="row mt-4 card-body">
+                            <div class="col-lg-8">
+                                <h5 class="card-title" th:text="${orderProduct.product.name}">Name: Turbo</h5>
+                                <div class="mt-3">
+                                    <span class="card-text text-secondary pe-3 border-end" th:text="${orderProduct.product.make}"></span>
+                                    <span class="card-text text-secondary pe-3 border-end ps-3" th:text="${orderProduct.product.model}"></span>
+                                    <span class="card-text text-secondary ps-3" th:text="${orderProduct.product.category}"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-6">
+                                        <span class="h5" th:text="'£' + ${orderProduct.product.price}"></span>
+                                    </div>
+                                    <div class="col-lg-12 col-6">
+                                        <span class="text-secondary">Quantity: <span th:text="${orderProduct.quantity}"></span> </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row card-body mb-3">
+                            <div class="col-md-4"><span><a th:href="@{/product/{id}(id=${orderProduct.product.id})}" class="btn btn-primary w-100 my-1 my-md-0">Buy it again</a></span></div>
+                            <div class="col-md-4"><span><a th:href="@{/product/{id}/review (id=${{orderProduct.product.id}})}" class="btn btn-outline-primary me-2 w-100 my-1 my-md-0">Write review</a></span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <div class="col-md-4"><span><a class="btn btn-outline-danger w-100 my-1 my-md-0"><i class="bi bi-x-lg"></i> Cancel order</a></span></div>
                 </div>
             </div>
         </div>
-        <div class="card mb-3 product-card">
+
+        <!-- <div class="card mb-3 product-card">
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark"> <!--when user clicks the image it should redirect them to the product-->
+                    
+                    <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark">
                         <img
                                 src="https://www.turbokits.com/media/catalog/product/cache/3b2aefc2b48a174ba8be0a677a9948b5/h/p/hpt-f3-6870-ball-bearing-turbo.jpg"
                                 alt=""
@@ -129,7 +97,7 @@
                     <button type="button" class="btn  btn-sm btn-dark rounded-pill mb-3">Buy it again</button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 </body>
