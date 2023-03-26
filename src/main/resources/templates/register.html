@@ -11,7 +11,7 @@
 <body>
     <div layout:fragment="content">
         <!-- The registration form -->
-        <form method="post" action="#" th:action="@{/registerUser}" th:object="${userDTO}">
+        <!-- <form method="post" action="#" th:action="@{/registerUser}" th:object="${userDTO}">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Enter your name" th:field="*{name}">
 
@@ -33,7 +33,109 @@
                   <li th:text="${data.getDefaultMessage()}"></li>
                 </ul>
             </div>
-        </form>
+        </form> -->
+
+        <div class="container d-flex justify-content-center">
+            <div class="card p-3 rounded-3 login my-5">
+                <div class="card-body">
+                    <div class="h3 my-4"><b>Register</b></div>
+                    <form class="needs-validation" method="post" action="#" th:action="@{/registerUser}" th:object="${userDTO}">
+                        <div class="form-group pb-4">
+                            <label class="form-label" for="name">Name</label>
+                            <input class="form-control validate" type="text" id="name" name="name" th:field="*{name}">
+                            <div id="nameFeedback" class="invalid-feedback">
+                                Please enter your name.
+                            </div>
+                        </div>
+                        <div class="form-group pb-4">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control validate" type="text" id="username" name="username" th:field="*{username}" th:classappend="${usernameTakenError}? 'is-invalid' : '' ">
+                            <div class="text-danger" id="usernameTakenError" th:text="${usernameTakenError}"></div>
+                            <div id="usernameFeedback" class="invalid-feedback">
+                                Please enter a username.
+                            </div>
+                        </div>
+                        <div class="form-group pb-4">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control validate" type="email" id="email" name="email" th:field="*{email}" th:classappend="${emailTakenError}? 'is-invalid' : '' ">
+                            <div class="text-danger" id="emailTakenError" th:text="${emailTakenError}"></div>
+                            <div id="emailFeedback" class="invalid-feedback">
+                                Please enter a valid email.
+                            </div>
+                        </div>
+                        <div class="form-group pb-4">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control validate" type="password" id="password" name="password" th:field="*{password}" th:classappend="${param.error}? 'is-invalid' : '' ">
+                            <div id="passwordFeedback" class="invalid-feedback">
+                                Please enter a strong password.
+                            </div>
+                        </div>
+                        <div class="form-group pb-4">
+                            <label class="form-label" for="repeatPassword">Confirm password</label>
+                            <input class="form-control validate" type="password" id="repeatPassword" name="repeatPassword">
+                            <div id="passwordFeedback" class="invalid-feedback">
+                                Passwords do not match.
+                            </div>
+                        </div>
+                        
+                        <input class="btn btn-success w-100" id="submit" type="submit" value="REGISTER">
+
+                    </form>
+
+                    <div th:if="${failedMessage}">
+                        <div class="alert alert-danger text-center mt-3 mb-0" th:utext="${failedMessage}"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout:fragment="scripts">
+        <script>
+            // add an event listener for each input with class validate
+            document.querySelectorAll('.validate').forEach(input => {
+                input.addEventListener('blur', function () {
+                    if (this.value.trim() === '') {
+                        // add is-invalid class when input is empty
+                        this.classList.add('is-invalid');
+                    } else {
+                        // remove is-invalid class when input is not empty
+                        this.classList.remove('is-invalid');
+                    }
+                });
+            });
+
+            // Check if confirmation password matches the password, and disable form submission if it doesn't.
+            let passwordInput = document.getElementById('password');
+            let repeatPasswordInput = document.getElementById('repeatPassword');
+            let submitButton = document.getElementById('submit');
+
+            repeatPasswordInput.addEventListener('blur', function () {
+            
+            if (this.value !== passwordInput.value) {
+                this.classList.add('is-invalid');
+                submitButton.disabled = true;
+            } else {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+                submitButton.disabled = false;
+            }
+            });
+
+            // Hide username taken error once the user starts typing
+            let usernameTakenError = document.getElementById('usernameTakenError');
+            document.getElementById('username').addEventListener('input', function () {
+                this.classList.remove('is-invalid');
+                usernameTakenError.style.display = 'none';
+            });
+            // Hide email taken error once the user starts typing
+            let emailTakenError = document.getElementById('emailTakenError');
+            document.getElementById('email').addEventListener('input', function () {
+                this.classList.remove('is-invalid');
+                emailTakenError.style.display = 'none';
+            });
+        </script>
     </div>
 </body>
 

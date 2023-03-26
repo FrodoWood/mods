@@ -40,7 +40,7 @@ public class AuthController {
     public String registerUser(@Valid UserDTO userDTO, BindingResult bindingResult, Model model) {
         
         if (bindingResult.hasErrors()) {
-            model.addAttribute("successMessage", "User registration failed!");
+            model.addAttribute("failedMessage", "User registration failed!");
             model.addAttribute("bindingResult", bindingResult);
             return "/register";
         }
@@ -49,11 +49,11 @@ public class AuthController {
         Optional<User> existingEmail = userRepository.findByEmail(userDTO.getEmail());
 
         if(existingUsername.isPresent()){
-            model.addAttribute("successMessage", "Username already taken");
+            model.addAttribute("usernameTakenError", "Username already taken");
             return "/register";
         }
         if(existingEmail.isPresent()){
-            model.addAttribute("successMessage", "Email already in use");
+            model.addAttribute("emailTakenError", "Email already in use");
             return "/register";
         }
 
