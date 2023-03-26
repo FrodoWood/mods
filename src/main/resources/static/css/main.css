@@ -205,4 +205,8 @@ body {
     width: 100%;
     object-fit: cover;
     object-position: 0 50%;
-}
+  } 
+
+  .logo{
+    height: 1.6rem;
+  }
