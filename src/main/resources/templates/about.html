@@ -12,7 +12,8 @@
       <div class="container d-flex flex-column justify-content-center pb-5">
 
         <div class="container mb-3">
-          <img class="banner-img" th:src="@{/images/img3.jpg}" alt="" />
+          <!-- <img class="banner-img" th:src="@{/images/img3.jpg}" alt="" /> -->
+          <video autoplay loop muted class="banner-img" src="/images/car-drift-trim.mp4"></video>
         </div>
         
         
@@ -27,7 +28,7 @@
                 </p>
             </div>
 
-            <div class="container w-75">
+            <div class="container w-75 mb-3">
                 <div class="h3 text-center mt-5 mb-3">Mission</div>
                 <p>
                   Our mission at Auto Mods is to become the go-to destination for car
@@ -39,44 +40,54 @@
                 </p>
             </div>
 
-            <div class="container w-75">
-                <div class="h3 text-center mt-5 mb-3">Our Great Prices</div>
-                <p>
-                  At Auto Mods, we believe that everyone should have access to
-                  high-quality car parts at affordable prices. We understand that
-                  modifying a car can be an expensive hobby, and that's why we strive to
-                  offer our customers the best prices possible. Our prices are
-                  competitive, and we always ensure that our customers get value for
-                  their money.
-                </p>
+            <div class="row my-2">
+                <div class="col-md-4 order-md-1">
+                    <div class="h3 text-center mt-3 mb-3">Our Great Prices</div>
+                    <p>
+                      At Auto Mods, we believe that everyone should have access to
+                      high-quality car parts at affordable prices. We understand that
+                      modifying a car can be an expensive hobby, and that's why we strive to
+                      offer our customers the best prices possible. Our prices are
+                      competitive, and we always ensure that our customers get value for
+                      their money.
+                    </p>
+                </div>
+                <div class="col-md-8 order-md-0 my-3">
+                    <img class="banner-img" th:src="@{/images/save-money.jpg}" alt="" />
+                </div>
+            </div>
+                
+            <div class="row my-2">
+                <div class="col-md-4">
+                    <p class="h3 text-center mt-3 mb-3">Customer Support</p>
+                    <p>
+                        At Auto Mods, we believe that exceptional customer service is
+                        essential for the success of our business. Our team is dedicated to
+                        providing our customers with personalized support and guidance, and we
+                        are always available to answer any questions or concerns that our
+                        customers may have. We understand that our customers rely on us for
+                        high-performance car parts, and we are committed to delivering the
+                        best possible service to meet their needs.
+                    </p>
+                </div>
+                
+                <div class="col-md-8 my-3">
+                    <img class="banner-img" th:src="@{/images/customer-service.jpg}" alt="" />
+                </div>
             </div>
 
             <div class="container w-75">
                 <div class="h3 text-center mt-5 mb-3">Quality Assurance</div>
                 <p>
-                  We are committed to delivering high-quality products that meet the
-                  highest standards of performance and reliability. All of our products
-                  are carefully selected from trusted manufacturers and suppliers, and
-                  we only offer products that we have tested and verified ourselves. We
-                  understand that our customers rely on us for high-performance car
-                  parts, and that's why we have strict quality assurance procedures in
-                  place to ensure that our products meet our customers' expectations.
+                    We are committed to delivering high-quality products that meet the
+                    highest standards of performance and reliability. All of our products
+                    are carefully selected from trusted manufacturers and suppliers, and
+                    we only offer products that we have tested and verified ourselves. We
+                    understand that our customers rely on us for high-performance car
+                    parts, and that's why we have strict quality assurance procedures in
+                    place to ensure that our products meet our customers' expectations.
                 </p>
             </div>
-
-            <div class="container w-75">
-                <div class="h3 text-center mt-5 mb-3">Customer Support</div>
-                <p>
-                  At Auto Mods, we believe that exceptional customer service is
-                  essential for the success of our business. Our team is dedicated to
-                  providing our customers with personalized support and guidance, and we
-                  are always available to answer any questions or concerns that our
-                  customers may have. We understand that our customers rely on us for
-                  high-performance car parts, and we are committed to delivering the
-                  best possible service to meet their needs.
-                </p>
-            </div>
-
       </div>
     </div>
   </body>
