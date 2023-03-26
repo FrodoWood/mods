@@ -198,3 +198,10 @@ body {
   .user-role-col{
     min-width: 180px;
   }
+
+  .banner-img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    object-position: 0 50%;
+}

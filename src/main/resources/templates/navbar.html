@@ -31,16 +31,16 @@
                       Car Parts
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" th:href="@{/store/Coilovers}">Coilovers</a></li>
-                      <li><a class="dropdown-item" th:href="@{/store/Turbo}">Turbo Kits</a></li>
-                      <li><a class="dropdown-item" th:href="@{/store/Brakes}">Big Brake Kits</a></li>
-                      <li><a class="dropdown-item" th:href="@{/store/Oils}">Engine Oils</a></li>
-                      <li><a class="dropdown-item" th:href="@{/store/Batteries}">Batteries</a></li>
+                      <li><a class="dropdown-item" th:href="@{/store/category/{category}(category= 'Coilovers')}">Coilovers</a></li>
+                      <li><a class="dropdown-item" th:href="@{/store/category/{category}(category= 'Turbo')}">Turbo Kits</a></li>
+                      <li><a class="dropdown-item" th:href="@{/store/category/{category}(category= 'Brakes')}">Big Brake Kits</a></li>
+                      <li><a class="dropdown-item" th:href="@{/store/category/{category}(category= 'Oils')}">Engine Oils</a></li>
+                      <li><a class="dropdown-item" th:href="@{/store/category/{category}(category= 'Batteries')}">Batteries</a></li>
                     </ul>
                   </li>
         
-                  <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                  <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
                 </ul>
         
         
