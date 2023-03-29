@@ -58,6 +58,10 @@ body {
     max-width: 50rem;
     /* margin:auto; */
 }
+
+.store-container-width{
+  width: 50rem;
+}
 .product-card:hover {
     box-shadow: 0 1rem 2.5rem rgba(22,28,45,.1),0 .3rem 0.5rem -.50rem rgba(22,28,45,.05);
     transition-duration: 0.2s;

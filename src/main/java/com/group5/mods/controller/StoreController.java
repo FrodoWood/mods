@@ -37,6 +37,9 @@ public class StoreController extends BaseController {
         List<Product> temp = productRepository.findByMakeAndModel(make, carmodel);
         // List<Product> temp = productRepository.findAll();
         model.addAttribute("products", temp);
+        model.addAttribute("make", make);
+        model.addAttribute("model", carmodel);
+        model.addAttribute("filter", "filter");
         return "store";
     }
 
@@ -57,6 +60,7 @@ public class StoreController extends BaseController {
         model.addAttribute("products", allProducts);
         model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("sort", sort);
+        model.addAttribute("filter", "filter");
         return "store";
     }
 
@@ -65,18 +69,25 @@ public class StoreController extends BaseController {
         List<Product> allProducts = productRepository.findAll();
         List<Product> result = new ArrayList<Product>();
         for (Product product : allProducts) {
-            if (product.getName().toLowerCase().contains(search.toLowerCase())) {
+            if (product.getName().toLowerCase().contains(search.toLowerCase()) ||
+                product.getMake().toLowerCase().contains(search.toLowerCase()) ||
+                product.getModel().toLowerCase().contains(search.toLowerCase()) ||
+                product.getCategory().toLowerCase().contains(search.toLowerCase())
+                ) {
                 result.add(product);
             }
         }
+        String size = Integer.toString(result.size());
+
+        model.addAttribute("search", search);
+        model.addAttribute("size", size);
+
         if (result.isEmpty()) {
             String error = "No items for that search";
             model.addAttribute("error", error);
             return "store";
         } else {
-            String size = Integer.toString(result.size());
             model.addAttribute("products", result);
-            model.addAttribute("size", size);
             return "store";
         }
     }
@@ -86,6 +97,8 @@ public class StoreController extends BaseController {
         Optional<List<Product>> categoryProducts = productRepository.findAllByCategory(category);
         // List<Product> allProducts = productRepository.findAll();
         model.addAttribute("products", categoryProducts.get());
+        model.addAttribute("category", category);
+        model.addAttribute("filter", "filter");
         return "store";
     }
 }

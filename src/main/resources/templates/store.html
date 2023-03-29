@@ -13,7 +13,7 @@
 
         <!-- Categories -->
         <h5 class="text-center mt-4">Product Categories</h5>
-        <div class=" d-flex flex-wrap justify-content-sm-center">
+        <div class=" d-flex flex-wrap justify-content-center">
             <div class="card categories-card m-md-2 text-center">
                 <a href="#" th:href="@{/store/category/{category}(category= 'Coilovers')}" class="text-decoration-none link-dark">
                   <img src="..." th:src="@{/images/Tein Street Basis Z Coilovers.png}" class="card-img-top categories-img" alt="...">
@@ -57,7 +57,7 @@
         </div>
         <!-- Price filter and sorting -->
         <div class="container d-flex justify-content-center my-5">
-          <div class="card product-card w-100 py-3">
+          <div class="card store-container-width  py-3">
             <div class="card-body d-flex justify-content-between">
           
               <div class="row w-100 align-items-center">
@@ -66,7 +66,7 @@
                   <form method="GET" action="/store/price">
                       <div class="row align-items-center">
                         <div class="col-3"><label class="form-label" for="maxPrice">Max Price</label></div>
-                        <div class="col-4"><input class="w-100" type="range" id="maxPrice" name="maxPrice" min="0" max="2000" th:value="${maxPrice}" step="100" oninput="priceRange.value = this.value"></div>
+                        <div class="col-4"><input class="w-100" type="range" id="maxPrice" name="maxPrice" min="0" max="10000" th:value="${maxPrice}" step="100" oninput="priceRange.value = '£'+ this.value"></div>
                         <div class="col-2">
                           <output id="priceRange"></output>
                         </div>
@@ -75,37 +75,79 @@
                   </form>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-2">
+                  <a class="btn btn-outline-secondary" href="#" th:href="@{/store}">Clear</a>
+                </div>
+
+                <div class="col-lg-4">
                   <div class="form-group row align-items-center">
                     <div class="col-4 text-lg-end"><label class="col-form-label" for="sort">Sort by</label></div>
                     <div class="col-8">
                       <form method="GET" action="/store/price">
-                        <select class="form-select" id="sort" name="sort" onchange="this.form.submit();" required>
-                            <option th:selected="${sort == 'low'}" value="low">Low to High</option>
-                            <option th:selected="${sort == 'high'}" value="high">High to Low</option>
-                        </select>
-                        <input type="hidden" name="maxPrice" th:value="${maxPrice}">
+                        <div class="form-group">
+                          <select class="form-select" id="sort" name="sort" onchange="this.form.submit();" required>
+                              <option value="">Select</option>
+                              <option th:selected="${sort == 'low'}" value="low">Low to High</option>
+                              <option th:selected="${sort == 'high'}" value="high">High to Low</option>
+                          </select>
+                          <input type="hidden" name="maxPrice" th:value="${maxPrice}">
+                        </div>
                       </form>
                     </div>
                   </div>
                 </div>
-                
+
               </div>
           
-              <!-- <a th:href="@{/store/price(maxPrice=${maxPrice},sort='low')}">Low to High Price</a>
-              <a th:href="@{/store/price(maxPrice=${maxPrice},sort='high')}">High to Low Price</a> -->
             </div>
           </div>
         </div>
+
         <!-- Search result   -->
-        <div th:if="${size}">
-          <p th:text="${'Total Results ' + size}"></p>
+        <div class="container d-flex justify-content-center my-2" th:if="${search}">
+          <div class="store-container-width">
+            <!-- <div th:if="${size}">
+              <p th:text="${'Total Results ' + size}"></p>
+            </div> -->
+            <div class="row mb-2 border border-bottom border-0 pb-3">
+              <div class="col-md-8">
+                <span class="h4 text-secondary">Search results for:</span> <span class="h3" th:text="${search}"></span>
+              </div>
+              <div class="col-md-4 text-md-end">
+                <span class="h5" th:text="${size}"></span> <span class="h5" th:text="${size} eq 1? 'product' : 'products'"></span>
+              </div>
+            </div>
+
+            <div class="text-center h3 mt-5" th:if="${error}">
+              <div><span><i class="bi bi-search"></i> Sorry we couldn't find anything for</span> <span>"<span th:text="${search}"></span>"</span></div>
+              <a class="btn btn-success bg-light-green border border-light my-3" th:href="@{/store}">Continue Shopping <i class="bi bi-chevron-right"></i></a>
+            </div>
+
+          </div>
         </div>
 
-        <div class="container justify-content-center card-container card-deck my-5">
-          <div th:if="${error}">
-            <span th:text="${error}"></span>
+        <!-- Make model filter   -->
+        <div class="container d-flex justify-content-center my-2" th:if="${filter}">
+          <div class="store-container-width">
+            <div class="row mb-2 border border-bottom border-0 pb-3">
+              <div class="col-md-8">
+                <span class="h4 text-secondary">Results for:</span>
+                <span class="h3 ms-2" th:if="${make}" th:text="${make}"></span>
+                <span class="h3 ms-2" th:if="${model}" th:text="${model}"></span>
+                <span class="h3 ms-2" th:if="${maxPrice}" th:text="'Max price £' + ${maxPrice}"></span>
+                <span class="h3 ms-2" th:if="${category}" th:text="${category}"></span>
+              </div>
+              <div class="col-md-4 text-md-end">
+                <span class="h5" th:text="${#lists.size(products)}"></span> <span class="h5" th:text="${#lists.size(products)} eq 1? 'product' : 'products'"></span>
+              </div>
+            </div>
+
           </div>
+        </div>
+
+        <!-- Products -->
+        <div class="container justify-content-center card-container card-deck my-5">
+          
             <div th:each="product:${products}">
                 <a href="#" th:href="@{/product/{id}(id=${product.id})}" class="text-decoration-none text-dark">
                     <div class="card mb-3 product-card w-100">
@@ -121,7 +163,7 @@
                               </span>
                               <h5 class="card-title" th:text="${product.name}"></h5>
                               <h4 th:text="'£' + ${product.price}">£79.99</h4>
-                              <p class="card-text" th:text="${product.description}"></p>
+                              <p class="card-text" th:text="${#strings.length(product.description) > 180 ? #strings.substring(product.description, 0, 180) + '...' : product.description}"></p>
                             </div>
                           </div>
                         </div>
@@ -136,7 +178,7 @@
         window.onload = function(){
           let maxPriceInput = document.getElementById('maxPrice');
           let priceRangeOutput = document.getElementById('priceRange');
-          priceRangeOutput.value = maxPriceInput.value;
+          priceRangeOutput.value = '£'+maxPriceInput.value;
         };
       </script>
     </div>

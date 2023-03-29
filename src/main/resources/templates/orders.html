@@ -36,10 +36,10 @@
                             <span class="badge rounded-pill bg-secondary-subtle text-secondary">Order <span class="text-dark" th:text="'#'+${order.id}"></span></span>
                         </div>
                         <div class="col-lg-4 order-2 order-lg-2" th:text="'Order placed: ' + ${#temporals.format(order.dateCreated, 'dd MMM yyyy')}"></div>
-                        <div class="col-lg-2 order-3 order-lg-3">
+                        <div class="col-lg-3 order-3 order-lg-3">
                             <span>Deliver to </span><span class="text-capitalize" th:text="${order.user.name}"></span>
                         </div>
-                        <div class="col-lg-4 col-6 order-1 order-lg-3 text-end h5">
+                        <div class="col-lg-3 col-6 order-1 order-lg-3 text-end h5">
                             <span th:text="${order.status}" th:classappend="
                                                             ${#strings.equals(order.status, 'DELIVERED')}    ? 'badge rounded-pill bg-success-subtle text-success' 
                                                             : (${#strings.equals(order.status, 'CANCELLED')}    ? 'badge rounded-pill bg-danger-subtle text-danger' 
@@ -53,7 +53,7 @@
                 <div class="row" th:each="orderProduct : ${order.orderProducts}">
                     
                     <div class="col-4 col-lg-4 mt-lg-1 mt-4">
-                        <a href="#" th:href="@{/product/2}" class="text-decoration-none link-dark"> <!--when user clicks the image it should redirect them to the product-->
+                        <a href="#" th:href="@{/product/{id}(id=${orderProduct.product.id})}" class="text-decoration-none link-dark"> <!--when user clicks the image it should redirect them to the product-->
                             <img th:src="${orderProduct.product.image}" alt="" class="img-thumbnail border-0 w-auto"/>
                         </a>
                     </div>
@@ -74,7 +74,7 @@
                                     <div class="col-lg-12 col-6">
                                         <span class="h5" th:text="'£' + ${orderProduct.product.price}"></span>
                                     </div>
-                                    <div class="col-lg-12 col-6">
+                                    <div class="col-lg-12 col-6 text-end">
                                         <span class="text-secondary">Quantity: <span th:text="${orderProduct.quantity}"></span> </span>
                                     </div>
                                 </div>

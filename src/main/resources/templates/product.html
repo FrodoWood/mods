@@ -67,16 +67,16 @@
 
                 <!-- Check if stock is equal to 0 -->
                 <div th:if="${{product.stock}} eq 0">
-                    <p><b>Availability: </b> <span class="text-danger">Out of stock</span></p>
+                    <p><b>Availability: <span class="text-danger h5">Out of stock</span></b></p>
                 </div>
                 <!-- Check if stcok is less than 5 -->
                 <div th:if="${{product.stock}} gt 0 and ${{product.stock}} lt 5">
-                    <p><b>Availability: </b> <span class="text-success">In stock, only <span
-                            th:text="${{product.stock}}"></span> left</span></p>
+                    <p><b>Availability: <span class="text-success h5">In stock, only <span
+                            th:text="${{product.stock}}"></span> left</span></b></p>
                 </div>
                 <!-- Check if stock is greater than 5 -->
                 <div th:if="${{product.stock}} ge 5">
-                    <p><b>Availability: </b> <span class="text-success">In stock</span></p>
+                    <p><b>Availability: <span class="text-success h5">In stock</span></b></p>
                 </div>
 
                 <p><b>Make: </b> <span th:text="${{product.make}}"></span></p>
@@ -123,9 +123,15 @@
                              aria-labelledby="nav-description-tab">
                             <p th:text="${{product.description}}"></p>
                         </div>
-                        <div class="tab-pane fade p-3" id="nav-delivery" role="tabpanel"
-                             aria-labelledby="nav-delivery-tab">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi, cupiditate nam aperiam.</p>
+                        <div class="tab-pane fade p-3" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
+                            <h4>Delivery Information</h4>
+                            <p>At Auto Mods, we understand that getting your aftermarket performance car parts quickly and safely is important to you. That's why we offer a variety of delivery options to meet your needs.</p>
+                            <h5>Delivery Options and Prices</h5>
+                            <p>We offer a range of delivery options to fit your budget and time constraints. Our standard delivery service typically takes <b>3-5 business days</b> and is priced based on the weight of your order. If you need your parts sooner, we also offer expedited shipping options for an additional fee. Please note that delivery times may vary based on your location.</p>
+                            <h5>International Delivery</h5>
+                            <p>We offer international delivery to many countries. Please note that international shipping rates and delivery times may vary based on your location and the size and weight of your order. You may also be responsible for any customs or import duties that may be charged by your country. Please contact our customer service team for more information about international delivery options.</p>
+                            <h5>Returns</h5>
+                            <p>If you need to return any parts, please contact our customer service team within 30 days of receiving your order. We will be happy to assist you with the return process and issue a refund or exchange for your purchase.</p>
                         </div>
                     </div>
                 </div>
