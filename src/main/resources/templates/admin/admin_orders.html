@@ -56,38 +56,48 @@
               
             
             <!-- Orders -->
-            <table class="table">
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date created</th>
-                    <th>Total price</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                <tr th:each="order : ${orders}">
-                    <form action="#" method="post" th:action="@{/admin/orders/updateStatus}">
-                        <input type="hidden" th:name="orderId" th:value="${order.id}">
-                        <td th:text="${order.id}"></td>
-                        <td th:text="${order.dateCreated}"></td>
-                        <td th:text="'£' + ${order.totalPrice}"></td>
-                        <td>
-                            <select th:name="orderStatus" class="form-select" 
-                                    th:classappend="
-                                       ${#strings.equals(order.status, 'DELIVERED')}    ? 'border-success bg-success-subtle text-success' 
-                                    : (${#strings.equals(order.status, 'CANCELLED')}    ? 'border-danger bg-danger-subtle text-danger' 
-                                    : (${#strings.equals(order.status, 'ORDERED')}      ? 'border-info bg-info-subtle text-info'))">
-                                <option th:each="status : ${orderStatusEnum}" 
-                                        th:value="${status}" 
-                                        th:text="${status}"
-                                        th:selected="${status == order.status}"></option>
-                            </select>
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-outline-dark">Update</button>
-                        </td>
-                    </form>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Date created</th>
+                        <th>Products</th>
+                        <th>Total price</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="order : ${orders}">
+                        <form action="#" method="post" th:action="@{/admin/orders/updateStatus}">
+                            <input type="hidden" th:name="orderId" th:value="${order.id}">
+                            <td th:text="${order.id}"></td>
+                            <td class="text-capitalize" th:text="${order.user.name}"></td>
+                            <td th:text="${order.dateCreated}"></td>
+                            <td>
+                                <div th:each="orderProduct : ${order.orderProducts}">
+                                    <p th:text="${orderProduct.product.name}"></p>
+                                </div>
+                            </td>
+                            <td th:text="'£' + ${order.totalPrice}"></td>
+                            <td>
+                                <select th:name="orderStatus" class="form-select"
+                                        th:classappend="
+                                           ${#strings.equals(order.status, 'DELIVERED')}    ? 'border-success bg-success-subtle text-success'
+                                        : (${#strings.equals(order.status, 'CANCELLED')}    ? 'border-danger bg-danger-subtle text-danger'
+                                        : (${#strings.equals(order.status, 'ORDERED')}      ? 'border-info bg-info-subtle text-info'))">
+                                    <option th:each="status : ${orderStatusEnum}"
+                                            th:value="${status}"
+                                            th:text="${status}"
+                                            th:selected="${status == order.status}"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-outline-dark">Update</button>
+                            </td>
+                        </form>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>
