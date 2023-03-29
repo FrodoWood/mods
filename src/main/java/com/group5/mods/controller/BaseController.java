@@ -35,4 +35,23 @@ public class BaseController {
         }
         return null;
     }
+
+    @ModelAttribute("loggedUser")
+    public String loggedUser(Authentication authentication){
+        if (authentication != null && authentication.isAuthenticated()) {
+            SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+            User user = securityUser.getUser();
+            return user.getName();
+        }
+        return null;
+    }
+    @ModelAttribute("userRole")
+    public String userRole(Authentication authentication){
+        if (authentication != null && authentication.isAuthenticated()) {
+            SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+            User user = securityUser.getUser();
+            return user.getRoles();
+        }
+        return null;
+    }
 }

@@ -54,9 +54,10 @@
                 <!-- User Links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center flex-wrap">
                     <li class="nav-item"><a class="nav-link" href="#" th:href="@{/orders}">Orders</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" th:href="@{/login}"><i class="bi bi-person-fill"></i>Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" th:href="@{/register}">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" th:href="@{/logout}">Logout</a></li>
+                    <li class="nav-item" th:if="${loggedUser eq null}"><a class="nav-link" href="#" th:href="@{/login}"><i class="bi bi-person-fill"></i>Login</a></li>
+                    <li class="nav-item" th:if="${loggedUser}"><span class="nav-link text-capitalize" th:text="${loggedUser}"></span></li>
+                    <li class="nav-item" th:if="${loggedUser eq null}"><a class="nav-link" href="#" th:href="@{/register}">Register</a></li>
+                    <li class="nav-item" th:if="${loggedUser}"><a class="nav-link" href="#" th:href="@{/logout}">Logout</a></li>
                     <li class="nav-item">
                         <span>
                             <a class="nav-link" href="#" th:href="@{/basket}">
@@ -65,7 +66,7 @@
                             </a>
                         </span>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin}">Admin</a></li>
+                    <li class="nav-item" th:if="${#strings.equals(userRole, 'ROLE_ADMIN')}"><a class="nav-link" href="#" th:href="@{/admin}">Admin</a></li>
                 </ul>
 
               </div>
