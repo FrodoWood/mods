@@ -56,4 +56,6 @@ public class Review {
     public boolean getHidden(){
         return this.hidden;
     }
+    public Review(String string, boolean b, Product product2) {
+    }
 }
