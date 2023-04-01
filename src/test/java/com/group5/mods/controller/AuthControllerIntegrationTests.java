@@ -8,12 +8,18 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 
 import java.util.Optional;
 
@@ -35,7 +41,7 @@ import com.group5.mods.repository.UserRepository;
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = { SecurityConfig.class, ModsApplication.class })
-public class AuthControllerIntegrationTest {
+public class AuthControllerIntegrationTests {
 
     @Autowired
     private UserRepository userRepository;
@@ -62,4 +68,47 @@ public class AuthControllerIntegrationTest {
         assertEquals(userDTO.getEmail(), user.get().getEmail());
         assertEquals(userDTO.getRoles(), user.get().getRoles());
     }
+
+    @Test
+    public void testRegisterEmailTakenFailure() throws Exception {
+        // Create a test user with email existinguser@gmail.com
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        User existingUser = new User("TestName", "TestUsername", "existinguser@example.com", passwordEncoder.encode("testPassword"), "USER_ROLE");
+        userRepository.save(existingUser);
+
+        // attempt to register with same email
+        UserDTO userDTO = new UserDTO("New User", "newUsername", "existinguser@example.com", "password", "ROLE_USER");
+
+        mockMvc.perform(post("/registerUser")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .flashAttr("userDTO", userDTO)
+                .with(csrf())
+                .session(new MockHttpSession())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/register"))
+                .andExpect(model().attributeExists("emailTakenError"));
+    }
+
+    @Test
+    public void testRegisterUsernameTakenFailure() throws Exception {
+        // Create a test user with username existingUsername
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        User existingUser = new User("TestName", "existingUsername", "TestEmail", passwordEncoder.encode("testPassword"), "USER_ROLE");
+        userRepository.save(existingUser);
+
+        // attempt to register with same email
+        UserDTO userDTO = new UserDTO("New User", "existingUsername", "newEmail@gmail.com", "password", "ROLE_USER");
+
+        mockMvc.perform(post("/registerUser")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .flashAttr("userDTO", userDTO)
+                .with(csrf())
+                .session(new MockHttpSession())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/register"))
+                .andExpect(model().attributeExists("usernameTakenError"));
+    }
+
 }

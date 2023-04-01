@@ -27,7 +27,7 @@ import com.group5.mods.repository.UserRepository;
     "spring.jpa.hibernate.ddl-auto=create",
 })
 @ActiveProfiles("test")
-public class ProductControllerIntegrationTest {
+public class ProductControllerIntegrationTests {
     
     @Autowired
     private TestRestTemplate restTemplate;
