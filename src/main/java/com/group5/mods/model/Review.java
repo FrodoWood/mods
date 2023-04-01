@@ -56,6 +56,7 @@ public class Review {
     public boolean getHidden(){
         return this.hidden;
     }
-    public Review(String string, boolean b, Product product2) {
+    public float getRating(){
+        return this.rating;
     }
 }
