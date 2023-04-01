@@ -17,19 +17,6 @@ import com.group5.mods.service.UserService;
 @EnableWebSecurity
 public class SecurityConfig {
 
-        // @Bean
-        // public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        // UserDetails admin = User.withUsername("admin")
-        // .password(encoder.encode("pass"))
-        // .roles("ADMIN")
-        // .build();
-        // UserDetails user = User.withUsername("user")
-        // .password(encoder.encode("pass"))
-        // .roles("USER")
-        // .build();
-        // return new InMemoryUserDetailsManager(admin, user);
-        // }
-
         @Autowired
         private UserService userService;
 
@@ -39,7 +26,7 @@ public class SecurityConfig {
                                 .authorizeHttpRequests((requests) -> requests
                                                 .requestMatchers("/","/about/**", "/contact/**", "/store/**", "/product/**", "/js/**", "/css/**", "/images/**").permitAll()
                                                 .requestMatchers("/register", "/registerUser").permitAll()
-                                                .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                                                .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                                                 .requestMatchers("/user").hasAuthority("ROLE_USER")
                                                 .anyRequest().authenticated())
                                 .userDetailsService(userService)
@@ -55,10 +42,5 @@ public class SecurityConfig {
 
                 return http.build();
         }
-
-        // @Bean
-        // public PasswordEncoder passwordEncoder() {
-        // return new BCryptPasswordEncoder();
-        // }
 
 }
