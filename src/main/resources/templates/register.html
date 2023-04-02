@@ -10,31 +10,7 @@
 
 <body>
     <div layout:fragment="content">
-        <!-- The registration form -->
-        <!-- <form method="post" action="#" th:action="@{/registerUser}" th:object="${userDTO}">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" th:field="*{name}">
-
-            <label for="name">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter a username" th:field="*{username}">
-
-            <label for="name">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" th:field="*{email}">
-
-            <label for="name">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter a strong password"
-                th:field="*{password}">
-
-            <button type="submit">Register</button>
-            
-            <span th:utext="${successMessage}"></span>
-            <div th:if="${bindingResult!=null && bindingResult.getAllErrors()!=null}">
-                <ul th:each="data : ${bindingResult.getAllErrors()}">
-                  <li th:text="${data.getDefaultMessage()}"></li>
-                </ul>
-            </div>
-        </form> -->
-
+        
         <div class="container d-flex justify-content-center">
             <div class="card p-3 rounded-3 login my-5">
                 <div class="card-body">

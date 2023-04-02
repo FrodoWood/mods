@@ -1,6 +1,5 @@
 package com.group5.mods.controller;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.group5.mods.model.Basket;
@@ -27,8 +25,6 @@ import com.group5.mods.repository.ProductRepository;
 import com.group5.mods.service.BasketService;
 import com.group5.mods.service.OrderService;
 import com.group5.mods.service.UserService;
-
-import jakarta.persistence.EntityManager;
 
 @Controller
 public class OrderController extends BaseController {

@@ -1,6 +1,5 @@
 package com.group5.mods.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;

@@ -1,5 +1,7 @@
 package com.group5.mods;
 
+import java.util.Optional;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,26 +17,6 @@ public class ModsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ModsApplication.class, args);
 	}
-
-	// @Bean
-	// CommandLineRunner commandLineRunner(UserRepository userRepository,
-	// PasswordEncoder passwordEncoder) {
-	// return args -> {
-	// userRepository.save(new User("Jas", "jas", "jas@gmail.com",
-	// passwordEncoder.encode("pass"), "ROLE_USER"));
-	// userRepository.save(new User("Luca", "luca", "luca@gmail.com",
-	// passwordEncoder.encode("pass"), "ROLE_ADMIN"));
-	// };
-	// }
-
-	// @Bean
-	// CommandLineRunner commandLineRunner(UserRepository userRepository,
-	// PasswordEncoder passwordEncoder) {
-	// return args -> {
-	// userRepository.save(new User("alice", "alice", "alice@gmail.com",
-	// passwordEncoder.encode("pass"), "ROLE_USER"));
-	// };
-	// }
 
 	@Bean
 	public nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect layoutDialect() {
