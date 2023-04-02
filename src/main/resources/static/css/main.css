@@ -214,3 +214,7 @@ body {
   .logo{
     height: 1.6rem;
   }
+
+  .password-pattern{
+    font-size: 0.775em;
+  }

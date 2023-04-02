@@ -65,7 +65,10 @@
                         </div>
                         <div class="form-group pb-2">
                             <label class="form-label" for="password">Password</label>
-                            <input class="form-control validate" type="password" id="password" name="password" th:field="*{password}" th:classappend="${param.error}? 'is-invalid' : '' ">
+                            <input class="form-control validate" type="password" id="password" name="password" th:field="*{password}" th:classappend="${param.error}? 'is-invalid' : '' " 
+                                    pattern="^(?=.*[A-Z])(?=.*[\W_]).{8,}$" oninvalid="this.setCustomValidity('Password must be at least 8 characters long and contain at least one uppercase letter and one special character (!@#$%^&*)')" 
+                                    oninput="this.setCustomValidity('')">
+                            <div class="py-0 pt-1 text-secondary password-pattern">Must contain at least 1 uppercase letter, 1 special character, and be at least 8 characters long.</div>
                             <div id="passwordFeedback" class="invalid-feedback">
                                 Please enter a strong password.
                             </div>
