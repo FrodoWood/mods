@@ -16,6 +16,7 @@
 
 Auto Mods is an e-commerce website that specializes in high-performance aftermarket car parts. The website contains a feature-rich store page that allows the user to filter items by category, max price, car make/model and search products by any keyword such as name, description, category, and sort the items from low-high and high-low price. There is also an Admin section of the website only accessible by admin users which allows the admin to add/edit products, view/update orders and much more! The website has been built to scale up, as all the features are built using OOP principles and have been extensively tested through Unit tests and Integration tests.
 #### This is a group project for the Aston University Computer Science CS2TP Team Project module 2022-2023. 
+#### Link to live website on Azure: https://automods.azurewebsites.net/
 #### Link to task tracker: https://trello.com/b/qJCZBw3O/team-5-board
 
 ### Team Members
